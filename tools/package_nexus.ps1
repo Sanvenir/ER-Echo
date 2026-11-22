@@ -92,11 +92,11 @@ $dllHash = (Get-FileHash -LiteralPath $builtDll -Algorithm SHA256).Hash
 Say '[2/5] 主文件（不含游戏文件 / ME2 配置）...' 'Cyan'
 Reset-Dir $mainDir $OutDir
 Copy-One $builtDll $mainDir
-# 启动器：优先用游戏根目录的（可能已被 reset 还原成原版）；没有就用模板
-$batMain = Join-Path $game 'launchmod_eldenring.bat'
-if (-not (Test-Path -LiteralPath $batMain)) { $batMain = Join-Path $repo 'install\launchmod_eldenring.bat.template' }
-$batAdmin = Join-Path $game 'launchmod_eldenring_admin.bat'
-if (-not (Test-Path -LiteralPath $batAdmin)) { $batAdmin = Join-Path $repo 'install\launchmod_eldenring_admin.bat.template' }
+# 启动器：优先用仓库里的模板（发布包可复现，不依赖作者本机游戏目录的改动）
+$batMain = Join-Path $repo 'install\launchmod_eldenring.bat.template'
+if (-not (Test-Path -LiteralPath $batMain)) { $batMain = Join-Path $game 'launchmod_eldenring.bat' }
+$batAdmin = Join-Path $repo 'install\launchmod_eldenring_admin.bat.template'
+if (-not (Test-Path -LiteralPath $batAdmin)) { $batAdmin = Join-Path $game 'launchmod_eldenring_admin.bat' }
 Copy-Item -LiteralPath $batMain -Destination (Join-Path $mainDir 'launchmod_eldenring.bat') -Force
 Copy-Item -LiteralPath $batAdmin -Destination (Join-Path $mainDir 'launchmod_eldenring_admin.bat') -Force
 # 赐福菜单必需：ESD 要挂载到 mod/（实测不挂载时 EzState 注入失败）
@@ -112,8 +112,8 @@ Copy-One (Join-Path $repo 'vendor\fromsoftware-rs-main\LICENSE-MIT-NON-AI') $lic
 Copy-One (Join-Path $repo 'vendor\fromsoftware-rs-main\LICENSE-ASL2-NON-AI') $licDir
 
 # er_echo.ini：沿用默认值，profiles 指向示例；去掉作者存档相关注释
-$iniSource = Join-Path $game 'er_echo.ini'
-if (-not (Test-Path -LiteralPath $iniSource)) { $iniSource = Join-Path $repo 'install\er_echo.ini.template' }
+$iniSource = Join-Path $repo 'install\er_echo.ini.template'
+if (-not (Test-Path -LiteralPath $iniSource)) { $iniSource = Join-Path $game 'er_echo.ini' }
 if (-not (Test-Path -LiteralPath $iniSource)) { throw "找不到 ini 模板（$iniSource）" }
 $iniText = [IO.File]::ReadAllText($iniSource)
 $iniText = [regex]::Replace($iniText, '(?m)^\s*profiles\s*=.*$', 'profiles=profiles/profile.example.json')

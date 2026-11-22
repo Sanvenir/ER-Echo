@@ -5,6 +5,11 @@
 
 ---
 
+> 说明（2026-11-22 源码整理）：日志里提到的 `tools/live_test*.ps1`、`restart_and_test*.ps1`、
+> `_probe_magic*.py`、`tools/from_save*`、`tools/profile.*.json` 等一次性脚本与个人存档导出物
+> 已从工作树移除（构建/发布不需要它们）；需要考古时看 git 历史。
+
+
 ## 1. 工具链（已完成）
 
 | 项 | 结果 |

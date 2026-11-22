@@ -1,7 +1,7 @@
 # Nexus 发布包（素材 + 流程）
 
 这个目录是给 **Nexus Mods 发布**准备的东西，不是 mod 运行需要的文件。运行包在
-`dist\ER-Echo-20261120\` / `dist\ER-Echo-20261120.zip`。
+`dist\nexus\ER-Echo-<version>.zip`。
 
 ## 目录内容
 

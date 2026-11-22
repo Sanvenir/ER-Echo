@@ -2,24 +2,25 @@
 
 > 召唤**你自己另一个存档里的角色**当同伴：外观/装备一致，战斗用**游戏原生 AI**，LLM 只当「战斗导演」调行为权重，骨灰式跟随、掉队才传送。
 
-## 仓库位置（2026-11-21 起）
+## 仓库
 
-源码和打包产物**已经搬出游戏目录**：
+源码、文档与工具都在本仓库；构建产物与发布包**不提交**（见 `.gitignore`），随时可重新生成：
 
 | 内容 | 位置 |
 | --- | --- |
-| 源码仓库（本 README 所在） | `D:\Projects\ER-Echo` |
-| 安装器 / 发布包 | `D:\Projects\ER-Echo\dist\` |
-| 从游戏目录清理出来的运行期文件 | `D:\Projects\ER-Echo\archive\game-cleanup-20261121\`（含[清理记录](archive/game-cleanup-20261121/README-cleanup.md)） |
+| 源码 / 文档 / 工具 | 仓库根目录 |
+| Rust DLL 源码 | `mod/` |
+| 第三方 crate 快照（构建必需） | `vendor/fromsoftware-rs-main/`（只保留 `eldenring` / `shared` 及许可证） |
+| 构建产物 | `mod/target/`（`cargo build` 生成，已忽略） |
+| Nexus 发布包 | `dist/nexus/`（`tools/package_nexus.ps1` 生成，已忽略） |
 
-脚本不再靠「自己在 `Game\er-echo\` 里」猜游戏目录，统一用
-`tools\gamedir.ps1` / `tools\gamedir.py` 探测：
+脚本不猜游戏目录，统一用 `tools/gamedir.ps1` / `tools/gamedir.py` 探测
+（`-GameDir` 参数 → `$env:ER_ECHO_GAME_DIR` → 老布局 → 当前目录 → Steam 注册表/libraryfolders.vdf）：
 
 ```powershell
-# 顺序：-GameDir 参数 → $env:ER_ECHO_GAME_DIR → 老布局 → 当前目录 → Steam 注册表/libraryfolders.vdf
 powershell -File tools\doctor.ps1 -Target "<Game>"        # 显式指定
 $env:ER_ECHO_GAME_DIR = "<Game>"                          # 或者设环境变量
-cd D:\Projects\ER-Echo; powershell -File tools\doctor.ps1  # 自动探测（本机已能直接找到）
+cd D:\Projects\ER-Echo; powershell -File tools\doctor.ps1  # 自动探测
 ```
 
 ## 状态
@@ -101,15 +102,15 @@ cd D:\Projects\ER-Echo; powershell -File tools\doctor.ps1  # 自动探测（本�
 #    mods = [ { enabled = true, name = "er-echo", path = "mod" } ]
 #    空数组会导致 mod/script/talk 下的 ESD 完全不加载（坐火没有「战友」）。
 # 0.5) 换机器 / 首次安装先自检（只读，游戏不用开）：
-powershell -NoProfile -ExecutionPolicy Bypass -File er-echo\tools\doctor.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\doctor.ps1
 
 # 1) 启动（EAC 关闭、离线），自动点掉标题/断线提示并进入游戏
-powershell -NoProfile -ExecutionPolicy Bypass -File er-echo\tools\auto_start.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\auto_start.ps1
 # 进图后需要坐火时：
-powershell -NoProfile -ExecutionPolicy Bypass -File er-echo\tools\sit_grace.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\sit_grace.ps1
 
 # 2) 进游戏后，另开一个终端 dump 数据
-cd "D:\Program Files (x86)\Steam\steamapps\common\ELDEN RING\Game\er-echo"
+cd "D:\Projects\ER-Echo"
 python tools\ipc_client.py dump_buddies
 python tools\ipc_client.py dump_ride
 python tools\ipc_client.py dump_profile
@@ -119,7 +120,7 @@ python tools\ipc_client.py set_rows --behavior 0 --think 133200000 --npc 1332010
 python tools\ipc_client.py set_weights --aggression 0.8 --dodge_rate 0.4
 
 # 4) 召唤后注入：load_profile → 改骨灰行成人形 → 用骨灰 → 克隆体变成目标角色
-python tools\ipc_client.py load_profile --path tools\profile.test_face.json
+python tools\ipc_client.py load_profile --path profiles\me.json   # 先导出你的角色
 python tools\ipc_client.py set_buddy_row --id 23200000 --npc 100000010 --think 100000010 --init 26050 --follow 2
 #    （在游戏里用「离群野狼」骨灰）
 python tools\ipc_client.py clone_info          # 看 face_prefix / equip / level
@@ -143,78 +144,58 @@ python tools\ipc_client.py rollback_equipment
 
 ## 构建
 
+前置：Windows + rustup `stable-x86_64-pc-windows-gnu` + MSYS2 binutils（提供 `as.exe`；
+Rust 自带 dlltool 需要它）。细节见 [implementation-log.md](docs/implementation-log.md) §1。
+
 ```powershell
-cd er-echo\mod
+cd mod
 powershell -ExecutionPolicy Bypass -File .\build.ps1
 ```
 
-前置（本机已装好）：rustup `stable-x86_64-pc-windows-gnu` + MSYS2 binutils（提供 `as.exe`，Rust 自带 dlltool 需要它）。
-细节见 [implementation-log.md](docs/implementation-log.md) §1。
+产物：`mod/target/release/er_echo.dll`（`build.ps1` 若探测到游戏目录会顺手复制）。
+
+## 打包 / 发布
+
+```powershell
+# Nexus 主包 + 可选 ESD fallback 包（发布到 Nexus 用这两个 zip）
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\package_nexus.ps1
+
+# 可插拔插件包（mods\ER-Echo\，不改 ME2 配置）
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\package_plugin.ps1
+```
+
+Nexus 页面文案 / 字段 / 截图清单 / 上传检查表在 [nexus/](nexus/README.md)。
+运行时不需要 Python；只有导出档案、IPC 调试、LLM 导演需要。
 
 ## 目录
 
 ```
-er-echo/
-├─ docs/INSTALL.md                安装 / 换机器 / 兼容性 / 症状对照
-├─ docs/INSTALL.en.md             same, in English
-├─ docs/handoff-launch.md         启动链排障：launcher 0xC0000409 / 10 秒闪退 / 无 mod 也崩
-├─ docs/PLUGIN.md                 可插拔安装（mods\ER-Echo\）+ 纯净安装实验流程
-├─ docs/i18n.md                   菜单多语言（键表 / 覆盖文件 / 加语言）
-├─ docs/design.md                 主设计（v0.2）
-├─ docs/usage.md                  使用指南（导出/配置/召唤/LLM）
-├─ docs/follow-mount-multi.md     跟随/爬梯/骑乘/多召唤
-├─ docs/implementation-log.md     实现日志（工具链/DLL/加载器/下一步）
-├─ docs/handoff-submenu.md        二级菜单交接（运行时 ezstate 注入方案）
-├─ docs/submenu-runtime-injection.md  二级菜单实现（钩子/结构/字节码/验收）
-├─ config/behavior_map.yaml       权重 → param/槽位
-├─ config/weights.schema.json     LLM 输出 Schema
-├─ bridge/                        Python sidecar
-│  ├─ director.py                 调度 + LLM + 护栏
-│  ├─ protocol.py                 NDJSON 帧
-│  └─ profile_reader.py           profile.json 校验
-├─ tools/doctor.ps1               安装预检（缺文件/版本/权限/依赖，换机器先跑这个）
-├─ tools/package_release.ps1      打完整发布包（排除作者存档导出物与调试脚本）
-├─ tools/package_nexus.ps1        打 Nexus 主包（不含游戏文件/ME2 配置）+ 可选 ESD fallback 包
-├─ tools/package_plugin.ps1       打可插拔插件包（mods\ER-Echo\ + config-er-echo.toml）
-├─ tools/reset_to_vanilla.ps1     备份并清掉 mod 痕迹，恢复干净基线（支持 -DryRun）
-├─ tools/install_plugin.ps1       纯净安装实验：校验基线 → 解包 → doctor → 等 attached
-├─ nexus/                         Nexus 发布素材（文案/字段/图片/上传清单）
-│  ├─ description.bbcode          模组页正文（英文 + 中文段 + FAQ + 许可 + AI 声明）
-│  ├─ page-fields.md              表单字段：标题/摘要/分类/标签/权限/Requirements
-│  ├─ shotlist.md                 需要游戏内录/截的素材清单（技术设置 + 构图 + 分镜）
-│  ├─ checklist.md                上传当天按顺序勾的清单
-│  ├─ credits-and-licenses.md     署名 / 代码许可 / AI 披露 / 联网说明
-│  ├─ THIRD-PARTY-LICENSES.txt    随包分发的三方许可说明
-│  └─ media/                      占位图（旧开发截图，发布前按 shotlist 替换）
-├─ tools/ipc_client.py            手动 IPC 客户端（dump/菜单诊断命令）
-├─ tools/switch_menu_mode.ps1     二级菜单 ⇄ 根列表 ESD fallback 一键切换
-├─ tools/shot.ps1                 截主屏（验证菜单/HUD）
-├─ tools/focus_game.ps1           把 ELDEN RING™ 窗口切前台
-├─ tools/export_profile_from_save.py  离线解析 .sl2 → profile.json（不用切号）
-├─ tools/profile_export_gui.py        上面那个的 PyQt5 图形界面（选存档/多选槽/导出）
-├─ tools/build_gui_exe.ps1            把图形界面打包成单文件 exe（PyInstaller）
-├─ tools/dump_to_profile.py       当前角色 dump → profile.json
-├─ tools/diff_profile.py          运行时 dump ↔ 离线 profile 全字段对照（回归测试）
-├─ tools/watch_state.py           只读监听 state 流（LLM 输入 / 距离 / 血量 / 事件）
-├─ tools/verify_after_restart.py  换新 DLL 后的一键验收（dump/diff/参数表/state）
-├─ tools/probe_save_fields.py     用运行时真值反查存档偏移（新增字段时用）
-├─ tools/merge_profile_fields.py  旧导出(已验证装备) + 新解析(三围/抗性) 合并
-├─ tools/swap_dll_on_exit.ps1     游戏退出后换 DLL（只换，不重启）
-├─ tools/make_profile.py          派生档案（改装备槽/等级）
-├─ tools/extract_game_file.py     从 Data0.bhd/bdt 抽单个文件（RSA/AES/DCX/KRAK）
-├─ tools/patch_grace_esd.py       给 t000001000 加「战友」菜单
-├─ tools/pack_talk_esd.py         BND4 → KRAK DCX
-├─ tools/export_profile.md        存档导出指南
-├─ ui/                            赐福菜单 ESD 资产 + 重建说明
-│  └─ README.md                   ESD 抽取/反编译/编译/打包流程
-└─ mod/                           Rust DLL
-   ├─ build.ps1                  一键构建 + 复制到游戏目录（被占用时暂存 .new.dll）
-   ├─ Cargo.toml
-   └─ src/{lib,ipc,params,profile,dump,kit,ai,balance,bench,roster,spirit,ui,ezstate,i18n}.rs
+ER-Echo/
+├─ README.md
+├─ LICENSE / LICENSE-MIT / LICENSE-APACHE
+├─ docs/                         设计、安装、使用、排障、实现日志、文档配图（docs/images/）
+├─ config/                       behavior_map.yaml / weights.schema.json
+├─ bridge/                       Python sidecar（director / protocol / profile_reader）
+├─ install/                      er_echo.ini 模板、ME2 配置片段、启动 bat 模板、参数表
+├─ nexus/                        Nexus 发布素材（文案/字段/截图清单/上传清单/media）
+├─ tools/                        doctor、gamedir、导出、IPC、打包、ESD 构建等
+├─ ui/                           赐福菜单 ESD 资产（源 + 打包用的 out_vanilla / out_rootmenu）
+├─ mod/                          Rust DLL（src + Cargo + build.ps1 + examples/offsets.rs）
+└─ vendor/fromsoftware-rs-main/  上游 crate 快照（eldenring / shared，含 NON-AI 许可证）
+```
+
+常用命令：
+
+```powershell
+powershell -File tools\doctor.ps1                  # 安装预检
+python tools\export_profile_from_save.py --list    # 列出存档角色
+python tools\ipc_client.py status                  # 游戏内状态
+python tools\ipc_send.py rebuild_clone --arg mode=model  # 通用 IPC（JSON 参数）
 ```
 
 ## 安全与合规
 
 - **只离线**：EAC 关闭；带 mod 存档上线会被隔离/soft-ban。
 - 改 `regulation.bin` / `.sl2` 前备份；本仓库不含游戏原始资源或他人存档。
-- 本仓库代码 MIT OR Apache-2.0；文档中的参数名来自 Paramdex / 社区逆向。
+- 本仓库代码 MIT OR Apache-2.0（见 [LICENSE](LICENSE) / [LICENSE-MIT](LICENSE-MIT) / [LICENSE-APACHE](LICENSE-APACHE)）；文档中的参数名来自 Paramdex / 社区逆向。
+- `vendor/fromsoftware-rs-main` 使用 MIT-NON-AI / Apache-NON-AI，全文见该目录与 [nexus/THIRD-PARTY-LICENSES.txt](nexus/THIRD-PARTY-LICENSES.txt)。
