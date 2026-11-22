@@ -1,0 +1,44 @@
+{
+  "payload": "D:\\Projects\\ER-Echo\\dist\\tools\\ER-Echo-Setup\\_internal\\payload",
+  "targets": [
+    {
+      "kind": "me2",
+      "path": "d:\\program files (x86)\\steam\\steamapps\\common\\ELDEN RING\\Game"
+    },
+    {
+      "kind": "me3",
+      "path": "D:\\Games\\Convergence3\\ConvergenceER",
+      "profiles": [
+        "convergence - seamless.me3",
+        "convergence.me3"
+      ]
+    }
+  ],
+  "saves": [
+    "C:\\Users\\sanve\\AppData\\Roaming\\EldenRing\\76561198162832529\\ER0000.cnv",
+    "C:\\Users\\sanve\\AppData\\Roaming\\EldenRing\\76561198162832529\\ER0000.sl2",
+    "C:\\Users\\sanve\\AppData\\Roaming\\EldenRing\\76561198162832529\\ER0000.mod",
+    "C:\\Users\\sanve\\AppData\\Roaming\\EldenRing\\76561198162832529 - 副本\\ER0000.sl2"
+  ],
+  "errors": [],
+  "payload_files": [
+    "me2/config-er-echo.toml",
+    "me2/plugin/launch-er-echo-admin.bat",
+    "me2/plugin/launch-er-echo.bat",
+    "me2/plugin/mod/script/talk/m00_00_00_00.talkesdbnd.dcx",
+    "shared/LICENSES/LICENSE-ASL2-NON-AI",
+    "shared/LICENSES/LICENSE-MIT-NON-AI",
+    "shared/README-PLUGIN.txt",
+    "shared/THIRD-PARTY-LICENSES.txt",
+    "shared/docs/CONVERGENCE.md",
+    "shared/docs/INSTALL.en.md",
+    "shared/docs/INSTALL.md",
+    "shared/docs/PLUGIN.md",
+    "shared/docs/i18n.md",
+    "shared/docs/usage.md",
+    "shared/er_echo.dll",
+    "shared/profiles/profile.example.json",
+    "tables/convergence/er_echo_equip.json",
+    "tables/convergence/er_echo_magic.json"
+  ]
+}

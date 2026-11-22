@@ -23,7 +23,7 @@ param(
     [switch]$SkipIcon,
     [switch]$SkipPayload,
     [switch]$Onefile,
-    [string]$Version = '0.2.0'
+    [string]$Version = '0.1.0'
 )
 
 $ErrorActionPreference = 'Stop'
