@@ -50,7 +50,7 @@ Nexus 在 2026 年 4 月换了新版上传表单（[公告](https://www.nexusmod
 | AI 披露 | 正文 AI 段**必须二选一**；代码主要是 AI 写的 → 诚实档是 `AI-Generated Content` |
 | 图片 | 只用游戏内截图（`shotlist.md`），不用 AI 图 → 不需要 `AI Media`（除非描述也用 AI 写） |
 
-## 2026-11-21 启动链补充（来源：[docs/handoff-launch.md](docs/handoff-launch.md)）
+## 2026-11-21 启动链补充（来源：[docs/handoff-launch.md](../docs/handoff-launch.md)）
 
 那次排查发现三个互相独立的崩溃，都会表现成「游戏打不开」，但修法完全不同。发布素材已按这个补齐：
 
