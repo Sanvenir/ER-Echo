@@ -259,14 +259,19 @@ if (Test-Path -LiteralPath $toml) {
         Write-Check PASS ("{0}: 自带配置（不需要 mods 条目）" -f $tomlLeaf) '插件布局：本 mod 不替换游戏文件'
     } else {
         $modsOk = $false
+        $modPath = ''
         if ($text -match '(?ms)^\s*mods\s*=\s*\[(.*?)\]') {
-            $block = $Matches[1]
-            if ($block -match 'path\s*=\s*"mod"' -or $block -match "path\s*=\s*'mod'") { $modsOk = $true }
+            # 平铺布局写 path = "mod"，插件布局写 path = "mods/ER-Echo/mod"；都算
+            $block = $Matches[1] -replace "'", '"'
+            if ($block -match 'path\s*=\s*"([^"]+)"') {
+                $modPath = $Matches[1]
+                if ($modPath -match '(^|/)mod$') { $modsOk = $true }
+            }
         }
         if ($modsOk) {
-            Write-Check PASS ("{0}: mod_loader 指向 mod/" -f $tomlLeaf) '赐福菜单的 ESD 从这里加载'
+            Write-Check PASS ("{0}: mod_loader 指向 {1}" -f $tomlLeaf, $modPath) '赐福菜单的 ESD 从这里加载'
         } else {
-            Write-Check FAIL ('{0}: mods 里没有 path = "mod"' -f $tomlLeaf) 'mods=[] 时 ME2 不读 mod/script，游戏里没有「战友」菜单'
+            Write-Check FAIL ('{0}: mods 里没有指向 mod 目录的 path' -f $tomlLeaf) 'mods=[] 时 ME2 不读 mod/script，游戏里没有「战友」菜单'
         }
     }
     if ($text -match '(?m)^\s*debug\s*=\s*true') {
@@ -390,10 +395,15 @@ if (-not (Test-Path -LiteralPath $ini)) {
         }
     }
 
-    $lang = if ($cfg.ContainsKey('language')) { $cfg['language'] } else { 'auto' }
-    $builtin = @('auto', 'zh-cn', 'zh-tw', 'en', 'ja')
+    $lang = if ($cfg.ContainsKey('language')) { $cfg['language'] } else { 'game' }
+    $builtin = @('game', 'steam', 'follow', 'auto', 'zh-cn', 'zh-tw', 'en', 'ja')
     if ($builtin -contains $lang.ToLower()) {
-        Write-Check PASS ("language = {0}" -f $lang) '菜单文案语言（ui.rs / i18n.rs）'
+        $note = if ($lang.ToLower() -eq 'game' -or $lang.ToLower() -eq 'steam') {
+            '跟随游戏文本语言（Steam per-game 语言 → manifest / 模拟器 → Windows）'
+        } else {
+            '菜单文案语言（ui.rs / i18n.rs）'
+        }
+        Write-Check PASS ("language = {0}" -f $lang) $note
     } else {
         $ov = Join-Path $Target 'er_echo_i18n.ini'
         if (Test-Path -LiteralPath $ov) {

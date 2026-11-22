@@ -1,4 +1,4 @@
-#requires -Version 5.1
+﻿#requires -Version 5.1
 <#
 .SYNOPSIS
   打一个可直接发给别人的 ER Echo 发布包（只含运行必需文件 + 工具 + 文档）。
@@ -125,7 +125,7 @@ if ($tomlText -notmatch '(?ms)^\s*mods\s*=\s*\[[^\]]*path\s*=\s*"mod"') {
 }
 [IO.File]::WriteAllText($tomlPath, $tomlText, [Text.UTF8Encoding]::new($false))
 
-# er_echo.ini：沿用本机的完整默认值，但把 profiles 指到示例档案并加发布头
+# er_echo.ini：沿用本机的完整默认值，但把 profiles 指到内置的 Sanvenir 并加发布头
 $iniSource = Join-Path $game 'er_echo.ini'
 if (-not (Test-Path -LiteralPath $iniSource)) { $iniSource = Join-Path $repo 'install\er_echo.ini.template' }
 if (-not (Test-Path -LiteralPath $iniSource)) { throw "找不到 ini 模板（$iniSource）" }
@@ -133,14 +133,14 @@ $iniText = [IO.File]::ReadAllText($iniSource)
 $iniText = [regex]::Replace(
     $iniText,
     '(?m)^\s*profiles\s*=.*$',
-    'profiles=profiles/profile.example.json'
+    'profiles=profiles/builtin_sanvenir.json'
 )
 $header = @'
 ; ============================================================
 ; ER Echo 发布包配置
 ; 第一次用：先导出自己的角色（docs/INSTALL.md 第 4 步），
-; 再把下面 [clone] 段的 profiles= 改成你自己的 json（逗号分隔可放多份）。
-; 示例档案 equipment_param_ids 全是 0，只保证「能跑起来」。
+; 再把 [clone] 段的 profiles= 改成你自己的 json（逗号分隔可放多份）。
+; 默认只带内置角色 Sanvenir（彩蛋 / 备用，Lv1）；profile.example.json 只是格式示例。
 ; ============================================================
 
 '@
@@ -151,6 +151,7 @@ $iniText = ($iniText -split "`r?`n" | Where-Object { $_ -notmatch 'from_save_acc
 
 New-Item -ItemType Directory -Force -Path (Join-Path $stage 'profiles') | Out-Null
 Copy-One (Join-Path $repo 'tools\profile.example.json') (Join-Path $stage 'profiles')
+Copy-One (Join-Path $repo 'install\profiles\builtin_sanvenir.json') (Join-Path $stage 'profiles')
 
 # ---------------------------------------------------------------- 3) 工具/文档
 Say '[4/6] 拷贝工具、bridge、文档 ...' 'Cyan'
@@ -239,7 +240,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -File er-echo\tools\doctor.ps1
 * 启动后游戏**约 10 秒就闪退**（WER：eldenring.exe / 0xc0000005 / 偏移 0x1EBCEF9）？改用
   `launchmod_eldenring_admin.bat`（管理员启动，Steam 覆盖层注不进去），或在 Steam → 设置 → 游戏中
   里关掉「启用 Steam 界面」。
-* `er_echo.ini` 里的 `profiles=` 默认指向示例档案；换成你自己导出的 json 才会变成「你的另一个存档角色」。
+* `er_echo.ini` 里的 `profiles=` 默认只带内置角色 **Sanvenir**（`profiles\builtin_sanvenir.json`，
+  Lv1 彩蛋 / 备用）；把你的 json 追加在后面，才会变成「你的另一个存档角色」。导出工具只写
+  `slot<N>_*.json`，不会覆盖内置档案。
 * 菜单语言：`er_echo.ini` → `[i18n] language=auto|zh-CN|zh-TW|en|ja`；自定义语言见
   `er_echo_i18n.example.ini` 与 `er-echo/docs/i18n.md`。
 

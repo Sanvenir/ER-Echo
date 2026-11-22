@@ -104,23 +104,24 @@ New-Item -ItemType Directory -Force -Path $licDir | Out-Null
 Copy-One (Join-Path $repo 'vendor\fromsoftware-rs-main\LICENSE-MIT-NON-AI') $licDir
 Copy-One (Join-Path $repo 'vendor\fromsoftware-rs-main\LICENSE-ASL2-NON-AI') $licDir
 
-# er_echo.ini：profiles 指向插件内的示例（相对游戏根目录），去掉作者存档相关注释
+# er_echo.ini：profiles 默认指向内置的 Sanvenir（相对游戏根目录），去掉作者存档相关注释
 $iniSource = Join-Path $game 'er_echo.ini'
 if (-not (Test-Path -LiteralPath $iniSource)) {
     $iniSource = Join-Path $repo 'install\er_echo.ini.template'
 }
 if (-not (Test-Path -LiteralPath $iniSource)) { throw "找不到 ini 模板（$iniSource）" }
 $iniText = [IO.File]::ReadAllText($iniSource)
-$iniText = [regex]::Replace($iniText, '(?m)^\s*profiles\s*=.*$', 'profiles=mods/ER-Echo/profiles/profile.example.json')
+$iniText = [regex]::Replace($iniText, '(?m)^\s*profiles\s*=.*$', 'profiles=mods/ER-Echo/profiles/builtin_sanvenir.json')
 $iniText = ($iniText -split "`r?`n" | Where-Object { $_ -notmatch 'from_save_account|ER0000\.sl2|7656|本账号' }) -join "`r`n"
 $header = @'
 ; ============================================================
 ; ER Echo (plugin layout)
 ; 本文件在 mods\ER-Echo\ 里，DLL 会优先读自己同目录的 er_echo.ini。
 ; profiles 仍以**游戏根目录**为基准，所以写成 mods/ER-Echo/profiles/...
+; 默认带内置角色 Sanvenir（彩蛋 / 备用，Lv1）：它固定留在 profiles= 末尾。
 ; 换成自己的角色：
 ;   python mods\ER-Echo\tools\export_profile_from_save.py --slot N -o mods\ER-Echo\profiles\me.json
-;   再把下面 [clone] 的 profiles= 改成 mods/ER-Echo/profiles/me.json
+;   再把 [clone] 的 profiles= 改成 mods/ER-Echo/profiles/me.json,mods/ER-Echo/profiles/builtin_sanvenir.json
 ; 卸载：删掉 mods\ER-Echo\ 和游戏根目录的 config-er-echo.toml 即可。
 ; ============================================================
 
@@ -129,6 +130,7 @@ $header = @'
 
 New-Item -ItemType Directory -Force -Path (Join-Path $plugin 'profiles') | Out-Null
 Copy-One (Join-Path $repo 'tools\profile.example.json') (Join-Path $plugin 'profiles')
+Copy-One (Join-Path $repo 'install\profiles\builtin_sanvenir.json') (Join-Path $plugin 'profiles')
 
 # 赐福菜单需要挂载这份 ESD（实测：不挂载 ezstate 注入会报
 # "cannot find grace root list start state"，菜单不出现）
@@ -254,6 +256,10 @@ ER Echo 0.1.0 - pluggable plugin (ER Echo / 可插拔插件)
   1. 确认已装 Mod Engine 2 到 ...\ELDEN RING\Game。
   2. 双击 Export-Profiles.bat -> 自动列出你存档里的角色 -> 选一个 -> 导出选中
      -> 弹窗选「是」，工具会把 profiles= 写进 er_echo.ini（自动备份原文件）。
+     内置角色 Sanvenir（profiles\builtin_sanvenir.json，Lv1 彩蛋/备用）会保留在名单末尾；
+     什么都不导出也能直接玩。
+     内置角色 Sanvenir（profiles\builtin_sanvenir.json，Lv1 彩蛋/备用）会保留在名单末尾；
+     什么都不导出也能直接玩。
   3. 双击 launch-er-echo-admin.bat（本机需要管理员；普通机器可试 launch-er-echo.bat）。
      进游戏坐赐福 -> 「战友（n/m）」，或按 F8 召唤。
 
@@ -271,7 +277,10 @@ First run (3 steps, no manual ini editing)
 
 Notes / 注意
   * ELDEN RING 1.17.2 only (exe 2.7.2.0 / 2.7.2.1); offline only.
-  * The bundled example profile is a placeholder; Export-Profiles.bat replaces it.
+  * Built-in companion: profiles\builtin_sanvenir.json (Sanvenir, Lv1) is pinned at the end of
+    profiles= and already works before you export anything. Export-Profiles.bat only writes
+    slot<N>_*.json and keeps the builtin entry, so exporting your own characters never removes it.
+  * The bundled profile.example.json is only a format sample.
   * If the game core-dumps ~10 s after launch, use the admin launcher or disable the
     Steam overlay (see docs/INSTALL.md section 3).
 
@@ -289,11 +298,12 @@ LAYOUT
   launch-er-echo.bat        launcher (normal)
   launch-er-echo-admin.bat  launcher (elevated)
   mod\script\talk\...dcx    ESD mounted for the grace menu (required)
-  profiles\                 exported characters (example + yours)
+  profiles\                 exported characters (builtin Sanvenir + example + yours)
   tools\Setup\           the GUI tool (onedir: keep _internal next to the exe)
   tools\  bridge\  docs\  install\  LICENSES\
   ..\config-er-echo.toml    ME2 config (next to eldenring.exe)
 '@
+$readme = $readme -replace '(?m)^ER Echo \d+\.\d+\.\d+', ("ER Echo " + $Version)
 [IO.File]::WriteAllText((Join-Path $plugin 'README-PLUGIN.txt'), $readme, [Text.UTF8Encoding]::new($false))
 
 # ---------------------------------------------------------------- 4) BOM/脱敏 + 打包

@@ -506,6 +506,27 @@ def sanitize(name: str) -> str:
     return "".join(keep)[:32] or "char"
 
 
+# ---------------------------------------------------------------- 内置档案
+#: 随包发布、固定追加在 `profiles=` 名单里的档案（彩蛋 / 备用角色）。
+#: 用 `builtin_` 前缀而不是 `slot<N>_`：导出工具只会写/删 `slot*.json`，
+#: 所以用户导出、切号、Convergence 清理都不会碰到内置档案。
+BUILTIN_PREFIX = "builtin_"
+
+
+def is_builtin_profile(path: str | pathlib.Path) -> bool:
+    """是不是内置档案（按文件名判断：`builtin_*.json`）。"""
+    name = pathlib.Path(str(path).replace("\\", "/")).name.lower()
+    return name.startswith(BUILTIN_PREFIX) and name.endswith(".json")
+
+
+def builtin_profiles(dirpath: str | pathlib.Path) -> list[pathlib.Path]:
+    """`dirpath` 里的内置档案（按文件名排序）。"""
+    folder = pathlib.Path(dirpath)
+    if not folder.is_dir():
+        return []
+    return sorted(p for p in folder.glob(BUILTIN_PREFIX + "*.json") if p.is_file())
+
+
 def preserve_ai(out: pathlib.Path, profile: dict) -> None:
     """重新导出到同一路径时保留赐福菜单写进去的 `ai` 段（AI 存在 profile 里、不在存档里）。"""
     try:

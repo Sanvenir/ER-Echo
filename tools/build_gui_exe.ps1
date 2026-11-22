@@ -1,4 +1,4 @@
-#requires -Version 5.1
+﻿#requires -Version 5.1
 <#
 .SYNOPSIS
   Build the ER Echo installer + profile exporter (PyQt5, onedir) and embed the mod payload.
@@ -7,7 +7,7 @@
   Output:
       dist\tools\ER-Echo-Setup\ER-Echo-Setup.exe
       dist\tools\ER-Echo-Setup\_internal\payload\...   <- mod files used by the installer
-      dist\tools\ER-Echo-Setup-0.2.0.zip
+      dist\tools\ER-Echo-Setup-<Version>.zip
 
   Ship that zip: the user unzips it anywhere, runs the exe, types the game path.
 
@@ -63,7 +63,7 @@ if (-not $SkipInstall) {
 # ---------------------------------------------------------------- payload
 if (-not $SkipPayload) {
     Write-Host '[..] building payload ...' -ForegroundColor Cyan
-    & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $tools 'package_payload.ps1') -SkipBuild
+    & powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $tools 'package_payload.ps1') -SkipBuild -Version $Version
     if ($LASTEXITCODE -ne 0) { throw "payload build failed (exit $LASTEXITCODE)" }
 }
 if (-not (Test-Path (Join-Path $payload 'shared\er_echo.dll'))) {
@@ -100,8 +100,15 @@ $pyArgs = @(
 if (Test-Path $icon) { $pyArgs += @('--icon', $icon) }
 if (Test-Path $verFile) { $pyArgs += @('--version-file', $verFile) }
 $pyArgs += $script
+# PyInstaller 6 writes its INFO/progress to stderr. With $ErrorActionPreference = 'Stop',
+# Windows PowerShell turns that native stderr into a terminating error and aborts the build,
+# so run it under 'Continue' and check the exit code ourselves.
+$eap = $ErrorActionPreference
+$ErrorActionPreference = 'Continue'
 & python @pyArgs
-if ($LASTEXITCODE -ne 0) { throw "PyInstaller(onedir) failed (exit $LASTEXITCODE)" }
+$rc = $LASTEXITCODE
+$ErrorActionPreference = $eap
+if ($rc -ne 0) { throw "PyInstaller(onedir) failed (exit $rc)" }
 
 $onedir = Join-Path $dist $name
 $exe = Join-Path $onedir ($name + '.exe')
@@ -109,12 +116,20 @@ if (-not (Test-Path $exe)) { throw "no artifact: $exe" }
 Write-Host ("[ok] {0} ({1} MB)" -f $exe, [math]::Round((Get-Item $exe).Length / 1MB, 1)) -ForegroundColor Green
 
 $readme = Join-Path $dist 'README-Setup.txt'
-if (-not (Test-Path $readme)) {
-    $text = @"
-ER Echo 0.2.0 - installer / profile exporter
+# Always regenerate: the instructions ship next to the exe and change with the GUI.
+$text = @"
+ER Echo $Version - installer / profile exporter
 ============================================
 
 Run ER-Echo-Setup.exe -> "Setup" tab -> enter the game path -> Install.
+Then click "Launch game" on the same tab (or accept "Launch the game now?"):
+  vanilla / ME2     -> mods\ER-Echo\launch-er-echo*.bat (tick "as administrator" if it crashes after ~10 s)
+  Convergence / me3 -> me3\Windows\me3.exe launch -p .\me3\convergence*.me3 (Seamless Coop auto-detected)
+
+Missing loader? The Setup tab has "Get Mod Engine 2" / "Get me3" (official release pages) and a
+"Loader install steps..." dialog. No ME2/me3 files are bundled or redistributed.
+Vanilla + me3: pick "me3 (standalone)", point at me3.exe (auto-detected or Browse); the installer
+writes <Game>\er-echo.me3 and the Launch button runs `me3 launch -p .\er-echo.me3`.
 
   vanilla + Mod Engine 2 : ...\steamapps\common\ELDEN RING\Game
   Convergence 3.x        : ...\Convergence3\ConvergenceER
@@ -122,8 +137,7 @@ Run ER-Echo-Setup.exe -> "Setup" tab -> enter the game path -> Install.
 The same program exports your characters ("Profiles" tab).
 onedir build: copy the whole folder, not just the exe.
 "@
-    [IO.File]::WriteAllText($readme, $text, [Text.UTF8Encoding]::new($false))
-}
+[IO.File]::WriteAllText($readme, $text, [Text.UTF8Encoding]::new($false))
 
 $onedirZip = Join-Path $dist ($name + '-' + $Version + '.zip')
 if (Test-Path $onedirZip) { Remove-Item $onedirZip -Force }
@@ -163,8 +177,12 @@ if ($Onefile) {
     if (Test-Path $icon) { $oneArgs += @('--icon', $icon) }
     if (Test-Path $verFile) { $oneArgs += @('--version-file', $verFile) }
     $oneArgs += $script
+    $eap = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
     & python @oneArgs
-    if ($LASTEXITCODE -ne 0) { throw 'PyInstaller(onefile) failed' }
+    $rc = $LASTEXITCODE
+    $ErrorActionPreference = $eap
+    if ($rc -ne 0) { throw "PyInstaller(onefile) failed (exit $rc)" }
     $oneExe = Join-Path $repo ('build\onefile\' + $name + '-onefile.exe')
     Copy-Item $oneExe (Join-Path $dist ($name + '-onefile.exe')) -Force
 }

@@ -29,7 +29,8 @@
 [CmdletBinding()]
 param(
     [switch]$SkipBuild,
-    [string]$OutDir
+    [string]$OutDir,
+    [string]$Version = '0.1.0'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -97,6 +98,33 @@ Say '[3/4] 拷贝公共文件 ...' 'Cyan'
 Copy-One $builtDll $shared
 New-Item -ItemType Directory -Force -Path (Join-Path $shared 'profiles') | Out-Null
 Copy-One (Join-Path $repo 'tools\profile.example.json') (Join-Path $shared 'profiles')
+# 菜单文案覆盖模板：docs/i18n.md 让用户复制这个文件；手动包和安装器都要带
+Copy-One (Join-Path $repo 'install\er_echo_i18n.example.ini') $shared
+
+# CLI 工具 / bridge：安装器布局（mods\ER-Echo\）下也要有 doctor.ps1、导出工具和 IPC，
+# 和插件包保持一致（否则 docs 里的自检 / 导出命令在安装器用户那里找不到文件）。
+# 注意工具落在 mods\ER-Echo\tools\，gamedir.ps1 的「老布局」候选是 mods\ER-Echo 的上一级，
+# 不是游戏根目录；自动探测仍会走 Steam 注册表，也可以用 -Target / ER_ECHO_GAME_DIR 显式指定。
+$toolExclude = @(
+    'live_*.ps1', 'restart_and_test*.ps1', 'restart_and_probe.ps1', 'restart_with_new_dll.ps1',
+    '_probe_magic*.py', 'analyze_dump.py', 'profile.*.json', '_inspect_regulation.mjs',
+    'package_release.ps1', 'package_nexus.ps1',
+    'from_save', 'from_save_account', '__pycache__', '*.pyc', 'Setup'
+)
+Copy-Tree (Join-Path $repo 'tools') (Join-Path $shared 'tools') $toolExclude
+Copy-One (Join-Path $repo 'tools\profile.example.json') (Join-Path $shared 'tools')
+Copy-Tree (Join-Path $repo 'bridge') (Join-Path $shared 'bridge') @('__pycache__', '*.pyc')
+
+# 内置档案（彩蛋 / 备用角色）：install\profiles\builtin_*.json -> payload\shared\profiles\
+# 安装器每次都用这份覆盖到 <plugin>\profiles\，并固定追加在 profiles= 名单末尾；
+# 导出工具只写 slot<N>_*.json，所以用户导出不会覆盖它。
+$builtinDir = Join-Path $repo 'install\profiles'
+if (Test-Path -LiteralPath $builtinDir) {
+    Get-ChildItem -LiteralPath $builtinDir -Filter 'builtin_*.json' -File | ForEach-Object {
+        Copy-One $_.FullName (Join-Path $shared 'profiles')
+        Write-Host ("[i] builtin profile: {0}" -f $_.Name)
+    }
+}
 
 # 参数 id 表（游戏内 dump_equip / dump_magic 导出，按 regulation 分套）：
 #   tables\vanilla      原版 / Mod Engine 2 安装用
@@ -121,7 +149,7 @@ Copy-One (Join-Path $repo 'vendor\fromsoftware-rs-main\LICENSE-MIT-NON-AI') $lic
 Copy-One (Join-Path $repo 'vendor\fromsoftware-rs-main\LICENSE-ASL2-NON-AI') $licDir
 Copy-One (Join-Path $repo 'nexus\THIRD-PARTY-LICENSES.txt') $shared
 
-Write-Crlf (Join-Path $shared 'README-PLUGIN.txt') @'
+$readme = @'
 ER Echo 0.1.0
 =============
 
@@ -129,18 +157,36 @@ ER Echo 0.1.0
   ER-Echo-Setup.exe -> 「安装 / Setup」页 -> 游戏路径 填或选：
     原版 + Mod Engine 2： ...\steamapps\common\ELDEN RING\Game
     Convergence 3.x    ： ...\Games\Convergence3\ConvergenceER
-  -> 自动检测 -> 一键安装。装完按钮会告诉你从哪启动。
+  -> 自动检测 -> 一键安装。装完同一页点「一键启动游戏」：
+     原版跑 launch-er-echo.bat（可勾管理员），Convergence 跑 me3 + convergence*.me3；
+     安装完成的弹窗也会问「现在启动游戏？」。
+
+  加载器（ME2 / me3）不随包分发：没装时安装器会给出官方发布页和详细安装步骤
+  （ME2: github.com/soulsmods/ModEngine2/releases；me3: github.com/garyttierney/me3/releases）。
+  原版也能用 me3：加载器选「me3（独立安装）」，安装器会生成 er-echo.me3 并一键启动。
 
 Install (nothing to copy by hand, no ini editing)
   Run ER-Echo-Setup.exe -> "Setup" tab -> Game path:
     vanilla + Mod Engine 2: ...\steamapps\common\ELDEN RING\Game
     Convergence 3.x       : ...\Games\Convergence3\ConvergenceER
-  -> Detect -> Install. The dialog afterwards tells you what to launch.
+  -> Detect -> Install. Then click "Launch game" on the same tab: vanilla starts
+     launch-er-echo.bat (optional admin), Convergence starts me3 + convergence*.me3.
+     The install dialog also offers "Launch the game now?".
+
+  Mod loaders are NOT bundled: if ME2/me3 is missing, the installer links to the official
+  release pages and shows detailed steps (ME2: github.com/soulsmods/ModEngine2/releases;
+  me3: github.com/garyttierney/me3/releases). Vanilla + me3 is supported too: pick
+  "me3 (standalone)"; the installer writes er-echo.me3 and launches it.
 
 本目录内容 / what is here
   er_echo.dll                mod 本体
   profiles\profile.example.json   示例档案（安装器会用你自己的角色覆盖 profiles=）
-  docs\                      安装 / 插件 / Convergence 说明
+  profiles\builtin_sanvenir.json  内置角色 Sanvenir（彩蛋 / 备用）：固定在 profiles= 末尾，
+                                  导出自己的角色时不会被覆盖；重装会恢复成发布版
+  er_echo_i18n.example.ini   菜单文案覆盖模板（复制成 er_echo_i18n.ini 再改）
+  tools\                     doctor.ps1 自检、导出工具、IPC 客户端
+  bridge\                    可选 LLM 战斗导演（默认 mock 离线）
+  docs\                      安装 / 插件 / Convergence / 使用说明
   LICENSES\ THIRD-PARTY-LICENSES.txt
 
 注意 / notes
@@ -148,6 +194,9 @@ Install (nothing to copy by hand, no ini editing)
   * 原版需要先装 Mod Engine 2；Convergence 自带 me3，不用另装。
   * 卸载：setup exe -> 「卸载 / Uninstall」，会自动恢复改过的配置。
 '@
+# 版本号只从 -Version 参数来（build_gui_exe.ps1 会把它传下来）
+$readme = $readme -replace '(?m)^ER Echo \d+\.\d+\.\d+', ("ER Echo " + $Version)
+Write-Crlf (Join-Path $shared 'README-PLUGIN.txt') $readme
 
 # ---------------------------------------------------------------- 3) ME2
 Say '[4/4] 生成 ME2 配置和启动器 ...' 'Cyan'

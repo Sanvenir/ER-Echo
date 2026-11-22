@@ -134,20 +134,20 @@ New-Item -ItemType Directory -Force -Path $licDir | Out-Null
 Copy-One (Join-Path $repo 'vendor\fromsoftware-rs-main\LICENSE-MIT-NON-AI') $licDir
 Copy-One (Join-Path $repo 'vendor\fromsoftware-rs-main\LICENSE-ASL2-NON-AI') $licDir
 
-# er_echo.ini：沿用默认值，profiles 指向示例；去掉作者存档相关注释
+# er_echo.ini：沿用默认值，profiles 先指向内置的 Sanvenir；去掉作者存档相关注释
 $iniSource = Join-Path $repo 'install\er_echo.ini.template'
 if (-not (Test-Path -LiteralPath $iniSource)) { $iniSource = Join-Path $game 'er_echo.ini' }
 if (-not (Test-Path -LiteralPath $iniSource)) { throw "找不到 ini 模板（$iniSource）" }
 $iniText = [IO.File]::ReadAllText($iniSource)
-$iniText = [regex]::Replace($iniText, '(?m)^\s*profiles\s*=.*$', 'profiles=profiles/profile.example.json')
+$iniText = [regex]::Replace($iniText, '(?m)^\s*profiles\s*=.*$', 'profiles=profiles/builtin_sanvenir.json')
 $iniText = ($iniText -split "`r?`n" | Where-Object { $_ -notmatch 'from_save_account|ER0000\.sl2|7656|本账号' }) -join "`r`n"
 $header = @'
 ; ============================================================
 ; ER Echo (Nexus release)
 ; 1) 导出你自己的角色：er-echo\tools\export_profile_from_save.py --slot N -o profiles\me.json
-; 2) 把下面 [clone] 的 profiles= 改成你的文件
+; 2) 把 [clone] 的 profiles= 改成你的文件（保留末尾的 builtin_sanvenir.json 即可继续带内置角色）
 ; 3) config_eldenring.toml 的 external_dlls 里加上 "er_echo.dll"
-; 示例档案 equipment_param_ids 全是 0，只保证能跑起来。
+; 默认只带内置角色 Sanvenir（彩蛋 / 备用，Lv1）；profile.example.json 只是格式示例。
 ; ============================================================
 
 '@
@@ -155,6 +155,7 @@ $header = @'
 
 New-Item -ItemType Directory -Force -Path (Join-Path $mainDir 'profiles') | Out-Null
 Copy-One (Join-Path $repo 'tools\profile.example.json') (Join-Path $mainDir 'profiles')
+Copy-One (Join-Path $repo 'install\profiles\builtin_sanvenir.json') (Join-Path $mainDir 'profiles')
 
 $toolExclude = @(
     'live_*.ps1', 'restart_and_test*.ps1', 'restart_and_probe.ps1', 'restart_with_new_dll.ps1',
@@ -199,6 +200,8 @@ INSTALL
         python er-echo\tools\export_profile_from_save.py --list
         python er-echo\tools\export_profile_from_save.py --slot 2 -o profiles\slot2.json
      then set  profiles=profiles/slot2.json  under [clone] in er_echo.ini.
+     The bundled profiles\builtin_sanvenir.json (Sanvenir, Lv1) already works as a spare
+     companion - keep it at the end of profiles= and append your own files.
   4. Launch with launchmod_eldenring.bat (not through Steam).
 
 IF IT DOES NOT START
@@ -225,6 +228,7 @@ CONTENTS
   launchmod_eldenring_admin.bat   self-elevating launcher (10-second crash)
   mod\script\talk\...dcx          grace-menu ESD (must be mounted via mod_loader)
   profiles\                       your exported characters
+  profiles\builtin_sanvenir.json  built-in Sanvenir (Lv1 easter egg / spare; keep it in profiles=)
   er-echo\docs\                   install (incl. section 3 troubleshooting), usage, i18n
   er-echo\tools\                  profile export, doctor, IPC client
   er-echo\bridge\                 optional LLM battle director (off by default)
@@ -234,10 +238,12 @@ CONTENTS
 NOTES
   * Do not go online with a modded save.
   * A game update breaks the mod until it is rebuilt.
-  * This folder replaces no game files; there is no "mod" folder to merge.
-  * If you already have your own launchmod_eldenring.bat, back it up before
-    extracting; merge the -p argument rather than losing your customisations.
+  * This folder overwrites no vanilla files; it only adds the mod\ folder the loader mounts.
+    If you already have your own launchmod_eldenring.bat, back it up before extracting;
+    merge the -p argument rather than losing your customisations.
 '@
+# 版本号只在 -Version 参数里改；README 里的标题跟着走
+$readme = $readme -replace '(?m)^ER Echo \d+\.\d+\.\d+', ("ER Echo " + $Version)
 [IO.File]::WriteAllText((Join-Path $mainDir 'README.txt'), $readme, [Text.UTF8Encoding]::new($false))
 
 # ---------------------------------------------------------------- 2) 可选 ESD fallback
@@ -256,27 +262,35 @@ You only need this if the runtime-injected "Comrades" entry does not appear in t
 Site of Grace menu. The default (nested) mode does NOT use this file.
 
 What it does
-  * replaces mod\script\talk\m00_00_00_00.talkesdbnd.dcx with a patched vanilla ESD that
-    adds the five root-menu options directly (no runtime injection),
+  * replaces the talk ESD the loader mounts with a patched vanilla ESD that adds the
+    five root-menu options directly (no runtime injection),
   * sets nested_menu=false in er_echo.ini.
 
-Install
-  1. Extract into ...\ELDEN RING\Game (merge with the main archive).
-  2. Make sure config_eldenring.toml has a mod_loader block pointing at mod/ (see below).
-  3. er_echo.ini: set [ui] nested_menu=false (er-echo\tools\switch_menu_mode.ps1 -Mode root
-     does both steps).
-  4. Restart the game.
+Install (two layouts, pick yours)
+  A. One-click installer (files under mods\ER-Echo\)
+     1. Extract this archive into ...\ELDEN RING\Game (the er-echo\ui\... folder it
+        carries is only the source for the switch script - it does not get mounted).
+     2. Run:  powershell -NoProfile -ExecutionPolicy Bypass -File mods\ER-Echo\tools\switch_menu_mode.ps1 -Mode root
+        It finds the game folder, copies the root-menu ESD into
+        mods\ER-Echo\mod\script\talk\ and writes nested_menu=false.
+     3. Restart the game.
+     (Manual copy: er-echo\ui\out_rootmenu\m00_00_00_00.talkesdbnd.dcx ->
+      mods\ER-Echo\mod\script\talk\, then set nested_menu=false in
+      mods\ER-Echo\er_echo.ini.)
 
-config_eldenring.toml:
-  [extension.mod_loader]
-  enabled = true
-  mods = [ { enabled = true, name = "er-echo", path = "mod" }, ]
+  B. Manual install (files at the game root)
+     1. Extract this archive into ...\ELDEN RING\Game, merging with the main archive.
+     2. Run er-echo\tools\switch_menu_mode.ps1 -Mode root (or copy
+        er-echo\ui\out_rootmenu\m00_00_00_00.talkesdbnd.dcx over
+        mod\script\talk\m00_00_00_00.talkesdbnd.dcx and set nested_menu=false).
+     3. Restart the game.
 
 WARNING
   * This file is a modified copy of ELDEN RING game data. Do not redistribute it.
   * It conflicts with any other mod that replaces the same talk ESD; merge instead of overwrite.
-  * Switching back to the default mode: er-echo\tools\switch_menu_mode.ps1 -Mode nested
+  * Switching back to the default mode: switch_menu_mode.ps1 -Mode nested
 '@
+$fbReadme = $fbReadme -replace '(?m)^ER Echo \d+\.\d+\.\d+', ("ER Echo " + $Version)
 [IO.File]::WriteAllText((Join-Path $fallbackDir 'README.txt'), $fbReadme, [Text.UTF8Encoding]::new($false))
 
 # ---------------------------------------------------------------- 2.5) Setup 安装器（Nexus 主文件）
@@ -328,5 +342,25 @@ Say ("主包(手动): {0}  ({1} 个文件)" -f $mainDir, $mainFiles)
 Say ("可选包: {0}" -f $fallbackDir)
 if (Test-Path -LiteralPath $setupZip) { Say ("安装器(主文件): {0}" -f $setupZip) }
 Say ("DLL SHA256: {0}" -f $dllHash)
-Say '下一步：按 er-echo\nexus\checklist.md 上传；游戏内素材见 er-echo\nexus\shotlist.md。'
+
+# ---------------------------------------------------------------- 5) 校验清单
+# 让发布材料能对上「实际传上去的那个文件」：把三个 zip 的 SHA256 / 大小写成文本，
+# 每次打包自动更新 nexus\release-checksums.txt。
+$sumFile = Join-Path $repo 'nexus\release-checksums.txt'
+$lines = @()
+$lines += ("ER Echo " + $Version + " - Nexus release artifacts")
+$lines += ("generated " + (Get-Date -Format 'yyyy-MM-dd HH:mm:ss zzz'))
+$lines += ''
+$lines += ("er_echo.dll  {0} bytes  SHA256 {1}" -f (Get-Item -LiteralPath $builtDll).Length, $dllHash)
+$lines += ''
+foreach ($z in @($setupZip, $mainZip, $fallbackZip)) {
+    if (-not (Test-Path -LiteralPath $z)) { continue }
+    $h = (Get-FileHash -LiteralPath $z -Algorithm SHA256).Hash
+    $len = (Get-Item -LiteralPath $z).Length
+    $lines += ("{0}  {1} bytes  SHA256 {2}" -f (Split-Path -Leaf $z), $len, $h)
+}
+[IO.File]::WriteAllText($sumFile, (($lines -join "`r`n") + "`r`n"), [Text.UTF8Encoding]::new($false))
+Say ("[ok] 校验清单: {0}" -f $sumFile) 'Green'
+
+Say '下一步：按 nexus\checklist.md 上传；游戏内素材见 nexus\shotlist.md。'
 exit 0

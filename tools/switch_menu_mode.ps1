@@ -36,11 +36,19 @@ if (-not (Test-Path -LiteralPath (Split-Path -Parent $talk))) {
 }
 
 $source = if ($Mode -eq 'nested') {
-    Join-Path $repo 'ui\out_vanilla\m00_00_00_00.talkesdbnd.dcx'
+    @(
+        (Join-Path $repo 'ui\out_vanilla\m00_00_00_00.talkesdbnd.dcx'),
+        (Join-Path $game 'er-echo\ui\out_vanilla\m00_00_00_00.talkesdbnd.dcx')
+    ) | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
 } else {
-    Join-Path $repo 'ui\out_rootmenu\m00_00_00_00.talkesdbnd.dcx'
+    @(
+        (Join-Path $repo 'ui\out_rootmenu\m00_00_00_00.talkesdbnd.dcx'),
+        (Join-Path $game 'er-echo\ui\out_rootmenu\m00_00_00_00.talkesdbnd.dcx')
+    ) | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
 }
-if (-not (Test-Path $source)) { throw "missing ESD build: $source" }
+if (-not $source) {
+    throw ("missing ESD build for mode '{0}' (looked in the tools folder and <Game>\er-echo\ui\" -f $Mode)
+}
 
 Copy-Item $source $talk -Force
 Write-Host "[ok] deployed $Mode ESD -> $talk"
