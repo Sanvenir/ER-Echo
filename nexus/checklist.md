@@ -6,13 +6,15 @@
 
 ## 阶段 0：发布前（本地）
 
-- [ ] `powershell -File er-echo\tools\doctor.ps1` → 0 阻断
+- [ ] `powershell -File tools\doctor.ps1` → 0 阻断
 - [ ] `dist/nexus/ER-Echo-Setup-0.1.0.zip` 已生成（先 `tools\build_gui_exe.ps1`，再 `tools\package_nexus.ps1`）
 - [ ] `dist/nexus/ER-Echo-0.1.0.zip` + `ER-Echo-0.1.0-ESD-fallback.zip` 已生成
-- [ ] 压缩包里**没有** `config_eldenring.toml` / `mod\script\talk` / 作者 profile
-- [ ] 压缩包里**有** `er_echo.dll`、`er_echo.ini`、`profiles\profile.example.json`、
-      **两个** `launchmod_eldenring*.bat`（CRLF）、`THIRD-PARTY-LICENSES.txt`、`er-echo\docs\`
-- [ ] 两个 bat 都带 `-p ".\eldenring.exe"`；admin 版能自提权
+- [ ] 安装器 payload 里**没有** `config_eldenring.toml` / 作者 profile；`mod\script\talk` 的 ESD 作为 payload 一部分是**必需**的
+- [ ] 安装器 `_internal\payload` 里**有** `er_echo.dll`、`er_echo.ini`、`profiles\profile.example.json`、
+      两个 `launch-er-echo*.bat`（CRLF）、`THIRD-PARTY-LICENSES.txt`、`er-echo\docs\`
+- [ ] 手动包（Optional）里**有** `er_echo.dll`、`er_echo.ini`、`profiles\profile.example.json`、
+      两个 `launchmod_eldenring*.bat`（CRLF）、`THIRD-PARTY-LICENSES.txt`、`er-echo\docs\`
+- [ ] bat 都带 `-p ".\eldenring.exe"`；admin 版能自提权
 - [ ] 版本号统一为 `0.1.0`（DLL / 页面 / 文件名）
 - [ ] 图片按 `shotlist.md` 重拍并处理完（无 FPS 叠加层、16:9）
 - [ ] `description.bbcode` 的 AI 声明二选一（删掉没选的那段）
