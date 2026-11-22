@@ -5,7 +5,7 @@
       1400,
       400
     ],
-    "bytes": 112516
+    "bytes": 157133
   },
   {
     "file": "01-grace-menu.jpg",
@@ -13,7 +13,7 @@
       1920,
       1080
     ],
-    "bytes": 407061
+    "bytes": 502604
   },
   {
     "file": "02-party-menu.jpg",
@@ -21,7 +21,7 @@
       1920,
       1080
     ],
-    "bytes": 391416
+    "bytes": 528622
   },
   {
     "file": "03-companions.jpg",
@@ -29,6 +29,30 @@
       1920,
       1080
     ],
-    "bytes": 297345
+    "bytes": 500369
+  },
+  {
+    "file": "04-combat.jpg",
+    "size": [
+      1920,
+      1080
+    ],
+    "bytes": 454649
+  },
+  {
+    "file": "05-closeup.jpg",
+    "size": [
+      1920,
+      1080
+    ],
+    "bytes": 442158
+  },
+  {
+    "file": "06-localisation.jpg",
+    "size": [
+      1920,
+      1080
+    ],
+    "bytes": 465485
   }
 ]

@@ -3,7 +3,10 @@
 我这边跑不了游戏，所有「游戏内实拍」都得你来。下面按**可直接照做**的粒度写：
 拍什么、怎么摆、拍到什么算合格、存哪。
 
-拍完丢进 `er-echo\nexus\media\incoming\`（没有就新建），文件名按下面写，我来统一裁剪/压缩/拼图。
+拍完丢进 `nexus\media\incoming\`（没有就新建），文件名按下面写，我来统一裁剪/压缩/拼图。
+（`incoming/` 不进 git；生成好的成品在 `nexus\media\`。）
+
+格式就 **JPG**：截图工具的原图本来就是 JPG，直接丢进来，别转 PNG、别二次压缩/缩放。
 
 ---
 
@@ -16,18 +19,19 @@
 | 画质 | 最高（光照/阴影/植被拉满），关 DLSS/FSR 的「性能」档 | 缩略图第一印象 |
 | HDR | 关 | 截图容易过曝/发灰 |
 | 叠加层 | 关 **RTSS / MSI Afterburner / Steam FPS / Discord / GeForce Experience 性能层** | 旧截图左上角那条 `FPS 2 Time ...` 就是反面教材 |
-| 游戏文本语言 | **English**（拍主图组时） | 页面是英文的；中文菜单留给第 6 张「多语言」 |
-| 菜单语言 | `er_echo.ini` → `[i18n] language=en` | 和游戏文本一致，避免方块 |
+| 游戏文本语言 | **English**（拍主图组时） | 页面是英文的；中文界面只留给第 6 张「多语言」对比 |
+| 菜单语言 | `er_echo.ini` → `[i18n] language=game`（和游戏文本一致；拍英文主图时游戏语言设 English） | 避免方块 |
 | 截图键 | **不要用 F12**（F12 是本 mod 的「给队友装备」）；用 **Win+Alt+PrtScn**（Xbox Game Bar）或 ShareX | 不然一按 F12 就给队友塞装备了 |
+| 输出格式 | **JPG**（截图原图就是 JPG，直接给） | 别转 PNG / 别自己缩放裁切 |
 
-> 拍之前先进游戏确认：赐福菜单最上面是 `Comrades (3/3)`，日志 `er_echo.log` 里有
+> 拍之前先进游戏确认：赐福菜单里能看到 `Comrades (n/m)`（3 个号位 + 11 份档案就是 `3/11`），日志 `er_echo.log` 里有
 > `er_echo attached` 和 `ui: message hook installed`。
 
 ---
 
 ## 1. 必拍：页面缩略图 / 头图（1 张）
 
-**文件名**：`hero.png`
+**文件名**：`hero.jpg`
 
 - 场景：视野开阔、有地标的地方（例：湖之利耶尼亚湖边、王城城墙外、艾雷教堂夜晚）。
 - 站位：玩家在画面下方 1/3，**3 个克隆体**在玩家前方呈扇形，别重叠。
@@ -38,17 +42,17 @@
 
 ## 2. 必拍：赐福根菜单（1 张）
 
-**文件名**：`menu-root.png`
+**文件名**：`menu-root.jpg`
 
 - 坐赐福，菜单停在最上面那项。
-- 画面里要能看清 **`Comrades (3/3)`** 这一行（英文），以及右边站着的 3 个克隆体。
+- 画面里要能看清 **`Comrades (n/m)`** 这一行（英文），以及右边站着的克隆体。
 - 菜单不要滚动到别的项，别让「传送」之类的长列表盖住它。
 
 ## 3. 必拍：二级菜单（1 张）
 
-**文件名**：`menu-party.png`
+**文件名**：`menu-party.jpg`
 
-- 点进 `Comrades` → 显示 `Party size: 3`、`Slot 1/2/3`、`Companion AI`、`Resummon now`、`Friendly fire: OFF`、`Back`；
+- 点进 `Comrades` → 显示 `Party size: 3`、`Slot 1/2/3`、`Companion AI`、`Resummon now`、`Friendly fire`（ON/OFF 都行）、`Back`；
   再点 `Companion AI` → 三个号位各一行 `Slot N Name: <preset>` + `Back`。
 - 3 个号位最好是**三个不同名字**（`slot0_Sv` / `slot1_May` / 再导一个），
   证明多存档同场。
@@ -56,7 +60,7 @@
 
 ## 4. 必拍：战斗（1 张，最重要的一张）
 
-**文件名**：`combat.png`
+**文件名**：`combat.jpg`
 
 - 找一场能看清动作的仗：3 个克隆体 + 你 vs 一个精英/ Boss（大树守卫、龙、熔炉骑士都行）。
 - 要拍到**至少一个克隆体在施法/挥武器**，最好有法术弹道或火花。
@@ -65,33 +69,31 @@
 
 ## 5. 必拍：角色特写（1 张）
 
-**文件名**：`closeup.png`
+**文件名**：`closeup.jpg`
 
 - 镜头贴近一个克隆体的**正面/侧面**，能看清脸（证明脸是从存档注入的）、盔甲细节。
 - 最好和玩家角色同框对比：**同一个玩家，旁边站着另一个存档的角色**。
 - 背景虚化一点无所谓，脸要清楚。
 
-## 6. 必拍：多语言（1 张，可由 4 张拼）
+## 6. 必拍：多语言（1 张，两张拼）
 
-**文件名**：`i18n-en.png` / `i18n-ja.png` / `i18n-zhtw.png` / `i18n-zhcn.png`
+**文件名**：`i18n-en.jpg` / `i18n-zhcn.jpg`
 
 同一位置、同一构图，只换语言，各截一张（每次改 `er_echo.ini` 的 `language=` 后**重启游戏**）：
 
-- `en` → `Comrades (3/3)`
-- `ja` → `戦友（3/3）`
-- `zhtw` → `戰友（3/3）`
-- `zhcn`（顺便把游戏文本也切成简中）→ `战友（3/3）`
+- `en` → 英文菜单（`Comrades (3/11)`、`Party size: 3`）
+- `zh-CN`（顺便把游戏文本也切成简中）→ 中文菜单（`战友（3/11）`、`队伍人数：3`）
 
-四张给我，我拼成 2×2 一张图。拼图比单张更能说明「多语言适配」。
+两张给我，我拼成左右对比一张。页面文案只写**英文 + 简体中文**，繁中/日文这些不用在页面上列出来。
 
 ## 7. 可选但有加分
 
 | 文件名 | 内容 |
 |---|---|
-| `summon.png` | 用骨灰召唤的一瞬间（白雾/召唤圈） |
-| `f12-gear.png` | 置物包光标停在武器上，按 F12 后队友换装的对比 |
-| `auto-summon.png` | 坐火起身后 3 个克隆体已经在旁边 |
-| `glow-off.png` | 同一角度 `no_spirit_glow=true/false` 对比（证明不是蓝白虚影） |
+| `summon.jpg` | 用骨灰召唤的一瞬间（白雾/召唤圈） |
+| `f12-gear.jpg` | 置物包光标停在武器上，按 F12 后队友换装的对比 |
+| `auto-summon.jpg` | 坐火起身后 3 个克隆体已经在旁边 |
+| `glow-off.jpg` | 同一角度 `no_spirit_glow=true/false` 对比（证明不是蓝白虚影） |
 
 ---
 
@@ -103,7 +105,7 @@ Nexus 支持嵌 YouTube。没有也能发，但有视频的页面转化明显更
 
 分镜（每段 8–15 秒，够用）：
 
-1. **0–8s 钩子**：赐福菜单 `Comrades (3/3)` → 点进去 → 3 个克隆体在画面里呼吸/待机。
+1. **0–8s 钩子**：赐福菜单 `Comrades (3/11)` → 点进去 → 3 个克隆体在画面里呼吸/待机。
 2. **8–25s 召唤**：用骨灰召唤一队，镜头绕半圈，展示 3 个不同角色。
 3. **25–45s 战斗**：一场 20 秒的实打，剪 2–3 个「克隆体施法 / 举盾 / 处决」的特写。
 4. **45–60s 细节**：F12 给装备、菜单切人数 3→1、重召；字幕标 `Party size 3 → 1`。
@@ -116,21 +118,20 @@ Nexus 支持嵌 YouTube。没有也能发，但有视频的页面转化明显更
 ## 3. 交付清单
 
 ```
-er-echo\nexus\media\incoming\
-  hero.png
-  menu-root.png
-  menu-party.png
-  combat.png
-  closeup.png
-  i18n-en.png
-  i18n-ja.png
-  i18n-zhtw.png
-  i18n-zhcn.png
-  (可选) summon.png / f12-gear.png / auto-summon.png / glow-off.png
+nexus\media\incoming\
+  hero.jpg
+  menu-root.jpg
+  menu-party.jpg
+  combat.jpg
+  closeup.jpg
+  i18n-en.jpg
+  i18n-zhcn.jpg
+  (可选) summon.jpg / f12-gear.jpg / auto-summon.jpg / glow-off.jpg
   (可选) trailer.mp4
 ```
 
-PNG 就行，别自己压 JPG（我会统一转 1920×1080、JPEG q88、控制在 2 MB 以内）。
+JPG 就行（截图原图直接给）。我这边统一裁 1920×1080、JPEG q88、控制在 2 MB 以内，
+脚本是 `nexus\make_media.py`（把文件丢进 `incoming\` 后重跑即可）。
 
 **只要拍完丢进去告诉我一声**，我来出：`00-banner-1400x400.jpg`、`01..06` 的 16:9 图库版、
-多语言 2×2 拼图，并替换掉现在 `media/` 里的占位图。
+英文/中文对照拼图，并替换掉现在 `media/` 里的占位图。

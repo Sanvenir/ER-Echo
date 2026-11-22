@@ -15,22 +15,31 @@ armour and weapons, same level, same memorised spells. The clone fights with the
 (no scripted follow, no puppeteering), follows you like a Spirit Ash, and is summoned the same way — sit at a
 Site of Grace, use an Ash, or press a hotkey.
 
-It is a DLL mod for [b]ELDEN RING 1.17.2[/b], built on Mod Engine 2. It does not edit your save file. It ships one
-patched copy of the vanilla talk ESD (mod\script\talk), which the grace-menu patch needs; no other game data is
-included. (The optional "root menu fallback" file is a different ESD variant - only use it if the default menu
-entry fails to appear.)
+It is a DLL mod for [b]ELDEN RING 1.17.2[/b] and runs under Mod Engine 2 or me3 (vanilla install or Convergence).
+It does not edit your save file. The only game data it ships is one patched copy of the vanilla talk ESD
+(mod\script\talk), which the grace-menu patch needs, plus two JSON parameter-ID tables derived from the
+Convergence regulation (the exporter uses them to validate item IDs). (The optional "root menu fallback" file
+is a different ESD variant - only use it if the default menu entry fails to appear.)
+
+A one-click installer ([b]ER-Echo-Setup.exe[/b]) does the setup, the character export and the loader config;
+nothing else needs to be edited by hand. A built-in companion ([b]Sanvenir[/b], Lv1) is included, so the mod is
+playable before you export anything.
 
 [b][size=4]Features[/size][/b]
 
 [list]
 [*][b]Your other Tarnished, not a generic NPC.[/b] Export a character from any save slot (including old,
-   "retired" saves) and the clone gets its exact appearance, 22 equipment slots, level, stats and spells.
+   "retired" saves) and the clone gets its exact appearance, body shape, 22 equipment slots, level, stats and
+   spells.
+[*][b]Works before you export anything.[/b] A built-in Lv1 companion (**Sanvenir**) ships with the mod and is
+   pinned at the end of the profile list, so a fresh machine still has someone to summon.
 [*][b]Up to 3 companions at once[/b], each from a different profile, switchable in-game.
 [*][b]Native behaviour.[/b] Clones use the game's own AI think/behaviour params. They detect enemies, engage,
    guard, cast, and follow through the same systems a Spirit Ash uses — including the ash's own catch-up
    teleport when they fall behind.
-[*][b]No area restrictions.[/b] Summon anywhere, without a Summoning Pool, without the "you can't summon here"
-   dead zone, and without the one-party-at-a-time limit.
+[*][b]No area restrictions.[/b] F8 and auto-summon work anywhere: no Summoning Pool, no "you can't summon
+   here" dead zone, no one-party-at-a-time limit. (Using the Spirit Ash [i]item[/i] itself still follows the
+   vanilla dead-zone rule - the item is checked by the game's own menu code.)
 [*][b]Sites of Grace menu.[/b] A new entry at the top of the grace menu opens a nested sub-menu: party size
    (0–3), slot assignment, per-companion AI, resummon, friendly fire, back. Injected into the live menu at
    runtime; the archive includes the talk ESD it needs (mounted through mod_loader).
@@ -50,7 +59,7 @@ entry fails to appear.)
 [*][b]Comrade-mode enemy HP correction.[/b] Enemy max HP scales with the number of [b]living[/b] companions:
    1 / 2 / 3 → ×1.5 / ×1.8 / ×2.0 (×1.0 with none). Bosses already in combat scale immediately and keep
    their current HP percentage. Implemented at runtime; [i]NpcParam[/i] / [i]regulation.bin[/i] are untouched.
-   Configurable in [i]er_echo.ini[/i] ([i][balance][/i]) and diagnosable with [i]enemy_hp_status[/i].
+   Configurable in [i]er_echo.ini[/i] (the balance section) and diagnosable with [i]enemy_hp_status[/i].
 [*][b]Auto-summon[/b] after resting, fast travel or resurrection (optional).
 [*][b]Give gear to a companion[/b] — press [b]F12[/b] on an item in your inventory/equipment menu and the
    selected companion receives it. With no equipment item selected, [b]F12[/b] restores that companion's
@@ -58,8 +67,8 @@ entry fails to appear.)
 [*][b]Optional LLM "battle director"[/b] (Python sidecar, off by default). It reads combat state and nudges
    aggression / spell rate / guard rate / target switching. The LLM can also swap a clone's gear or stats, with
    whitelists, clamps and a rollback point. It only ever touches the clones — never your character.
-[*][b]Localised menu[/b] — English, 简体中文, 繁體中文, 日本語 out of the box; any other language via a simple
-   text override file, no rebuild needed.
+[*][b]Localised menu[/b] — English and 简体中文 out of the box, and the menu follows the game's own language.
+   Menu wording can be overridden from a plain-text file, no rebuild needed.
 [/list]
 
 [b][size=4]How it works (short version)[/size][/b]
@@ -79,10 +88,12 @@ your .sl2.
 [*][b]ELDEN RING 1.17.2[/b] (Steam, PC). eldenring.exe product version [b]2.7.2.0[/b] (worldwide) or
    [b]2.7.2.1[/b] (JP). [b]This is not optional[/b] — the mod resolves engine offsets and byte patterns for this
    exact build and will not work on other versions.
-[*][b]Mod Engine 2[/b] (tested with 2.1.0). Any DLL loader that injects er_echo.dll into eldenring.exe and
-   runs the game with EAC disabled should work; ME2 is what this was developed against.
+[*][b]A mod loader: Mod Engine 2 or me3.[/b] ME2 is what this was developed against (tested with 2.1.0);
+   me3 works too, standalone for vanilla or bundled with The Convergence 3.x. Any loader that injects
+   er_echo.dll into eldenring.exe with EAC disabled should work. The installer does not bundle a loader -
+   it links you to the official pages.
 [*][b]Windows 10/11 x64.[/b] No VC++ redistributable, no .NET, no Python required for the core mod.
-[*][b]Offline mode.[/b] Launch through ME2, never through Steam's Play button (that starts EAC).
+[*][b]Offline mode.[/b] Launch through a mod loader, never through Steam's Play button (that starts EAC).
 [*][b]Python 3.9+[/b] [i]optional[/i] — only for exporting profiles from a save and for the LLM sidecar.
 [/list]
 
@@ -91,28 +102,36 @@ your .sl2.
 [b]Recommended: one-click installer[/b]
 
 1. Back up %APPDATA%\EldenRing\<your SteamID>\ER0000.sl2.
-2. Install [b]Mod Engine 2[/b] into your game folder (...\ELDEN RING\Game).
+2. Install a loader. For a vanilla install that is [b]Mod Engine 2[/b] in the game folder
+   (...\ELDEN RING\Game); vanilla + me3 and Convergence + me3 also work. Don't have one? The installer
+   links to the official Mod Engine 2 / me3 pages and lists the steps; no loader files are bundled.
 3. Download the main file ([b]ER-Echo-Setup-0.1.0.zip[/b]), extract it anywhere and run
    [b]ER-Echo-Setup.exe[/b].
 4. Set the game path — ...\ELDEN RING\Game for vanilla, or
-   ...\Convergence3\ConvergenceER for Convergence/me3 — and click [b]Install[/b].
-   The installer:
+   ...\Convergence3\ConvergenceER for Convergence/me3 — pick the loader (Auto / Mod Engine 2 / me3) and
+   click [b]Install[/b]. The installer:
    [list]
-   [*]copies [b]mods\ER-Echo\[/b] and its own [b]config-er-echo.toml[/b] (does not overwrite your
-       config_eldenring.toml),
-   [*]exports your character(s) and writes [b]profiles=[/b] in er_echo.ini,
-   [*]backs up every file it touches; [b]Uninstall[/b] is in the same window.
+   [*]copies [b]mods\ER-Echo\[/b] (DLL, generated er_echo.ini, talk ESD, tools, docs) and its own
+       [b]config-er-echo.toml[/b]; it adds the er-echo entries to your config_eldenring.toml after a
+       .bak backup - it never replaces the file. For me3 it appends to the .me3 profile instead,
+   [*]exports your character(s) and writes [b]profiles=[/b] in er_echo.ini (the built-in Sanvenir stays at
+       the end of the list),
+   [*]backs up the config files it edits (`.bak-er-echo-*`) and has [b]Uninstall[/b] in the same window.
    [/list]
-5. Start the game with [b]mods\ER-Echo\launch-er-echo.bat[/b] (the installer shows the exact path).
-   It passes -p .\eldenring.exe, which works around a Mod Engine 2 2.1.0 launcher crash.
+5. Click [b]Launch game[/b] in the same window (the finished-install dialog also offers to start the game).
+   Vanilla runs [b]mods\ER-Echo\launch-er-echo.bat[/b], which passes -p .\eldenring.exe and so works around
+   a Mod Engine 2 2.1.0 launcher crash; Convergence runs its own me3 with the right profile.
 
 [b]Manual install[/b]: use the optional [b]ER Echo - Manual Install[/b] archive instead; unzip it into
 the game folder and follow its README.txt (add external_dlls + mod_loader mods entry yourself).
 
-If anything goes wrong, run the bundled self-check first:
+If anything goes wrong, run the bundled self-check first (the path depends on how you installed):
 
 [code]
-powershell -NoProfile -ExecutionPolicy Bypass -File er-echo\tools\doctor.ps1
+# installer layout
+powershell -NoProfile -ExecutionPolicy Bypass -File mods\ER-Echo\tools\doctor.ps1 -Target "C:\...\ELDEN RING\Game"
+# manual layout
+powershell -NoProfile -ExecutionPolicy Bypass -File er-echo\tools\doctor.ps1 -Target "C:\...\ELDEN RING\Game"
 [/code]
 
 It checks the game version, your ME2 config, the DLL's dependencies, your profile files, write permissions and
@@ -131,8 +150,9 @@ own .bat, add -p ".\eldenring.exe".
 [b]2. The game window appears, then closes after ~10 seconds.[/b] WER shows [b]eldenring.exe[/b],
 [b]0xc0000005[/b], fault offset [b]0x1EBCEF9[/b]; the crash dump contains
 "DLUserInputManagerImpl_win32.cpp(98)". Cause: Steam's in-game overlay (gameoverlayrenderer64.dll) collides
-with Mod Engine 2's hooks in the game's input manager. Fix: run [b]launchmod_eldenring_admin.bat[/b] (an
-elevated process cannot have the overlay injected into it), or turn off Steam → Settings → In Game →
+with Mod Engine 2's hooks in the game's input manager. Fix: run [b]launchmod_eldenring_admin.bat[/b] (manual
+install) or tick [b]Launch as administrator[/b] / run [b]launch-er-echo-admin.bat[/b] with the installer — an
+elevated process cannot have the overlay injected into it — or turn off Steam → Settings → In Game →
 "Enable the Steam Overlay". Cost of the elevated launcher: no Steam overlay/friends panel in game.
 
 [b]3. It crashes even with no mods loaded.[/b] The dump contains neither modengine2.dll nor er_echo.dll. This is
@@ -144,6 +164,9 @@ When reporting a crash, attach the last ~50 lines of er_echo.log and the WER ent
 
 [b][size=4]Exporting a character[/size][/b]
 
+The installer does this for you on the Setup tab. The command line (manual install layout shown;
+under the installer the tools live in [b]mods\ER-Echo\tools\[/b]):
+
 [code]
 python er-echo\tools\export_profile_from_save.py --list
 python er-echo\tools\export_profile_from_save.py --slot 2 -o profiles\slot2.json
@@ -153,12 +176,13 @@ Then in er_echo.ini:
 
 [code]
 [clone]
-profiles=profiles/slot2.json
+profiles=profiles/slot2.json,profiles/builtin_sanvenir.json
 [/code]
 
-Comma-separate several profiles to bring several characters (profiles=a.json,b.json). You can also export the
-character you are currently playing from inside the game (ipc_client.py dump_profile), or a character from an
-old, backed-up save folder.
+Comma-separate several profiles to bring several characters (profiles=a.json,b.json). The built-in
+[b]builtin_sanvenir.json[/b] is always appended by the installer; drop it from the list if you don't want it.
+You can also export the character you are currently playing from inside the game (ipc_client.py dump_profile),
+or a character from an old, backed-up save folder.
 
 [b][size=4]Using it[/size][/b]
 
@@ -185,34 +209,50 @@ local tools; it makes no outbound connections. This feature is optional and can 
 
 [b][size=4]Localisation[/size][/b]
 
-Menu text: er_echo.ini → [i18n] language=en (default) or auto (follows Windows display language),
-zh-CN, zh-TW, ja. Any other language can be added by copying er_echo_i18n.example.ini to er_echo_i18n.ini and
-translating ten short lines — no recompile. See er-echo/docs/i18n.md.
+Menu text follows the game: er_echo.ini → i18n section, language=[b]game[/b] (default), or pinned to
+[b]en[/b] / [b]zh-CN[/b]. English and Simplified Chinese are bundled. Menu strings can also be overridden from a
+plain-text file (er_echo_i18n.example.ini → er_echo_i18n.ini), so wording can be changed without a recompile.
+See er-echo/docs/i18n.md.
 
 [spoiler][b]简体中文说明[/b]
 
-这个 mod 把「骨灰」变成你自己另一个存档里的角色：外观、装备、等级、法术全部一致，战斗用游戏原生 AI。
-支持一次召 1-3 个、赐福菜单里切换人数和号位、玩家升级时队友跟着升级（并写回 profile）、
-队友伤害修正与玩家褪色者一致、菜单开关友伤（队友不会被当成敌人、也不会被锁定）、
-F12 把选中的装备给队友（没选中则把队友装备/法术恢复成档案原样），以及可选的 LLM 战斗导演。
+这个 mod 把「骨灰」变成你自己另一个存档里的角色：外观、体型、装备、等级、法术全部一致，战斗用游戏原生 AI。
+支持一次召 1-3 个、赐福菜单里切换人数和号位、每个号位单独的「队友 AI」、玩家升级时队友跟着升级（并写回
+profile）、队友伤害修正与玩家褪色者一致、敌人生命按出场人数补正、菜单开关友伤
+（队友不会被当成敌人、也不会被锁定）、F12 把选中的装备给队友（没选中则把队友装备/法术恢复成档案原样），
+以及可选的 LLM 战斗导演。随包带一个内置角色 **Sanvenir**（Lv1，彩蛋 / 备用），不导出也能直接玩。
 
-安装：把压缩包解到 ELDEN RING\Game，在 config_eldenring.toml 的 external_dlls 里加上
-"er_echo.dll"，用 launchmod_eldenring.bat 启动（必须离线、关 EAC）。
+安装（推荐，一键）：
 
-导出角色：
+1. 备份 `%APPDATA%\EldenRing\<你的 SteamID>\ER0000.sl2`；
+2. 装好加载器：原版 + Mod Engine 2，或原版 / Convergence 3.x + me3（安装器里有官方下载链接和步骤说明，
+   不打包、不分发加载器本身）；
+3. 解压主文件 `ER-Echo-Setup-0.1.0.zip`，运行 `ER-Echo-Setup.exe`；
+4. 填游戏路径（原版 `...\ELDEN RING\Game`；Convergence 为 `...\Convergence3\ConvergenceER`），
+   选加载器（自动 / Mod Engine 2 / me3），点「一键安装」——它会拷文件、导出存档角色、写 `profiles=`、
+   改加载器配置（都带备份），卸载也在同一页；
+5. 点同一页的「启动游戏」。
+
+手动安装：用可选的「Manual Install」压缩包，解到 `ELDEN RING\Game`，按包内 `README.txt` 自己加
+`external_dlls` 和 `mod_loader` 条目，用包里带的 `launchmod_eldenring.bat` 启动（必须离线、关 EAC）。
+
+导出自己的角色（可选；不导出就用内置的 Sanvenir）：
 
 [code]
 python er-echo\tools\export_profile_from_save.py --slot 2 -o profiles\slot2.json
 [/code]
 
-然后 er_echo.ini 里 profiles=profiles/slot2.json。菜单语言用 [i18n] language=en（默认）或 zh-CN。
+（安装器布局下工具在 `mods\ER-Echo\tools\`；也可以直接用安装器的「导出档案」页。）
+然后 `er_echo.ini` 里 `profiles=profiles/slot2.json`（可逗号分隔多个；末尾保留
+`profiles/builtin_sanvenir.json` 就还能带内置角色）。菜单语言默认在 i18n 段写 `language=game`
+（跟随游戏文本语言），也可以固定成 `en` / `zh-CN`，安装器「游戏内菜单语言」下拉框会直接写入。
 
-启动用包里的 launchmod_eldenring.bat（它带了 -p，绕开 ME2 2.1.0 启动器在某些机器上的 0xC0000409 崩溃）。
+启动用包里的 `launchmod_eldenring.bat`（它带了 `-p`，绕开 ME2 2.1.0 启动器在某些机器上的 0xC0000409 崩溃）。
 如果游戏窗口出现约 10 秒后闪退（WER：eldenring.exe / 0xc0000005 / 0x1EBCEF9），改用
-launchmod_eldenring_admin.bat，或在 Steam → 设置 → 游戏中 关掉「启用 Steam 界面」。
+`launchmod_eldenring_admin.bat`，或在 Steam → 设置 → 游戏中 关掉「启用 Steam 界面」。
 装 mod 之前先确认「不带 mod 能正常进标题」。
 
-出问题先看 er_echo.log，或跑 er-echo\tools\doctor.ps1 自检。[/spoiler]
+出问题先看游戏根目录的 `er_echo.log`，或跑 `mods\ER-Echo\tools\doctor.ps1`（手动包：`er-echo\tools\doctor.ps1`）自检。[/spoiler]
 
 [b][size=4]Known limitations[/size][/b]
 
@@ -227,8 +267,10 @@ launchmod_eldenring_admin.bat，或在 Steam → 设置 → 游戏中 关掉「�
    have to map their rows in er_echo.ini (buddy_rows) — see docs/usage.md.
 [*][b]Beta.[/b] The core loop is tested end-to-end on 1.17.2, but this is a 0.x release. Keep a clean save
    and a backup.
-[*][b]Optional ESD fallback.[/b] The separate fallback file replaces mod/script/talk/m00_00_00_00.talkesdbnd.dcx
-   and will conflict with any other mod that edits the same file. Merge instead of overwriting.
+[*][b]Optional ESD fallback.[/b] Only for the rare case where the runtime-injected entry never appears. The
+   separate archive carries a patched talk ESD and `switch_menu_mode.ps1`, which copies it into the folder your
+   loader actually mounts (`mods\ER-Echo\mod\` with the installer, `<Game>\mod\` with the manual archive) and
+   sets `nested_menu=false`. It conflicts with any other mod that edits the same file - merge, don't overwrite.
 [*][b]Launcher depends on your environment.[/b] The bundled launchers already carry the -p workaround. The
    10-second crash is environment-specific (Steam overlay + ME2 hooks); on most machines the normal launcher
    works, on some the admin one is required.
@@ -271,6 +313,8 @@ in elevated mode — verify on a throwaway save if that matters to you.
 [*][b]Paramdex[/b] and the wider Elden Ring modding community — parameter names and structure documentation.
 [*][b]ESDLang[/b] (thefifthmatt) — esdtool, used to build the optional root-menu ESD fallback.
 [*][b]Mod Engine 2[/b] (Soulsmods) — the loader this is developed and tested against.
+[*][b]me3[/b] (garyttierney) — the alternative loader the installer supports (vanilla + me3 and The
+   Convergence 3.x).
 [/list]
 
 [b][size=4]Permissions[/size][/b]
@@ -281,17 +325,9 @@ two incompatible forks.
 
 [b][size=4]AI disclosure[/size][/b]
 
-[color=#ffb86b][b]EDIT BEFORE PUBLISHING — pick one and delete the other.[/b][/color]
-
-Option A (accurate if most of the code was AI-written):
 This mod's code was written with substantial generative-AI assistance under human direction (design, testing,
 debugging, in-game verification). No AI-generated art, audio, voice or text is included in the mod itself. All
 page screenshots are real in-game captures. Tag: [b]AI-Generated Content[/b].
-
-Option B (only with evidence):
-AI tools were used as a supporting tool (code completion / drafting) while the design and implementation were
-human-led. Development history and the author's understanding of the code are documented in the repository's
-design/implementation logs. Tag: [b]AI Assisted[/b].
 
 [b]Do not remove this section[/b] — undisclosed generative-AI use is against Nexus Mods policy (see
 "AI Policy Changes 2026").

@@ -13,9 +13,11 @@
 | `changelog.md` | Changelogs 标签页 / 更新说明 | ✅ |
 | `credits-and-licenses.md` | 署名、代码许可、AI 披露、联网行为、 multiplayer 声明 | ✅ |
 | `THIRD-PARTY-LICENSES.txt` | 压缩包内必须带的三方许可全文说明 | ✅ 打包脚本会放进去 |
-| `shotlist.md` | **需要你在游戏里录/截的素材清单**（含技术设置、构图、视频分镜） | ⏳ 等你拍 |
-| `make_placeholder_media.py` | 把现有开发截图裁成 16:9 / 1400×400 的脚本 | ✅ 可重跑 |
-| `media/` | 占位图（旧开发截图，中文 UI） | ⚠️ 发布前替换 |
+| `shotlist.md` | **需要你在游戏里录/截的素材清单**（含技术设置、构图、视频分镜） | ✅ 图已齐（视频可选） |
+| `make_media.py` | `media/incoming/*.jpg` → 裁 16:9 / 1400×400、压到 2 MB 内、写 `media/manifest.json` | ✅ 可重跑 |
+| `make_placeholder_media.py` | 旧脚本：把更早的开发截图做成占位图（已被 `make_media.py` 取代） | 🗄️ 仅存档 |
+| `media/` | 发布用图（游戏内实拍 7 张：banner + 01..06，全部 1920×1080 / 1400×400） | ✅ |
+| `release-checksums.txt` | 三个 zip + DLL 的 SHA256 / 大小（打完包生成） | ✅ 每次发布更新 |
 | `checklist.md` | 上传当天按顺序勾的清单 | ✅ |
 
 ## 发布流程速览（2026 现行规则）
@@ -42,12 +44,12 @@ Nexus 在 2026 年 4 月换了新版上传表单（[公告](https://www.nexusmod
 
 | 规则 | 我们怎么处理 |
 |---|---|
-| 版权：不得上传游戏原始文件 | 主包**含** `mod\script\talk` 的 ESD（赐福菜单必需，实测不挂载时 EzState 注入失败），它是改过的 vanilla ESD，页面写明；不含 `config_eldenring.toml`（ME2 的配置，覆盖会破坏别人的设置） |
-| 启动链修复 | 主包**含**两个 `launchmod_eldenring*.bat`：`-p` 绕开 ME2 2.1.0 启动器 `0xC0000409`；admin 变体绕开「Steam 覆盖层 × ME2 钩子」的 10 秒闪退 |
+| 版权：不得上传游戏原始文件 | 主包**含** `mod\script\talk` 的 ESD（赐福菜单必需，实测不挂载时 EzState 注入失败），它是改过的 vanilla ESD，页面写明；另带两份 Convergence 参数 ID 表（JSON，校验装备 id 用，页面也写明）。不含 `config_eldenring.toml`（ME2 的配置，覆盖会破坏别人的设置） |
+| 启动链修复 | 安装器包**含** `launch-er-echo*.bat`，手动包**含** `launchmod_eldenring*.bat`：`-p` 绕开 ME2 2.1.0 启动器 `0xC0000409`；admin 变体绕开「Steam 覆盖层 × ME2 钩子」的 10 秒闪退 |
 | 第三方许可 | `fromsoftware-rs` 是 **MIT-NON-AI / Apache-NON-AI**，必须随包附全文 → `THIRD-PARTY-LICENSES.txt` + `LICENSES\` |
 | 联网行为 | DLL 只监听 `127.0.0.1:7811`；LLM 是可选脚本、默认 `mock` 离线；页面写明 |
 | 多人环境 | 页面顶部红字「OFFLINE ONLY」；正文再写一次 |
-| AI 披露 | 正文 AI 段**必须二选一**；代码主要是 AI 写的 → 诚实档是 `AI-Generated Content` |
+| AI 披露 | 正文已经是 **`AI-Generated Content`** 那一档（只有这一版，不再二选一） |
 | 图片 | 只用游戏内截图（`shotlist.md`），不用 AI 图 → 不需要 `AI Media`（除非描述也用 AI 写） |
 
 ## 2026-11-21 启动链补充（来源：[docs/handoff-launch.md](../docs/handoff-launch.md)）
@@ -76,20 +78,29 @@ Nexus 在 2026 年 4 月换了新版上传表单（[公告](https://www.nexusmod
 
 ## 还缺什么
 
-1. **游戏内素材**（`shotlist.md` 的 6 组图 + 可选视频）——这是唯一卡发布的。
-2. `description.bbcode` 末尾 AI 段二选一。
-3. 可选包要不要发（root-menu ESD fallback）——不发也能用，只是少了「注入失败时的退路」。
+1. **游戏内素材**：静态图已齐（`media/` 7 张，全部 16:9 / 1400×400）。可选：60–90 秒 trailer、
+   `summon` / `f12-gear` / `glow-off` 这类加分图。
+2. AI 声明：已定为 `AI-Generated Content`，`description.bbcode` 末尾就是这一档（见 `page-fields.md`）。
+3. 可选包（root-menu ESD fallback）**要发**——体积小，留一条「注入失败时的退路」。
 4. **未验证**（handoff TODO）：admin 模式下 Steam 成就 / 云存档是否正常；关掉 Steam 覆盖层后
    普通 bat 是否能跑（能跑就省掉每次 UAC）。发布前最好各测一次，并在 FAQ 里写实。
 
 ## 打包
 
-```powershell
-# 主文件（不含游戏文件 / ME2 配置）
-powershell -NoProfile -ExecutionPolicy Bypass -File er-echo\tools\package_nexus.ps1
+源码在仓库根目录（不在游戏目录里），按顺序跑：
 
-# 只重打不重编译
-powershell -NoProfile -ExecutionPolicy Bypass -File er-echo\tools\package_nexus.ps1 -SkipBuild
+```powershell
+# 1) Rust DLL
+powershell -NoProfile -ExecutionPolicy Bypass -File mod\build.ps1
+
+# 2) 安装器 payload（拷 DLL + 文档 + bat + ESD 到 build\payload）
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\package_payload.ps1 -SkipBuild
+
+# 3) 安装器 exe（PyInstaller onedir → dist\tools\ER-Echo-Setup）
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\build_gui_exe.ps1 -SkipPayload
+
+# 4) 三个发布 zip（安装器 + 手动包 + ESD fallback）
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\package_nexus.ps1 -SkipBuild
 ```
 
 产物：
@@ -99,3 +110,6 @@ dist\nexus\ER-Echo-Setup-0.1.0.zip            ← 传这个当 Main file（一�
 dist\nexus\ER-Echo-0.1.0.zip                  ← Optional：手动安装（解压 + 改 config）
 dist\nexus\ER-Echo-0.1.0-ESD-fallback.zip     ← Optional：root 菜单退路
 ```
+
+打完包核对 `nexus\release-checksums.txt`（三个 zip + DLL 的 SHA256 / 大小），
+上传到 Nexus 后用 `checklist.md` 最后一项对一遍。

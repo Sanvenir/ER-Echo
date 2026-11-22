@@ -7,18 +7,29 @@
 ## 阶段 0：发布前（本地）
 
 - [ ] `powershell -File tools\doctor.ps1` → 0 阻断
-- [ ] `dist/nexus/ER-Echo-Setup-0.1.0.zip` 已生成（先 `tools\build_gui_exe.ps1`，再 `tools\package_nexus.ps1`）
+- [ ] `dist/nexus/ER-Echo-Setup-0.1.0.zip` 已生成（顺序：`tools\package_payload.ps1` →
+      `tools\build_gui_exe.ps1` → `tools\package_nexus.ps1`）
 - [ ] `dist/nexus/ER-Echo-0.1.0.zip` + `ER-Echo-0.1.0-ESD-fallback.zip` 已生成
 - [ ] 安装器 payload 里**没有** `config_eldenring.toml` / 作者 profile；`mod\script\talk` 的 ESD 作为 payload 一部分是**必需**的
-- [ ] 安装器 `_internal\payload` 里**有** `er_echo.dll`、`er_echo.ini`、`profiles\profile.example.json`、
-      两个 `launch-er-echo*.bat`（CRLF）、`THIRD-PARTY-LICENSES.txt`、`er-echo\docs\`
-- [ ] 手动包（Optional）里**有** `er_echo.dll`、`er_echo.ini`、`profiles\profile.example.json`、
-      两个 `launchmod_eldenring*.bat`（CRLF）、`THIRD-PARTY-LICENSES.txt`、`er-echo\docs\`
+- [ ] 安装器 `_internal\payload` 里**有** `er_echo.dll`、`er_echo_i18n.example.ini`、
+      `profiles\profile.example.json`、`profiles\builtin_sanvenir.json`（内置彩蛋；安装后 `profiles=`
+      末尾要有它）、两个 `launch-er-echo*.bat`（CRLF）、`THIRD-PARTY-LICENSES.txt`、`er-echo\docs\`
+      （`er_echo.ini` 由安装器按内置模板生成，不在 payload 里）
+- [ ] 手动包（Optional）里**有** `er_echo.dll`、`er_echo.ini`、`er_echo_i18n.example.ini`、
+      `profiles\profile.example.json`、`profiles\builtin_sanvenir.json`、两个 `launchmod_eldenring*.bat`
+      （CRLF）、`THIRD-PARTY-LICENSES.txt`、`er-echo\docs\`
 - [ ] bat 都带 `-p ".\eldenring.exe"`；admin 版能自提权
 - [ ] 版本号统一为 `0.1.0`（DLL / 页面 / 文件名）
-- [ ] 图片按 `shotlist.md` 重拍并处理完（无 FPS 叠加层、16:9）
-- [ ] `description.bbcode` 的 AI 声明二选一（删掉没选的那段）
+- [ ] 三个 zip 的大小 / SHA256 与 `nexus\release-checksums.txt` 一致
+- [ ] 图片按 `shotlist.md` 重拍并处理完（无 FPS 叠加层、16:9、1920×1080 / 1400×400）
+- [ ] `description.bbcode` 的 AI 段是 `AI-Generated Content`（已定档）
 - [ ] **干净环境实测两条启动路径**：普通 bat ×1（不提权）、admin bat ×1（提权）
+- [ ] 安装器「一键启动游戏」实测三种组合：原版 + ME2（含勾管理员）×1、
+      原版 + 独立 me3 ×1（生成 `<Game>\er-echo.me3`）、Convergence + 自带 me3（普通/无缝）
+- [ ] 原版切换加载器：ME2 ↔ me3 各重装一次，`er_echo_loader.json` 跟着变，启动走记录的那条；
+      另一条可用时作为兜底
+- [ ] 安装器「加载器安装步骤…」里的三个官方链接可达；未装 ME2 时弹窗跳转、以及
+      「仍然安装文件」两条路都正常；包里**没有** ME2 / me3 / Convergence 的文件
 - [ ] 确认 README.txt 里有「约 10 秒闪退 → admin 版 / 关覆盖层」和「先确认无 mod 能进标题」
 
 ## 阶段 1：建页面
@@ -39,12 +50,12 @@
    描述里写清「解压到 Game 目录 + 按 README.txt 改 config」。
 4. 可选文件 2：`ER-Echo-0.1.0-ESD-fallback.zip`，category `Optional files`，
    描述里写清「会替换 `mod/script/talk`，和其它改该文件的 mod 冲突」。
-4. 等病毒扫描通过（zip 一般几秒；`.rar` 容易被误判，我们用的是 zip）。
+5. 等病毒扫描通过（zip 一般几秒；`.rar` 容易被误判，我们用的是 zip）。
 
 ## 阶段 3：图片
 
 1. Images → Add images，按顺序上传：
-   `00-banner` → `01-grace-menu` → `02-party-menu` → `03-companions` → `04-combat` → `05-localisation`。
+   `00-banner` → `01-grace-menu` → `02-party-menu` → `03-companions` → `04-combat` → `05-closeup` → `06-localisation`。
 2. 第一张 = 缩略图，确认在搜索列表里能看清。
 3. Banner（1400×400）设为 header image。
 4. 如果加了视频：Videos → 贴 YouTube 链接。
@@ -73,7 +84,7 @@
 | 第三方代码许可 | `THIRD-PARTY-LICENSES.txt` + `LICENSES\` 里有 fromsoftware-rs 的 NON-AI 许可全文 |
 | 联网行为 | 页面写明「DLL 只监听 127.0.0.1；LLM 是你自己选的端点，默认 mock 离线」 |
 | 多人环境 | 页面顶部红字「OFFLINE ONLY」，正文再写一次 |
-| AI 未披露 | AI 声明段必填（2026-01-02 后强制） |
+| AI 未披露 | AI 声明段必填（2026-11-03 起强制，缓冲期到 2027-01-02） |
 | 图片误导 | 只用游戏内截图；不用 AI 图；不 P 战斗数值 |
 | 启动失败 = 差评 | 描述里有三分法排障（launcher `0xC0000409` / 10 秒 `0x1EBCEF9` / 无 mod 也崩），两个 bat 都在包里 |
 

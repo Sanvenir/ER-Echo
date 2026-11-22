@@ -12,7 +12,7 @@
 | Mod name | `ER Echo - Companions From Your Own Saves` |
 | Summary（一句话） | `Summon characters from your own save files as Spirit Ash companions - real face, gear, level and spells, driven by the game's native AI. Offline only.` |
 | Version | `0.1.0`（Beta；Cargo.toml 里也是 0.1.0） |
-| Language | English（正文末尾有简体中文段） |
+| Language | English, Chinese (Simplified)（正文末尾有简体中文段；繁中/日文不在页面上列） |
 | Category | `Gameplay`（备选：`Utilities`） |
 | Adult content | No |
 | Comments | 开（Comments + Discussion 都开，问题都往这里收） |
@@ -60,11 +60,12 @@ Nexus 的标签要在表单里从候选列表选，不要自己造词。优先�
 
 ## AI 声明（2026 起强制）
 
-表单会问 generative AI 的使用情况，正文 `description.bbcode` 末尾已经放了两个版本，**发布前二选一删掉另一个**：
+表单会问 generative AI 的使用情况。本项目的结论**已经定好**：选 **`AI-Generated Content`**
+（代码主要由 AI 生成，人工负责设计、测试、排障与游戏内验证），`description.bbcode` 末尾已经是这个版本，
+**不要再改回别的档**。
 
-- **Option A → `AI-Generated Content`**：代码主要由 AI 生成（本项目的情况更接近这个）。
-- **Option B → `AI Assisted`**：人工主导、AI 只做辅助，并且页面能给出开发历史/代码理解证据；
-  选了它但页面没有证据，审核可能改成 AI-Generated。
+参考：另一档 `AI Assisted` 要求人工主导且页面能给出开发历史 / 代码理解证据；`docs/implementation-log.md`
+虽然够详细，但为了不跟审核扯皮，还是选更诚实的那档。
 
 另外两条容易踩的：
 
@@ -109,24 +110,32 @@ Nexus 的标签要在表单里从候选列表选，不要自己造词。优先�
 顺序就是页面展示顺序，**第一张是缩略图**：
 
 1. `media/00-banner-1400x400.jpg` → 页头横幅（1400×400）
-2. `media/01-grace-menu.jpg` → 赐福菜单根入口
-3. `media/02-party-menu.jpg` → 二级菜单 + 3 个克隆体
-4. `media/03-companions.jpg` → 野外同行
-5. `media/04-combat.jpg` → 战斗（待补拍）
-6. `media/05-localisation.jpg` → 英文/日文/繁中菜单拼图（待补拍）
-> 现在的图是**旧的开发截图**（中文界面、旧版本），只用来占位/验证流程。
-> 正式发布前按 `shotlist.md` 重拍，替换同名文件即可。
+2. `media/01-grace-menu.jpg` → 赐福菜单根入口（`Comrades (3/11)`：3 个在场 / 11 份档案）
+3. `media/02-party-menu.jpg` → 二级菜单 + 3 个号位
+4. `media/03-companions.jpg` → 野外同行（3 个克隆体 + 你）
+5. `media/04-combat.jpg` → 战斗
+6. `media/05-closeup.jpg` → 角色特写（脸 / 盔甲）
+7. `media/06-localisation.jpg` → 英文 / 简体中文菜单左右对照
+> 图由 `nexus\make_media.py` 从 `media/incoming/*.jpg` 生成（1920×1080、JPEG q88、<2 MB），
+> 原始截图不要直接传。`06` 的英文半边用的是英文二级菜单图（和 `02` 同一张）——没有单独的
+> `i18n-en.jpg` 时脚本自动这么取，补了同名文件就会优先用它。
 
 视频（可选）：Nexus 支持 YouTube 嵌入。60–90 秒足够，脚本见 `shotlist.md` §3。
 
 ## 发布前检查
 
 - [ ] 版本号与 DLL 一致（`0.1.0`）
-- [ ] `description.bbcode` 里的 AI 段二选一
-- [ ] 图片全部是游戏内截图、无 FPS 叠加层、无 debug 文本
-- [ ] 主文件里**不含** `config_eldenring.toml` / `mod\script\talk` / 游戏原始文件
-- [ ] 主文件里**含** `launchmod_eldenring.bat` + `launchmod_eldenring_admin.bat`（CRLF、都带 `-p`）
-- [ ] 主文件里含 `THIRD-PARTY-LICENSES.txt`、`LICENSES\`
-- [ ] Requirements 里 ME2 链接可用
+- [ ] `description.bbcode` 的 AI 段是 `AI-Generated Content`（已定，见上）
+- [ ] 图片全部是游戏内截图、无 FPS 叠加层、无 debug 文本，且都是 1920×1080 / 1400×400
+- [ ] 主文件（`ER-Echo-Setup-0.1.0.zip`）里**不含** `config_eldenring.toml`、ME2 / me3 / Convergence 的
+      可执行文件、作者存档导出的 profile（`_internal\payload\tables\convergence\*.json` 只是参数 ID 表，
+      用来校验装备 id，页面上已说明）
+- [ ] 主文件 payload 里**含** `mod\script\talk\m00_00_00_00.talkesdbnd.dcx`（赐福菜单必需）、
+      `tools\doctor.ps1` + `bridge\`（CLI 工具，和插件包一致）、
+      `profiles\builtin_sanvenir.json`、`THIRD-PARTY-LICENSES.txt`、`LICENSES\`
+- [ ] 手动包（`ER-Echo-0.1.0.zip`）里**含** `launchmod_eldenring.bat` + `launchmod_eldenring_admin.bat`
+      （CRLF、都带 `-p`）
+- [ ] 三个 zip 的 SHA256 与 `nexus/release-checksums.txt` 一致
+- [ ] Requirements 里 ME2 / me3 链接可用
 - [ ] 描述里有启动三分法排障（launcher `0xC0000409` / 10 秒 `0x1EBCEF9` / 无 mod 也崩）
 - [ ] 先点 **Publish** 前用预览看一眼 BBCode 有没有漏标签

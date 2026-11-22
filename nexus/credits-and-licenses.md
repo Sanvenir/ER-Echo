@@ -12,6 +12,9 @@ Paramdex and the wider Elden Ring modding community - parameter names and struct
 ESDLang (thefifthmatt) - esdtool, used to build the optional root-menu ESD fallback.
 
 Mod Engine 2 (Soulsmods) - the loader this mod is developed and tested against.
+
+me3 (garyttierney) - the alternative loader supported by the installer for vanilla + me3 and for
+The Convergence 3.x.
 ```
 
 ## 2. 代码许可
@@ -64,6 +67,7 @@ run it. The mod works fully offline without it.
 ## 6. 需要写进页面的「多人环境」说明
 
 ```
-Offline only. Launch through Mod Engine 2 (EAC disabled). Never use a modded save online -
-that is a soft-ban. This mod modifies runtime memory only; it does not write to your .sl2.
+Offline only. Launch through a mod loader (Mod Engine 2 or me3) with EAC disabled. Never use a
+modded save online - that is a soft-ban. This mod modifies runtime memory only; it does not write
+to your .sl2.
 ```
