@@ -7,7 +7,8 @@
 ## 阶段 0：发布前（本地）
 
 - [ ] `powershell -File er-echo\tools\doctor.ps1` → 0 阻断
-- [ ] `dist/nexus/ER-Echo-0.1.0.zip` 已生成（`tools\package_nexus.ps1`）
+- [ ] `dist/nexus/ER-Echo-Setup-0.1.0.zip` 已生成（先 `tools\build_gui_exe.ps1`，再 `tools\package_nexus.ps1`）
+- [ ] `dist/nexus/ER-Echo-0.1.0.zip` + `ER-Echo-0.1.0-ESD-fallback.zip` 已生成
 - [ ] 压缩包里**没有** `config_eldenring.toml` / `mod\script\talk` / 作者 profile
 - [ ] 压缩包里**有** `er_echo.dll`、`er_echo.ini`、`profiles\profile.example.json`、
       **两个** `launchmod_eldenring*.bat`（CRLF）、`THIRD-PARTY-LICENSES.txt`、`er-echo\docs\`
@@ -30,9 +31,11 @@
 ## 阶段 2：传文件
 
 1. Files → Upload file。
-2. 主文件：`ER-Echo-0.1.0.zip`，version `0.1.0`，category `Main files`，
-   勾 `This is the latest version`，描述用 `file-description.md`。
-3. 可选文件：`ER-Echo-0.1.0-ESD-fallback.zip`，category `Optional files`，
+2. 主文件：`ER-Echo-Setup-0.1.0.zip`，version `0.1.0`，category `Main files`，
+   勾 `This is the latest version`，描述用 `file-description.md`（安装器版）。
+3. 可选文件 1：`ER-Echo-0.1.0.zip`（手动安装），category `Optional files`，
+   描述里写清「解压到 Game 目录 + 按 README.txt 改 config」。
+4. 可选文件 2：`ER-Echo-0.1.0-ESD-fallback.zip`，category `Optional files`，
    描述里写清「会替换 `mod/script/talk`，和其它改该文件的 mod 冲突」。
 4. 等病毒扫描通过（zip 一般几秒；`.rar` 容易被误判，我们用的是 zip）。
 

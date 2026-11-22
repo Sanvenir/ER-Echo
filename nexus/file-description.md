@@ -1,65 +1,56 @@
-## ER Echo 0.1.0 — main file
+## ER Echo 0.1.0 — installer (main file)
 
-DLL mod. Requires **ELDEN RING 1.17.2** and **Mod Engine 2**. Offline only.
+One-click installer for **ER Echo**, the companion mod that summons characters from your own save
+files as Spirit Ash allies. Requires **ELDEN RING 1.17.2** and **Mod Engine 2**. Offline only.
 
 ### Install
 
-1. Back up `%APPDATA%\EldenRing\<SteamID>\ER0000.sl2`.
-2. Install Mod Engine 2 into the game folder.
-3. Extract this archive into `...\ELDEN RING\Game` (next to `eldenring.exe`).
-4. In `config_eldenring.toml`, add the DLL to the existing array:
+1. Back up `%APPDATA%\EldenRing\<your SteamID>\ER0000.sl2`.
+2. Install Mod Engine 2 into your game folder (`...\ELDEN RING\Game`).
+3. Extract this archive anywhere and run **`ER-Echo-Setup.exe`**.
+4. Set the game path — `...\ELDEN RING\Game` for vanilla, or
+   `...\Convergence3\ConvergenceER` for Convergence/me3 — and click **Install**.
 
-   ```toml
-   [modengine]
-   external_dlls = ["er_echo.dll"]
-   ```
+The installer:
 
-   If the array already has entries, append `"er_echo.dll"` — do not replace them.
-   No `mods` entry is needed; this mod does not replace game files.
+- copies `mods\ER-Echo\` (DLL, `er_echo.ini`, talk ESD, tools, docs) and its own
+  `config-er-echo.toml`; it does **not** overwrite your `config_eldenring.toml`;
+- exports that save's character(s) and writes `profiles=` in `er_echo.ini`;
+- backs up every file it touches; **Uninstall** is in the same window.
 
-5. Export a character from one of your saves:
-
-   ```
-   python er-echo\tools\export_profile_from_save.py --list
-   python er-echo\tools\export_profile_from_save.py --slot 2 -o profiles\slot2.json
-   ```
-
-6. Set `profiles=profiles/slot2.json` under `[clone]` in `er_echo.ini`.
-7. Launch with the bundled **`launchmod_eldenring.bat`** (not through Steam's Play button).
+5. Start the game with `mods\ER-Echo\launch-er-echo.bat` (the installer dialog shows the exact path).
 
 ### If it does not start
 
 | Symptom | Fix |
 |---|---|
-| Console flashes, nothing happens; WER: `modengine2_launcher.exe` / `0xC0000409` in `ucrtbase.dll` | The bundled bat passes `-p ".\eldenring.exe"`. If you use your own bat, add it. |
-| Game window closes after ~10 s; WER: `eldenring.exe` / `0xc0000005` / offset `0x1EBCEF9` | Run `launchmod_eldenring_admin.bat`, or disable the Steam in-game overlay. |
+| Console flashes, nothing happens; WER: `modengine2_launcher.exe` / `0xC0000409` in `ucrtbase.dll` | Use the bundled `launch-er-echo.bat` (it passes `-p ".\eldenring.exe"`). |
+| Game window closes after ~10 s; WER: `eldenring.exe` / `0xc0000005` / offset `0x1EBCEF9` | Run `launch-er-echo-admin.bat`, or disable the Steam in-game overlay. |
 | Crashes with no mods loaded | Not this mod — verify game files / repair EAC / reinstall, then test vanilla first. |
 
 ### Verify
 
 ```
-powershell -NoProfile -ExecutionPolicy Bypass -File er-echo\tools\doctor.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File mods\ER-Echo\er-echo\tools\doctor.ps1
 ```
 
-Then check `er_echo.log` for `er_echo attached` and `ui: message hook installed`.
+Then check `mods\ER-Echo\er_echo.log` for `er_echo attached` and `ui: message hook installed`.
 
 ### Contents
 
-- `er_echo.dll` — the mod
-- `er_echo.ini` — configuration (profiles, summoning, AI, language)
-- `er_echo_i18n.example.ini` — menu translation override template
-- `launchmod_eldenring.bat` — launcher with the `-p` workaround for ME2 2.1.0
-- `launchmod_eldenring_admin.bat` — same, self-elevating (for the 10-second Steam-overlay crash)
-- `mod\script\talk\m00_00_00_00.talkesdbnd.dcx` — grace-menu ESD; must be mounted through
-  `mod_loader` (see the config snippet)
-- `profiles\profile.example.json` — placeholder; replace with your own export
-- `er-echo\docs\` — install (incl. §3 launch troubleshooting), usage, localisation docs
-- `er-echo\tools\` — profile export, doctor, IPC client
-- `er-echo\bridge\` — optional LLM battle director (off by default)
-- `THIRD-PARTY-LICENSES.txt`, `LICENSES\` — third-party license texts
+- `ER-Echo-Setup.exe` — installer / config / profile-export GUI
+- `_internal\payload\` — mod files embedded into the installer (not meant to be used directly)
+- `_internal\` — bundled Python + Qt runtime; keep the whole folder together
+
+### Manual install alternative
+
+If you prefer not to run an installer, download the optional **ER Echo - Manual Install** archive,
+unzip it into `...\ELDEN RING\Game` and follow its `README.txt` (add `external_dlls` and the
+`mod_loader` entry to `config_eldenring.toml` yourself).
 
 ### Notes
 
-- Do **not** use online. Modded saves get flagged.
-- A game update will break the mod until it is rebuilt for the new version.
-- Other mods that rewrite the same `BuddyParam` / `NpcParam` / `NpcThinkParam` rows may conflict.
+- Do **not** go online with a modded save.
+- A game update breaks the mod until it is rebuilt for the new version.
+- Other mods that rewrite the same `BuddyParam` / `NpcParam` / `NpcThinkParam` rows, or the same talk
+  ESD, may conflict.

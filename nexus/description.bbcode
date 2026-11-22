@@ -88,24 +88,26 @@ your .sl2.
 
 [b][size=4]Installation[/size][/b]
 
+[b]Recommended: one-click installer[/b]
+
 1. Back up %APPDATA%\EldenRing\<your SteamID>\ER0000.sl2.
 2. Install [b]Mod Engine 2[/b] into your game folder (...\ELDEN RING\Game).
-3. Extract this archive into the same folder. You should end up with er_echo.dll, er_echo.ini,
-   profiles\, an er-echo\ folder and two launchers (launchmod_eldenring.bat and
-   launchmod_eldenring_admin.bat) next to eldenring.exe.
-4. Open config_eldenring.toml and add the DLL to external_dlls:
+3. Download the main file ([b]ER-Echo-Setup-0.1.0.zip[/b]), extract it anywhere and run
+   [b]ER-Echo-Setup.exe[/b].
+4. Set the game path — ...\ELDEN RING\Game for vanilla, or
+   ...\Convergence3\ConvergenceER for Convergence/me3 — and click [b]Install[/b].
+   The installer:
+   [list]
+   [*]copies [b]mods\ER-Echo\[/b] and its own [b]config-er-echo.toml[/b] (does not overwrite your
+       config_eldenring.toml),
+   [*]exports your character(s) and writes [b]profiles=[/b] in er_echo.ini,
+   [*]backs up every file it touches; [b]Uninstall[/b] is in the same window.
+   [/list]
+5. Start the game with [b]mods\ER-Echo\launch-er-echo.bat[/b] (the installer shows the exact path).
+   It passes -p .\eldenring.exe, which works around a Mod Engine 2 2.1.0 launcher crash.
 
-[code]
-[modengine]
-external_dlls = ["er_echo.dll"]
-[/code]
-
-   If you already have other DLLs listed, append "er_echo.dll" to the array. You do [b]not[/b] need a
-   mods entry — this mod replaces no files.
-
-5. Export a character from a save (see below) and point er_echo.ini at it.
-6. Start the game with [b]launchmod_eldenring.bat[/b]. It passes -p .\eldenring.exe, which works around a
-   Mod Engine 2 2.1.0 launcher crash on some machines (see troubleshooting below).
+[b]Manual install[/b]: use the optional [b]ER Echo - Manual Install[/b] archive instead; unzip it into
+the game folder and follow its README.txt (add external_dlls + mod_loader mods entry yourself).
 
 If anything goes wrong, run the bundled self-check first:
 

@@ -60,7 +60,7 @@ cd D:\Projects\ER-Echo; powershell -File tools\doctor.ps1  # 自动探测
 | 安装 / 跨机器 | ✅ [docs/INSTALL.md](docs/INSTALL.md)：版本/加载器/权限三道门槛、换机清单、症状对照；`tools/doctor.ps1` 预检、`tools/package_release.ps1` 打免存档发布包 |
 | Nexus 发布素材 | ✅ [nexus/README.md](nexus/README.md)：页面文案/字段/权限/AI 披露/许可/上传清单；`tools/package_nexus.ps1` 出主包+可选 ESD 包；游戏内截图清单见 [nexus/shotlist.md](nexus/shotlist.md) |
 | 可插拔安装 | ✅ [docs/PLUGIN.md](docs/PLUGIN.md)：整个 mod 收进 `mods\ER-Echo\`（DLL 读同目录 ini），不改 ME2 的 config/bat；**内置图形工具**（`Export-Profiles.bat` → 安装 / 导出 / 写 `profiles=`）；`tools/package_plugin.ps1` 打包，`reset_to_vanilla.ps1` / `install_plugin.ps1` 做纯净安装实验 |
-| 一键安装器 | ✅ `ER-Echo-Setup.exe`（`tools/build_gui_exe.ps1`，payload 由 `tools/package_payload.ps1` 生成）：**只输入游戏路径**就自动装好——拷文件、导出存档角色、写 `profiles=`、改加载器配置（全带备份），卸载同页；exe 不用放进 Game 目录 |
+| 一键安装器 | ✅ `ER-Echo-Setup.exe`（Nexus 主文件；`tools/build_gui_exe.ps1`，payload 由 `tools/package_payload.ps1` 生成）：**只输入游戏路径**就自动装好——拷文件、导出存档角色、写 `profiles=`、改加载器配置（全带备份），卸载同页；exe 不用放进 Game 目录 |
 | 参数表 dump | ✅ exe「安装 / 配置」页的「导出参数表」（或 `ER-Echo-Setup.exe --dump-tables <游戏路径>`）：走 DLL 的 IPC 让运行中的游戏写 `er_echo_equip.json` / `er_echo_magic.json`，导出器据此硬校验装备 id（混搭套装角色也能过）；Convergence 那套表已随包发布在 `payload\tables\convergence\` |
 | Convergence 适配 | ✅ [docs/CONVERGENCE.md](docs/CONVERGENCE.md)：Convergence 3.x 走 me3，安装器改成往 `me3\convergence*.me3` 追加 `[[natives]]`；不覆盖它的 talk ESD；已实测 DLL 在 me3 下注入并挂上 EzState 钩子（`er_echo_npc.json` 2036415 字节 = Convergence 的 regulation） |
 

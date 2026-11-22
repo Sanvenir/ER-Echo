@@ -122,7 +122,7 @@ Copy-One (Join-Path $repo 'vendor\fromsoftware-rs-main\LICENSE-ASL2-NON-AI') $li
 Copy-One (Join-Path $repo 'nexus\THIRD-PARTY-LICENSES.txt') $shared
 
 Write-Crlf (Join-Path $shared 'README-PLUGIN.txt') @'
-ER Echo 0.2.0
+ER Echo 0.1.0
 =============
 
 安装（不用手动放文件、不用改 ini）

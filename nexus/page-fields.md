@@ -77,14 +77,24 @@ Nexus 的标签要在表单里从候选列表选，不要自己造词。优先�
 
 | 字段 | 值 |
 |---|---|
-| File name | `ER Echo - Companions From Your Own Saves` |
+| File name | `ER Echo - Installer` |
 | File version | `0.1.0` |
 | Category | `Main files` |
 | 勾选 | `This is the latest version` |
-| Description | 用 `file-description.md` 的内容 |
-| 上传文件 | `dist/nexus/ER-Echo-0.1.0.zip` |
+| Description | 用 `file-description.md` 的内容（安装器版） |
+| 上传文件 | `dist/nexus/ER-Echo-Setup-0.1.0.zip` |
 
-可选文件（第二个 file）：
+可选文件 1（手动安装）：
+
+| 字段 | 值 |
+|---|---|
+| File name | `ER Echo - Manual Install (optional)` |
+| Version | `0.1.0` |
+| Category | `Optional files` |
+| 文件 | `dist/nexus/ER-Echo-0.1.0.zip` |
+| 说明 | 不想跑安装器时用；解压到 Game 目录，按包内 `README.txt` 手动加 `external_dlls` + `mod_loader` |
+
+可选文件 2（ESD fallback）：
 
 | 字段 | 值 |
 |---|---|

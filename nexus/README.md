@@ -95,6 +95,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File er-echo\tools\package_nexus.
 产物：
 
 ```
-dist\nexus\ER-Echo-0.1.0.zip                  ← 传这个当 Main file
-dist\nexus\ER-Echo-0.1.0-ESD-fallback.zip     ← Optional file（root 菜单退路）
+dist\nexus\ER-Echo-Setup-0.1.0.zip            ← 传这个当 Main file（一键安装器）
+dist\nexus\ER-Echo-0.1.0.zip                  ← Optional：手动安装（解压 + 改 config）
+dist\nexus\ER-Echo-0.1.0-ESD-fallback.zip     ← Optional：root 菜单退路
 ```

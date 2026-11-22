@@ -279,6 +279,20 @@ WARNING
 '@
 [IO.File]::WriteAllText((Join-Path $fallbackDir 'README.txt'), $fbReadme, [Text.UTF8Encoding]::new($false))
 
+# ---------------------------------------------------------------- 2.5) Setup 安装器（Nexus 主文件）
+# 由 tools\build_gui_exe.ps1 生成；这里只负责把 onedir 重新压成条目名用 "/" 的 zip，
+# 避免 PyInstaller/Compress-Archive 生成反斜杠条目。
+$setupDir = Join-Path $repo 'dist\tools\ER-Echo-Setup'
+$setupZip = Join-Path $OutDir ("ER-Echo-Setup-" + $Version + ".zip")
+if (Test-Path -LiteralPath $setupDir) {
+    Say '[2.5/5] Setup 安装器（Nexus 主文件）...' 'Cyan'
+    Compress-Dir $setupDir $setupZip
+    $mb = [Math]::Round((Get-Item -LiteralPath $setupZip).Length / 1MB, 2)
+    Say ("[ok] {0} ({1} MB)" -f $setupZip, $mb) 'Green'
+} else {
+    Say '[!] 没找到 dist\tools\ER-Echo-Setup（先跑 tools\build_gui_exe.ps1）；本次不含安装器' 'Yellow'
+}
+
 # ---------------------------------------------------------------- 3) 收尾：BOM + 脱敏
 Say '[4/5] 规范化脚本编码 / 脱敏 ...' 'Cyan'
 foreach ($stageDir in @($mainDir, $fallbackDir)) {
@@ -310,8 +324,9 @@ foreach ($pair in @(@($mainDir, $mainZip), @($fallbackDir, $fallbackZip))) {
 
 $mainFiles = @(Get-ChildItem -LiteralPath $mainDir -Recurse -File).Count
 Say ''
-Say ("主包: {0}  ({1} 个文件)" -f $mainDir, $mainFiles)
+Say ("主包(手动): {0}  ({1} 个文件)" -f $mainDir, $mainFiles)
 Say ("可选包: {0}" -f $fallbackDir)
+if (Test-Path -LiteralPath $setupZip) { Say ("安装器(主文件): {0}" -f $setupZip) }
 Say ("DLL SHA256: {0}" -f $dllHash)
 Say '下一步：按 er-echo\nexus\checklist.md 上传；游戏内素材见 er-echo\nexus\shotlist.md。'
 exit 0
