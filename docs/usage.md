@@ -33,7 +33,7 @@ python tools\dump_to_profile.py "..\er_echo_profile.json" -o tools\profile.slot2
 
 ```powershell
 # 图形界面（推荐给不想记参数的人）：
-#   双击 dist\tools\ER-Echo-ProfileExport\ER-Echo-ProfileExport.exe
+#   双击 build 出来的 dist\tools\ER-Echo-Setup\ER-Echo-Setup.exe →「导出 / Export」页
 #   （onedir 版，整个文件夹一起拷；支持中文/English，导出后可直接写入 er_echo.ini）
 # 或从源码跑： python tools\profile_export_gui.py
 ```
