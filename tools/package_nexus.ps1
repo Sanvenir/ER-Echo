@@ -122,6 +122,9 @@ Copy-Item -LiteralPath $batAdmin -Destination (Join-Path $mainDir 'launchmod_eld
 # 赐福菜单必需：ESD 要挂载到 mod/（实测不挂载时 EzState 注入失败）
 Copy-One (Join-Path $repo 'ui\out_vanilla\m00_00_00_00.talkesdbnd.dcx') (Join-Path $mainDir 'mod\script\talk')
 Copy-One (Join-Path $repo 'nexus\THIRD-PARTY-LICENSES.txt') $mainDir
+Copy-One (Join-Path $repo 'LICENSE') $mainDir
+Copy-One (Join-Path $repo 'LICENSE-MIT') $mainDir
+Copy-One (Join-Path $repo 'LICENSE-APACHE') $mainDir
 Copy-One (Join-Path $repo 'install\er_echo_i18n.example.ini') $mainDir
 Copy-Tree (Join-Path $repo 'install') (Join-Path $mainDir 'er-echo\install')
 
