@@ -1453,6 +1453,8 @@ talk machine 每秒会进很多次 EnterState，实测 **191 次调用累计 48 
 * `language=auto`（默认）读 Windows 显示语言（`GetUserDefaultUILanguage`，LANGID
   0x04 简/繁、0x11 日，其他英文）——**没法**可靠地用游戏自己的语言：`CSMsgRepository`
   的 `lang` 参数没有公开的「索引 → 语言」映射；
+  （**2026-11-23 更新，见 §31**：`language=game` 已改为读 Steam 的 per-game 语言，
+  不再需要 msg 索引映射；`auto` 保留为「跟 Windows」。）
 * `er_echo_i18n.ini`（可选，游戏根目录）按 `[语言]` 段覆盖/新增语言，
   值里 `{count}` `{n}` `{i}` `{name}` `{level}` 由 `render()` 替换；UTF-8（BOM 也认）；
 * 运行时也能切：`ipc_client.py set_language --args "{\"lang\":\"ja\"}"`。
@@ -1914,3 +1916,329 @@ LLM state 的 `clones[]` 每只也带 `ai`（`inherit` / 预设名）。
 * `mod/examples/offsets.rs`：`cargo run --example offsets` 打印运行时结构偏移；
 * `tools/probe_face_memory.py`：扫描游戏进程里的 `FACE` + 0x120 结构，打印 `FaceData.unk130` 的体型 float；
 * `tools/ipc_send.py <cmd> --arg k=v`：避开 PowerShell 引号传 JSON 的通用 IPC 客户端。
+
+## 29. 菜单偶现消失 / 文本偶现英文（2026-11-22 深夜）
+
+### 29.1 症状
+
+* 赐福菜单里**偶尔没有「战友（n/m）」**，重启游戏通常恢复；
+* 菜单文字**偶尔是英文**（`EventTextForTalk` / `Comrades`），重启也常恢复。
+
+### 29.2 根因 1：补丁只打一次，ESD 重实例化后不会补
+
+`ezstate::on_enter_state` 原来第一行是：
+
+```rust
+if PATCHED_GROUP.load(Ordering::Acquire) != 0 { return; }
+```
+
+一次打补丁成功后，**整个进程内再也不检查**。但 talk machine 的 state group 会在
+「回标题 → 进游戏 / 读档」后重新实例化：旧 group 地址失效，新 group 永远打不上补丁，
+赐福里就看不到「战友」；重启 = 新进程里第一次坐火重新打补丁，所以“重启能恢复”。
+
+实测日志（2026-11-22，`er_echo.log`）：
+
+```text
++449.9s ezstate: patched grace group x31 (0x7ff460a807c8): ... transitions 17 -> 18
++595.4s event: travel -> summon scheduled ...        # 回标题 / 读档
++597.5s event: entered game -> summon scheduled ...  # 新 ESD 实例
++793.5s / +800.3s / +978.3s event: sat at grace      # 三次坐火，都没有「战友」（latch 挡住了）
+```
+
+同一个会话里 `menu_reset`（清 latch）后重开赐福：
+
+```text
++1237.9s ezstate: patched grace group x31 (0x7ff47ad74178): ... transitions 17 -> 18
+```
+
+group 地址从 `0x…a807c8` 变成 `0x…d74178`，补丁重新打上、菜单当场恢复 —— 确认是
+「实例换了 + latch 不重查」，不是文本/菜单渲染问题。
+
+**修复**（`mod/src/ezstate.rs`）：
+
+1. 删掉 `PATCHED_GROUP != 0` 的提前返回；每次进入 state 都 `group_of(machine)`
+   （布局确认后只是一次裸读）+ 只在 `state == g.initial_state` 时做完整校验；
+2. 新增 `patch_intact(group)`：不仅比 group 地址，还回读当初插入「战友」的
+   `PATCHED_ADD_STATE.entry_events`，确认 `AddTalkListData(_, 69100000)` 还在
+   （防止分配器把同一块内存复用给新 group）；
+3. `patch_group` 的「已经注入过」分支现在也补记 `PATCHED_GROUP/INITIAL/ADD_STATE`
+   —— 以前它只 `return true`，latch 一直是 0，`menu_reset` 后每次坐火都会全量重扫；
+4. `reset_patch()` 连 `PATCHED_ADD_STATE` 一起清。
+
+代价：布局确认后每次 EnterState 多 1 次指针读 + 比较（提示类 talk machine 每秒最多几百次，
+可忽略）；补丁失效时下一次坐火会重新扫描一次（实测 `slow EnterState` 的 ~0.5s 主要是
+游戏自己开菜单，不是补丁扫描）。
+
+### 29.3 根因 2：英文来自 `er_echo.ini` 的 `[i18n] language`
+
+当前会话实测（游戏开着，IPC）：
+
+```text
+msg_test: id=69100000 -> "Comrades (3/4)"
+i18n: language=en (config …\mods\ER-Echo\er_echo.ini: loaded, language="en", …)
+```
+
+`mods\ER-Echo\er_echo.ini` 是安装器第一次装成插件布局时用 `INI_TEMPLATE` 生成的，
+模板里就是 `language=en`；而旧的平铺 `<Game>\er_echo.ini` 写的是 `auto`（日志里
+21:49 之前的会话全是 `language="auto"` → `zh-CN`）。换布局时**没有沿用旧 ini**，
+中文菜单因此变成英文。
+
+**修复**：
+
+1. `tools/er_echo_setup.py`：`write_ini()` 新增 `legacy=`；目标 ini 不存在、而旧平铺
+   `<Game>\er_echo.ini` 存在时，整份沿用旧 ini 再只改 `profiles=`（保留
+   `[i18n] language`、`[ui] nested_menu` 等手改项）；三个安装入口都传了 legacy；
+2. `Config::load` 的日志补上配置路径和是否读到：
+   `config <path>: loaded / not read — defaults` —— 以后「怎么变英文了」一眼能分辨
+   是配置写了 `en`，还是配置根本没读到（读不到时 DLL 兜底 `en`，见 §24）；
+3. 本机现场：`set_language {"lang":"auto"}` 热切（`msg_test` → `战友（3/4）`），
+   并把 `mods\ER-Echo\er_echo.ini` 的 `language=en` 改成 `auto`，重启后保持中文。
+
+顺带修的：`tools/swap_dll_on_exit.ps1` 原来只认平铺布局、用 `$PSScriptRoot` 往上两级
+猜游戏目录（源码搬出游戏目录后必错），而且用 `Get-Process eldenring` 判断退出
+（沙箱/受限令牌里 tasklist 直接 Access denied，看不到游戏进程）。现在走 `gamedir.ps1`
+探测、同时支持 `mods\ER-Echo\` 与平铺两种布局，靠「DLL 还能不能覆盖」判断退出。
+
+### 29.4 另一个「英文」来源（历史日志，非本次现场）
+
+`LookupEntry` 钩子装失败时，69100000+ 的文本不会命中，菜单会回退到游戏原版
+占位文本（英文 `EventTextForTalk`）。日志里出现过一次（Convergence 下入口已被
+别的 mod detour、且找不到直接 call 点）：
+
+```text
+ui: LookupEntry prologue mismatch ...: E9 ...
+ui: no direct call sites to LookupEntry found; menu texts will show EventTextForTalk
+```
+
+这是加载顺序相关的偶发问题，重启可能让我们的钩子先装上。排查看 `status` 输出里的
+`ui.msg_hook`（`hooked=true` 且 `mode=entry/call-site/entry-chain` 才算装好）；
+`msg_test` 能直接验证某条文本。
+
+### 29.5 验证
+
+* 关掉赐福菜单重开 → 「战友（3/4）」在（本机已确认）；
+* 回标题 → 继续游戏 → 坐火 → 「战友」仍在（新 DLL 的 `patch_intact` 会重新打补丁，
+  日志应出现第二条 `patched grace group`，地址与上一条不同）；
+* `msg_test --id 69100000` → 中文/英文应与 `er_echo.ini [i18n] language` 一致；
+* `status` 的 `ezstate ... patches=N`：换过 ESD 实例后 N 会 +1。
+
+## 30. 内置档案 Sanvenir（彩蛋 / 备用角色，2026-11-22）
+
+**需求**：把作者存档里的 `Sanvenir`（存档 slot 4，Lv1）作为 MOD 的彩蛋兼备用角色
+**固定**在 `profiles` 里；用户导出自己的角色时不能把它覆盖/挤掉。
+
+### 30.1 做法
+
+* 发布资产：`install/profiles/builtin_sanvenir.json`（离线从 `.sl2` 导出后脱敏：
+  `source.steam_id=""`、去掉 `equipment_raw`、`notes` 写明用途；22 槽装备 / 303B 脸 /
+  14 法术槽完整，`profile.rs::validate()` 能过）。
+* **文件名即约定**：`builtin_` 前缀 —— 导出工具只写/删 `slot<N>_<名字>.json`，
+  所以用户导出、切号、Convergence 的「删过时 slot*」都不会碰它。
+* `tools/er_echo_setup.py::_install_profiles()`：
+  1. 每次安装把 payload `shared\profiles\builtin_*.json` 覆盖到插件 `profiles\`
+     （重装 = 恢复发布版）；
+  2. 内置档案**追加在名单末尾**（用户自己的档案保持 0..n-1）；
+  3. `merge_existing=False`（Convergence）的清理只删 `slot*.json`，内置不动；
+  4. 没有存档 / 导出失败时，名单里至少还有内置档案（不再只剩空壳 `profile.example.json`）。
+* `tools/profile_export_gui.py::write_profiles()`：写 `profiles=` 前把现有条目里的
+  `builtin_*.json` 捡回来追加（GUI 的「写入 er_echo.ini」是整行替换，不这样做会把内置档案
+  从名单里挤掉）。
+* 打包：`package_payload.ps1` / `package_nexus.ps1` / `package_plugin.ps1` /
+  `package_release.ps1` 都会带上这份 JSON，默认 `profiles=` 指向它
+  （手动包：`profiles/builtin_sanvenir.json`；插件包：`mods/ER-Echo/profiles/...`）。
+* 运行期行为与普通档案一致：`auto_level` 会跟玩家升级并写回该 JSON；重装安装器再覆盖回发布版。
+
+### 30.2 验证
+
+* 单测（临时目录 + 真 payload）：
+  `_install_profiles(save=None)` → `['builtin_sanvenir.json']`；
+  旧 `slot*.json` 存在时顺序为 `slot0… , builtin…`；
+  Convergence 分支不删 `slot*.json`；
+  重复安装不会重复追加、被手改的内置文件会被发布版覆盖；
+  `write_profiles` 两次写入后 `builtin_sanvenir.json` 仍只有 1 条。
+* 本机现场：`mods\ER-Echo\profiles\builtin_sanvenir.json` + `profiles=` 末尾已追加；
+  进游戏后菜单里 1/2/3 号位循环到最后应出现 `Sanvenir  Lv1`。
+* 打包产物：`doctor.ps1 -Target dist\ER-Echo-20261122` →
+  `profiles 可用（1 个） profiles/builtin_sanvenir.json`；各包 DLL SHA256 一致
+  （`C253E041…5E13`）。
+
+## 31. 菜单语言跟随游戏 + 安装器语言真的写进 ini（2026-11-23）
+
+**问题**（用户现场）：
+
+1. 安装器（`ER-Echo-Setup.exe`）里的语言下拉框只切换**安装器界面**语言，`er_echo.ini` 仍然
+   按模板写 `[i18n] language=en`，所以「在安装器里选了中文，游戏里还是英文」；
+2. `language=auto` 跟的是 **Windows 显示语言**，不是游戏文本语言——两者不一致时（本机
+   Windows 简中、ER 在 Steam 里是英文）菜单会和游戏字体对不上。
+
+### 31.1 DLL：`language=game`（`mod/src/i18n.rs`）
+
+Elden Ring 没有游戏内语言开关，语言由 Steam 的 per-game 语言决定
+（`ISteamApps::GetCurrentGameLanguage`；用户没选过时回退 Steam 界面语言）。
+`game` 模式按下面顺序解析，拿到就停：
+
+1. 进程里的 `steam_api64.dll`：`SteamAPI_GetHSteamUser` ≠ 0（确认 `SteamAPI_Init` 跑完，
+   不然接口上下文没建好会崩）→ `SteamAPI_SteamApps_v008()` →
+   `SteamAPI_ISteamApps_GetCurrentGameLanguage`；返回值只接受短可打印 ASCII，再按
+   Steam 语言名映射（`english`/`schinese`/`tchinese`/`japanese`/`koreana`… → 代码）；
+2. `<库>\steamapps\appmanifest_1245620.acf`：`UserConfig` → `MountedConfig` 的 `language`；
+3. 模拟器：`%APPDATA%\Goldberg SteamEmu Saves\settings\language`（纯文本）或
+   `configs.user.ini` / `<Game>\steam_settings\configs.user.ini` 的 `language=`；`auto` 不当语言；
+4. 都不行 → Windows 显示语言（等价 `auto`）。
+
+实现要点：
+
+* `configure()` 只做第一轮解析（DLL 注入时 `SteamAPI_Init` 往往还没跑，通常落到 manifest）；
+  `current()` 第一次取值（菜单构建，游戏已起来）再问一次 Steam，拿到就替换并打
+  `i18n: language=game -> X (steam_api；之前 Y 来自 manifest/系统)`；
+* 状态从 `Mutex<Option<String>>` 换成 `Mutex<Option<State>>`（`mode` / `code` / `source` /
+  `steam_tried`），`current()` 只探测一次；`source()` 给日志和 `status` 用；
+* `Config::load` 的兜底 `language` 从 `en` 改成 `game`；日志加 `source=`：
+  `i18n: language=en (source=manifest, config …: loaded, language="game", …)`；
+* `status` 的 `ui` 增加 `language_source`；`set_language` 日志也带 source。
+
+**本机实测**（Steam 在跑，游戏没开也能验）：用游戏自带的 `steam_api64.dll` 在 Python 里
+`SteamAPI_Init` → `GetCurrentGameLanguage` = **`english`**，`GetSteamUILanguage` = `schinese`；
+`appmanifest_1245620.acf` 是 `UserConfig.language=english` / `MountedConfig.language=schinese`。
+即：本机 ER 的文本语言是英文，`game` → `en` 是正确的；想要中文菜单就写 `zh-CN`，
+或者把 Steam 里 ER 的语言改成简体中文。
+
+DLL 侧也验证了启动那一段：用安装器装上新 DLL 后启动游戏（`mods\ER-Echo\launch-er-echo.bat`），
+`er_echo.log` 出现
+
+```text
+i18n: language=en (source=manifest, config …\mods\ER-Echo\er_echo.ini: loaded,
+                   language="game", override file absent, builtin: zh-CN,zh-TW,en,ja)
+```
+
+（这次启动随后撞上已知的「非管理员 10 秒闪退」`eldenring.exe 0xc0000005 @ 0x1EBCEF9`，
+见 `docs/handoff-launch.md`，与本次改动无关；`language=game` 的懒加载 Steam 探测在菜单构建时
+才跑，本机 manifest 和 Steam 都给 `english`，所以不会额外打日志。）
+
+### 31.2 安装器：菜单语言单独一项，改完立刻写 ini
+
+* `tools/er_echo_setup.py`：
+  * `INI_TEMPLATE` 改成 `[i18n] language=game`；
+  * 新增 `MENU_LANGUAGES` / `DEFAULT_MENU_LANGUAGE` / `normalize_menu_language()` /
+    `set_language()` / `parse_ini_language()` / `ini_language()` / `apply_ini_language()`
+    （只改 `language=` 一行、没有 `[i18n]` 就补一段、改前 `.bak-er-echo-<时间>` 备份）；
+  * `write_ini(..., language=)`：安装时写；`install()` / `install_me2` / `install_vanilla_me3` /
+    `install_me3` 都透传；返回里加 `menu_language`；
+  * CLI：`--menu-language LANG`（安装时）、`--set-language <ini> <lang>`（只改现有 ini）；
+  * `--selftest` 增加语言编辑用例（替换 / 插入 `[i18n]` / 追加 / 别名 `CHS`），并检查
+    `profiles=` 行没被改坏。
+* `tools/profile_export_gui.py`：
+  * 「安装 / 配置」页新增**「游戏内菜单语言」**下拉框（跟随游戏文本 / 跟随 Windows / 简中 /
+    繁中 / English / 日本語）；窗口顶部原来的语言框改名为**「安装器界面语言」**，两个不再混淆；
+  * 下拉框改动 → `setup_core.apply_ini_language()` 立即写 `er_echo.ini`（备份 + 日志）；
+    没装时只记住，装的时候写；
+  * `install()` 带上 `language=`；安装完按 ini 实际值回显；`_restore_settings` 优先读已装 ini 的
+    `language=`（真实生效值），否则用上次的选择（`QSettings.menu_lang`）；
+  * 安装中 `busy()` 连这个下拉框一起禁用。
+* `install/er_echo.ini.template`：原文件是「UTF-8 被当 GBK 再存成 UTF-8」的乱码（`閰嶇疆…`），
+  直接用 `INI_TEMPLATE` 重新生成（UTF-8 + CRLF，补回 `[balance]`），`language=game`。
+* `tools/doctor.ps1`：`game`/`steam`/`follow` 算合法值，并注明解析链。
+
+### 31.3 验证
+
+* `cargo build --release --lib` + `cargo test --release --lib`：35 个用例全过
+  （新增 `game_spec_aliases_are_recognised` / `steam_language_names_map_to_codes` /
+  `language_value_rejects_auto_and_junk` / `manifest_prefers_user_config_then_mounted` /
+  `emu_config_reads_language_line` / `game_detection_reports_a_known_source`）。
+* `python -m py_compile` 两个工具；`er_echo_setup.py --selftest` 0 error，
+  `menu_language_checks` 4/4。
+* GUI 无头冒烟（`QT_QPA_PLATFORM=offscreen`，假游戏目录）：下拉框 6 项；
+  选 `zh-CN` 后假 `er_echo.ini` 立刻变成 `language=zh-CN`，`[ui] nested_menu` / `profiles=`
+  原样保留，只产生 1 个备份；再点一次同值不重复备份。
+* 真机安装（`--install … --menu-language game`）→ `mods\ER-Echo\er_echo.ini`
+  `[i18n] language=game`，日志 `[i] 菜单语言：game`，返回 JSON `menu_language: game`；
+  随后用 `--set-language … auto` 把本机现场还原成原来的 `auto`（中文菜单），避免擅自改用户偏好。
+* 字节码/静态检查：DLL 里能找到 `SteamAPI_ISteamApps_GetCurrentGameLanguage` /
+  `appmanifest_1245620.acf` / `language_source` 等新串。
+
+## 32. 事故：安装器「游戏内菜单语言」提示 Permission denied（2026-11-23）
+
+**现象**（用户截图）：在安装器里改「游戏内菜单语言」，弹框写
+
+```text
+In-game menu language:
+%TEMP%\er-echo-gui-qn05app6\mods\ER-Echo\er_echo.ini
+[Errno 13] Permission denied: '...\er_echo.ini.bak-er-echo-20261123-004410'
+```
+
+**根因不是 Program Files 权限**：路径是 `%TEMP%\er-echo-gui-*`——作者（我）上一轮做
+GUI 无头冒烟测试时用的假游戏目录。测试里把 `QSettings.setup_path` 指向假目录，
+第一版冒烟脚本在恢复注册表时抛异常（`QSettings` 对象已被 Qt 销毁），
+于是「上次的游戏路径」永久留在注册表里；之后用户打开安装器，它就拿着这个
+已被沙箱/清理限制的临时目录去改写 ini，才报 Permission denied。
+（同理 `menu_lang` 也被留成了测试值。）
+
+**修法**（`tools/profile_export_gui.py`）：
+
+1. `_restore_settings`：`setup_path` 必须是**存在且能被 `probe()` 认出来**的目录，
+   否则打一行 `[i] 上次记录的游戏路径不可用…，已自动重新检测`，清空并走自动检测；
+   存档路径同样要求文件存在；
+2. `_save_settings`：只有当前目标 `kind != UNKNOWN` 且目录存在时才写 `setup_path`
+   ——半截路径 / 临时目录 / 已删目录不会再被记住；
+3. `apply_menu_language`：目标 `UNKNOWN`、ini 不在、或 `er_echo.dll` 不在时直接
+   当「还没装」处理，不去碰文件；
+4. 真遇到没写权限（Program Files / 只读文件）：
+   * `apply_ini_language()` 先清只读属性（`os.chmod(ini, 0o666)`）再重试一次；
+   * GUI 弹「以管理员身份写入」按钮：`ShellExecuteW(..., "runas", exe,
+     '--set-language "<ini>" <lang>', ...)`，UAC 允许后由提权实例写（frozen exe 和
+     源码运行两种 argv 都处理）；失败只记日志，不崩；
+   * 安装失败（`on_failed`）遇到 `Permission denied` 时提示「右键 → 以管理员身份运行」；
+5. 本机现场：注册表 `HKCU\Software\ER-Echo\ProfileExport` 的
+   `setup_path` 恢复成真实游戏目录、`setup_save`/`geometry` 删除、`menu_lang=auto`
+   （和 ini 一致），并删掉 `%TEMP%\er-echo-gui-*` 假目录。
+
+**验证**：新的无头回归（整段注册表快照 → 写入坏的 `setup_path` → 启动 GUI → 恢复快照）：
+
+```text
+kind: me2
+root: d:\program files (x86)\steam\steamapps\common\ELDEN RING\Game
+menu_lang: auto
+setup log has stale warning: True
+ini unchanged: True        # 测试期间没碰真 ini
+registry restored: True
+```
+
+即：坏路径会被丢弃并重新检测；语言下拉框以已装 ini 为准；测试全程不污染用户设置。
+
+## 33. 安装器英文界面去中文（2026-11-23）
+
+**问题**：安装器切到 English 后，安装/卸载日志、加载器状态、启动失败原因、菜单语言写入提示里仍混着中文（这些文字来自 `tools/er_echo_setup.py`，之前只有 GUI 自己的字符串是双语的）。
+
+### 33.1 做法
+
+* `er_echo_setup.py` 新增 `set_ui_lang(lang)` / `ui_lang()` / `tr(zh, en)` / `kind_label(kind)`：
+  GUI 启动和切换界面语言时调用，CLI 默认中文；
+* 约 100 处用户可见消息改成 `tr(...)`：install/uninstall/launch/dump 的日志、`Target.describe()`、
+  `KIND_LABEL`（改用 `kind_label()`）、`LaunchPlan` 的 reason/notes、`pick_save()` 的说明、
+  `--set-language` / 写 ini 的日志、`SystemExit` 错误（含 `--detect` / `--launch` 的 CLI 输出）；
+* `profile_export_gui.py`：`run_gui()` 解析出 `lang` 后调用 `setup_core.set_ui_lang(lang)`，
+  `on_lang_changed()` 再调一次；`setup_core.KIND_LABEL[...]` 全换成 `setup_core.kind_label(...)`；
+* 静态检查：`log()` / `SystemExit()` / `LaunchPlan()` 的中文参数必须包在 `tr()` 里（只剩 2 处
+  BinOp 误报）；`STRINGS["en"]` 无 CJK、157 个键与中文一一对应。
+
+### 33.2 验证
+
+* 无头 GUI（offscreen，整段注册表快照后恢复）：英文界面 Setup 日志 **0 行中文**，
+  `kind_label` = `Mod Engine 2 · game folder ...`；中文界面仍是中文；
+* 临时假游戏目录跑完整 `install()` + `uninstall()`：英文 0 行中文，中文 9 行中文；
+  `er_echo.ini` 的 `[i18n] language=game` 正常写入；
+* `er_echo_setup.py --selftest` 0 error；frozen exe 的 `--selftest-setup` exit 0。
+
+### 33.3 事故与恢复（编码）
+
+本轮曾用 PowerShell 的 `Get-Content -Raw | Set-Content` 批量替换 `profile_export_gui.py`：
+PS 5.1 把无 BOM 的 UTF-8 源码按 **ANSI（GBK）** 读入再写回，源文件被“双重编码”损坏
+（`?` 处丢了 1–2 个字节，部分换行也被吞）。恢复办法：
+
+1. 从会话记录里找到 22:53 的整文件 `read`（1..1234 行）；
+2. 重放其后所有 `edit` 调用（99 次，0 个锚点丢失）得到损坏前内容；
+3. 用 PyInstaller 归档 `PYZ-00.pyz` 里**损坏前**的 bytecode 校验：编译重建源码，944 个字符串
+   常量与 bytecode 完全一致；
+4. 用同样的 cp936 往返“重新制造损坏”，与现场文件逐字相同（仅 `Set-Content` 多加的结尾换行）。
+
+教训：**不要用 PS 5.1 的 Get-Content/Set-Content 改源码**；用编辑工具或显式 UTF-8 的 Python I/O。

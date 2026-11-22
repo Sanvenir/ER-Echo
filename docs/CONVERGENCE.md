@@ -33,6 +33,36 @@ D:\Games\Convergence3\ConvergenceER\
 `convergence.me3` 和 `convergence - seamless.me3` 两份都会被改，所以
 `Start_Convergence.bat`（含无缝联机版）照常启动就带上了 ER Echo。
 
+## 1.1 从安装器一键启动（原版 / Convergence 分开处理）
+
+`ER-Echo-Setup.exe` 的「安装 / 配置」页在安装按钮下面有「一键启动游戏」，
+按识别出的目标类型走不同的启动链：
+
+| 目标 | 实际执行 | 说明 |
+| --- | --- | --- |
+| 原版（ME2） | `mods\ER-Echo\launch-er-echo.bat`（勾管理员则 `launch-er-echo-admin.bat` + UAC） | 和双击插件 bat 等价 |
+| Convergence（me3） | `me3\Windows\me3.exe launch --auto-detect -p .\me3\convergence*.me3` | 有 `SeamlessCoop\ersc.dll` 时优先无缝配置，和 `Start_Convergence.bat` 的选择一致 |
+
+* 按钮下面那行会写清当前会用哪个启动器；没安装时按钮禁用并提示先「一键安装」。
+* 不会先 `taskkill` 已经在跑的 `eldenring.exe`（`Start_Convergence.bat` 会这么做）；
+  检测到游戏在跑时会先弹确认框，避免误杀正在玩的进程。
+* 「以管理员身份启动」主要给原版（Steam 覆盖层 × ME2 钩子的 10 秒闪退），Convergence 一般不用勾。
+* 安装成功的弹窗会问「现在启动游戏？」，选「是」就等同于点这个按钮。
+* 命令行同款（不开窗口）：
+
+  ```powershell
+  ER-Echo-Setup.exe --launch "D:\Games\Convergence3\ConvergenceER"
+  ER-Echo-Setup.exe --launch "D:\...\ELDEN RING\Game" --admin
+  ER-Echo-Setup.exe --launch --dry-run     # 只打印会执行的命令，不启动
+  ```
+
+> **加载器从哪来（合规）**：Convergence 整合包自带 me3（`me3\Windows\me3.exe`），
+> 不需要单独下载；独立安装 me3 见 [me3 Releases](https://github.com/garyttierney/me3/releases)，
+> 原版 + me3 也支持（安装器加载器选「me3（独立安装）」，会生成 `<Game>\er-echo.me3`）。
+> Convergence 本身见 [Nexus 发布页](https://www.nexusmods.com/eldenring/mods/3419)。
+> 本仓库 / 安装器**不打包、也不分发** ME2 / me3 / Convergence 的任何文件，只写配置引用。
+> 安装器里的「获取 me3」「加载器安装步骤…」按钮就是这些官方页面的入口。
+
 ## 2. 特意没做的事：不覆盖 Convergence 的 talk ESD
 
 ME2 安装里那份 `mod\script\talk\m00_00_00_00.talkesdbnd.dcx` 是**赐福菜单的挂载锚点**
@@ -186,7 +216,7 @@ cd D:\Games\Convergence3\ConvergenceER
 
 ```text
 er_echo thread spawned; waiting for CSTaskImp (target exe 2.7.2.0)
-i18n: language=zh-CN (...)
+i18n: language=zh-CN (source=manifest, ...)
 er_echo attached (target exe 2.7.2.0)
 ezstate: EnterState hook installed at 0x7ff63bfdbe00 (rva 0x208be00, ...)
 ezstate: enabled=true hooked=true ...

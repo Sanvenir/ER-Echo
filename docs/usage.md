@@ -5,11 +5,15 @@
 
 ## 0. 前置
 
-- 正版 1.17.2 + ModEngine2（`launchmod_eldenring.bat` 启动，EAC 关闭、离线）
+- 正版 1.17.2 + ModEngine2（`launchmod_eldenring.bat` 启动，EAC 关闭、离线）；
+  用 `ER-Echo-Setup.exe` 装的话，同一页的「一键启动游戏」会按目标和加载器自动选对启动器
+  （原版 + ME2 → `mods\ER-Echo\launch-er-echo*.bat`；原版 + me3 → `er-echo.me3`；
+  Convergence → me3 + `convergence*.me3`），安装完成时也会问「现在启动游戏？」
 - 游戏根目录有：`er_echo.dll`、`er_echo.ini`、`config_eldenring.toml`（`external_dlls=["er_echo.dll"]`）
 - Python 3（只有导出/调试脚本需要；日常使用**不需要**开着 Python）
 - 从零安装 / 换到另一台机器 / 自检：[INSTALL.md](INSTALL.md)（`er-echo\tools\doctor.ps1` 一键预检）
-- 菜单语言（中/繁/英/日/自定义）：[i18n.md](i18n.md)，`er_echo.ini` → `[i18n] language=`
+- 菜单语言（跟随游戏 / 中/繁/英/日/自定义）：[i18n.md](i18n.md)，`er_echo.ini` → `[i18n] language=`；
+  安装器「安装 / 配置」页的「游戏内菜单语言」下拉框会直接写这一项
 
 ## 1. 导出「另一个存档」的角色
 
@@ -202,13 +206,15 @@ safe_mode=false
 auto_status=true
 
 [i18n]
-; 赐福菜单文案：默认 en；要跟随系统就写 auto（也支持 zh-CN / zh-TW / ja / 自定义）
-; 自定义语言用 er_echo_i18n.ini 覆盖，见 docs/i18n.md
-language=en
+; 赐福菜单文案：默认 game（跟随游戏文本语言）；auto = 跟 Windows 显示语言
+; 也可以写死 zh-CN / zh-TW / ja / 自定义；自定义语言用 er_echo_i18n.ini 覆盖
+; 安装器「安装 / 配置」页有「游戏内菜单语言」下拉框，改完立即写入本文件
+language=game
 ```
 
-- `language` 只影响 mod 注入的那几行菜单字；建议和游戏「文本语言」一致，
-  否则游戏字体缺字会显示方块（`er_echo.log` 里 `i18n: language=...` 是实际生效值）。
+- `language` 只影响 mod 注入的那几行菜单字。**默认 `game`** = 和游戏「文本语言」一致
+  （Elden Ring 的语言由 Steam 的 per-game 语言决定），这样不会因为字体缺字显示方块；
+  想固定中文就写 `zh-CN`。`er_echo.log` 里 `i18n: language=... (source=...)` 是实际生效值。
 
 - `buddy_rows` 是**野狼骨灰**的 3 行（一次召 3 个）。想用别的骨灰：先用
   `python tools\ipc_client.py dump_buddies` 找到它的行 id 填进来。
@@ -253,6 +259,21 @@ language=en
   当前出场**活着**的战友为 0 / 1 / 2 / 3 人时，敌人生命上限分别 ×1.0 / ×1.5 / ×1.8 / ×2.0
   （`enemy_hp_scaling=false` 等于永远 ×1.0）。详见 §3.3。
 - 路径相对**游戏根目录**。
+
+### 2.1 内置档案：Sanvenir（彩蛋 / 备用）
+
+发布包固定带一份 `builtin_sanvenir.json`（Lv1，脸 / 体型 / 装备是发布时的快照），
+当作彩蛋兼「备用角色」：
+
+- 安装器每次把它复制到 `<Game>\mods\ER-Echo\profiles\builtin_sanvenir.json`，
+  并**追加在 `profiles=` 名单末尾**——赐福菜单里把 1/2/3 号位循环到最后就是 Sanvenir；
+- **用户导出不会覆盖它**：导出工具只写/删 `slot<N>_<名字>.json`，内置档案用的是
+  `builtin_` 前缀；GUI 的「写入 er_echo.ini」也会把已有的 `builtin_*` 条目保留下来；
+- 新机器没有存档 / 导出失败时，名单里至少还有它（不再只剩空壳 `profile.example.json`）；
+- `auto_level` 会像其它档案一样把玩家升级追给它并写回 JSON；**重装安装器**会用发布版
+  覆盖回来，改坏了也能还原；
+- 不想要：装完后把 `profiles=` 里那一段删掉即可；下次重装安装器会再加回来
+  （它本来就是随包的固定彩蛋）。
 
 ## 3. 进游戏
 

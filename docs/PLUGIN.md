@@ -23,7 +23,8 @@
 │     ├─ launch-er-echo-admin.bat ← 自提权（10 秒闪退时用）
 │     ├─ Export-Profiles.bat      ← 图形导出工具（选存档 → 导出 → 自动写 ini）
 │     ├─ mod\script\talk\...dcx   ← 赐福菜单必需（实测不挂载则不出现「战友」）
-│     ├─ profiles\profile.example.json
+│     ├─ profiles\builtin_sanvenir.json  ← 内置角色 Sanvenir（彩蛋 / 备用）
+│     ├─ profiles\profile.example.json   ← 格式示例
 │     ├─ tools\Setup\             ← 上面那个 bat 打开的 onedir GUI（exe + _internal + payload）
 │     ├─ tools\ bridge\ docs\ install\
 │     └─ LICENSES\ THIRD-PARTY-LICENSES.txt
@@ -79,8 +80,9 @@ cd /d "%~dp0..\.."                                    :: 回到游戏根目录
    - 双击 `mods\ER-Echo\launch-er-echo-admin.bat` 进游戏；
 4. （推荐）先跑 `powershell -File mods\ER-Echo\tools\doctor.ps1 -Target <Game>`。
 
-不导出也能直接玩：会用一个占位示例档案，外观不是你任何角色。要「自己另一个存档的角色」，
-必须走一次 `Export-Profiles.bat`（或者保留原来的命令行导出方式）。
+不导出也能直接玩：名单里固定带内置角色 **Sanvenir**（Lv1，彩蛋 / 备用）。
+要「自己另一个存档的角色」，走一次 `Export-Profiles.bat`（或命令行导出）；
+工具只会写 `slot<N>_*.json` 并保留内置档案条目，不会把它覆盖掉。
 
 卸载：
 

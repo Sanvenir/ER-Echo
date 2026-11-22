@@ -52,15 +52,18 @@ cd D:\Projects\ER-Echo; powershell -File tools\doctor.ps1  # 自动探测
 | 状态/日志/恢复（M5） | ✅ `status`（F6 / 每 30 秒）+ 日志轮转（8 MB、带 `+Xs`）+ 心跳/上次操作（`er_echo_heartbeat.txt`）+ `safe_mode` + `resummon`/掉队保底 |
 | 召唤区域限制 | ⚠️ 直接写召唤请求可绕过（已实测死区能召）；骨灰**物品**本身在死区仍不可用（引擎菜单层判定，见 §15.6） |
 | 离线导出存档角色（不切号） | ✅ `export_profile_from_save.py` 直接解析 `.sl2`（明文 BND4）；实测召唤出旧存档的 Sirenix lv17 / Ludwig lv9 |
+| 内置档案（彩蛋 / 备用） | ✅ 随包带 **Sanvenir**（Lv1）：安装器固定复制到 `profiles\builtin_sanvenir.json` 并追加到 `profiles=` 末尾；导出工具只写/删 `slot*`，不会覆盖它；重装恢复发布版 |
 | 离线字段完整性 | ✅ 与运行时 dump 逐字段对照（`tools/diff_profile.py`）：等级/8 属性/22 槽装备/脸部 276B/HP·FP·耐力上限 全一致 |
 | LLM 输入（战斗状态） | ✅ 每秒一条结构化 state：玩家三围/等级、克隆体（等级·血量·距离）、最近敌人、边沿事件 |
 | LLM 工具调用（换装/加点） | ✅ `set_equipment`/`set_stats`/`rollback_equipment` 作用在**克隆体**上，带槽位白名单、参数存在性、±20% clamp、回滚点 |
 | 游戏内 UI（原生） | ✅ 赐福根菜单「战友（n/m）」→ **二级菜单**（人数 / 1-3 号位 / 队友 AI（三级） / 立即重召 / 友伤 / 返回），运行时 EzState 注入；人数切换后「立即重新召唤」按新人数重召（1→3 / 3→1 实测）；消息钩子、F12 给装备（改内存档案，不写盘；没选中时恢复档案原样） |
-| 多语言菜单 | ✅ `[i18n] language=en`（默认英文，`auto` 可跟系统）或 `zh-CN` / `zh-TW` / `ja`；`er_echo_i18n.ini` 可覆盖/新增语言（[docs/i18n.md](docs/i18n.md)） |
+| 多语言菜单 | ✅ `[i18n] language=game`（默认**跟随游戏文本语言**：Steam per-game 语言 → manifest → 模拟器 → Windows）或 `auto` / `zh-CN` / `zh-TW` / `en` / `ja`；`er_echo_i18n.ini` 可覆盖/新增语言；安装器「游戏内菜单语言」下拉框直接写 ini（[docs/i18n.md](docs/i18n.md)） |
 | 安装 / 跨机器 | ✅ [docs/INSTALL.md](docs/INSTALL.md)：版本/加载器/权限三道门槛、换机清单、症状对照；`tools/doctor.ps1` 预检、`tools/package_release.ps1` 打免存档发布包 |
 | Nexus 发布素材 | ✅ [nexus/README.md](nexus/README.md)：页面文案/字段/权限/AI 披露/许可/上传清单；`tools/package_nexus.ps1` 出主包+可选 ESD 包；游戏内截图清单见 [nexus/shotlist.md](nexus/shotlist.md) |
 | 可插拔安装 | ✅ [docs/PLUGIN.md](docs/PLUGIN.md)：整个 mod 收进 `mods\ER-Echo\`（DLL 读同目录 ini），不改 ME2 的 config/bat；**内置图形工具**（`Export-Profiles.bat` → 安装 / 导出 / 写 `profiles=`）；`tools/package_plugin.ps1` 打包，`reset_to_vanilla.ps1` / `install_plugin.ps1` 做纯净安装实验 |
 | 一键安装器 | ✅ `ER-Echo-Setup.exe`（Nexus 主文件；`tools/build_gui_exe.ps1`，payload 由 `tools/package_payload.ps1` 生成）：**只输入游戏路径**就自动装好——拷文件、导出存档角色、写 `profiles=`、改加载器配置（全带备份），卸载同页；exe 不用放进 Game 目录 |
+| 一键启动 | ✅ 安装器同一页的「一键启动游戏」：**原版 + ME2** 跑 `mods\ER-Echo\launch-er-echo*.bat`（可选管理员启动，绕 10 秒闪退）；**原版 + me3** 跑 `me3 launch --auto-detect -p .\er-echo.me3`；**Convergence + 自带 me3** 跑 `me3 launch -p .\me3\convergence*.me3`（按 SeamlessCoop 自动选普通/无缝配置）。安装完成后也会问「现在启动？」。命令行：`ER-Echo-Setup.exe --launch <路径> [--admin] [--dry-run] [--me3 <me3.exe>]` |
+| 加载器引导 | ✅ 安装器检测 **Mod Engine 2 / me3**：原版可选「自动 / ME2 / me3（独立安装）」，me3.exe 可留空自动查找（PATH / 注册表 / 常见目录）或浏览指定；没装时弹窗引导 + 「获取 Mod Engine 2」「获取 me3」直接跳官方发布页，「加载器安装步骤…」给出三种组合的详细步骤；**安装器不打包、不分发** ME2/me3/Convergence（只写 ER Echo 文件和配置引用，合规） |
 | 参数表 dump | ✅ exe「安装 / 配置」页的「导出参数表」（或 `ER-Echo-Setup.exe --dump-tables <游戏路径>`）：走 DLL 的 IPC 让运行中的游戏写 `er_echo_equip.json` / `er_echo_magic.json`，导出器据此硬校验装备 id（混搭套装角色也能过）；Convergence 那套表已随包发布在 `payload\tables\convergence\` |
 | Convergence 适配 | ✅ [docs/CONVERGENCE.md](docs/CONVERGENCE.md)：Convergence 3.x 走 me3，安装器改成往 `me3\convergence*.me3` 追加 `[[natives]]`；不覆盖它的 talk ESD；已实测 DLL 在 me3 下注入并挂上 EzState 钩子（`er_echo_npc.json` 2036415 字节 = Convergence 的 regulation） |
 
@@ -86,8 +89,11 @@ cd D:\Projects\ER-Echo; powershell -File tools\doctor.ps1  # 自动探测
 - **F12 给队友装备**：置物包/装备菜单光标停在武器/防具/护符/法术上按 F12；没选中装备/法术时把队友的装备/法术恢复成档案原样（误按不会再复制玩家装备）；
 - **战友模式·敌人生命补正**：按当前出战友人数提高敌人生命上限（1/2/3 人 = 1.5/1.8/2.0 倍），
   场上的 Boss 也立刻生效；`[balance]` 可关/可改倍率，`enemy_hp_status` 看跟踪详情（详见 [usage.md](docs/usage.md) §3.3）；
-- **菜单多语言**：`er_echo.ini` 的 `[i18n] language=en`（默认英文；`auto` 跟随 Windows）或 `zh-CN` / `zh-TW` / `ja`，
-  `auto` 跟 Windows 显示语言；自定义语言放 `er_echo_i18n.ini`（不用重编译，见 [docs/i18n.md](docs/i18n.md)）；
+- **菜单多语言**：`er_echo.ini` 的 `[i18n] language=game`（默认：**跟随游戏文本语言**，
+  即 Steam 的 per-game 语言；拿不到再退 Steam manifest / 模拟器配置 / Windows），
+  也可以写 `auto`（跟 Windows）或 `zh-CN` / `zh-TW` / `en` / `ja`；自定义语言放
+  `er_echo_i18n.ini`（不用重编译，见 [docs/i18n.md](docs/i18n.md)）；安装器「游戏内菜单语言」
+  下拉框改完会立即写入 ini；
 - 运行时导出 **BuddyParam / RideParam / NpcParam / NpcThinkParam / 玩家 profile** 为 JSON（不需要 Smithbox）；
 - 运行时写 `NpcAiBehaviorProbability` / `NpcThinkParam` / `NpcParam`（LLM 权重通道）；
 - 从当前角色一键导出档案：`python tools/dump_to_profile.py er_echo_profile.json -o profiles/me.json`；
@@ -157,9 +163,17 @@ powershell -ExecutionPolicy Bypass -File .\build.ps1
 ## 打包 / 发布
 
 ```powershell
-# Nexus 主包 + 可选 ESD fallback 包（发布到 Nexus 用这两个 zip）
-powershell -NoProfile -ExecutionPolicy Bypass -File tools\package_nexus.ps1
+# 完整发布流程（源码在仓库根目录，不在游戏目录里）
+powershell -NoProfile -ExecutionPolicy Bypass -File mod\build.ps1              # 1) Rust DLL
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\package_payload.ps1  # 2) 安装器 payload
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\build_gui_exe.ps1    # 3) ER-Echo-Setup.exe
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\package_nexus.ps1    # 4) 三个 Nexus zip
+```
 
+产物在 `dist\nexus\`：安装器（主文件）+ 手动安装包 + 可选 ESD fallback 包；
+上传前对照 `nexus\release-checksums.txt` 和 [nexus/checklist.md](nexus/checklist.md)。
+
+```powershell
 # 可插拔插件包（mods\ER-Echo\，不改 ME2 配置）
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\package_plugin.ps1
 ```
@@ -196,6 +210,8 @@ python tools\ipc_send.py rebuild_clone --arg mode=model  # 通用 IPC（JSON 参
 ## 安全与合规
 
 - **只离线**：EAC 关闭；带 mod 存档上线会被隔离/soft-ban。
-- 改 `regulation.bin` / `.sl2` 前备份；本仓库不含游戏原始资源或他人存档。
+- 改 `regulation.bin` / `.sl2` 前备份；本仓库不含存档或他人存档。`ui/` 下是赐福菜单 ESD 的构建资产：
+  `ui/base/` 是重打包用的原版模板，`ui/out_vanilla/`、`ui/out_rootmenu/` 是改过的版本
+  （发布包里只有后者；原版模板不随包分发）。
 - 本仓库代码 MIT OR Apache-2.0（见 [LICENSE](LICENSE) / [LICENSE-MIT](LICENSE-MIT) / [LICENSE-APACHE](LICENSE-APACHE)）；文档中的参数名来自 Paramdex / 社区逆向。
 - `vendor/fromsoftware-rs-main` 使用 MIT-NON-AI / Apache-NON-AI，全文见该目录与 [nexus/THIRD-PARTY-LICENSES.txt](nexus/THIRD-PARTY-LICENSES.txt)。

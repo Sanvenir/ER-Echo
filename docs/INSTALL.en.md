@@ -30,6 +30,22 @@ Why these are hard limits:
 
 ---
 
+## 0.5 Loaders (Mod Engine 2 / me3)
+
+The installer supports all three setups as one-click install + launch:
+
+| Setup | Loader | How to get it |
+|---|---|---|
+| vanilla | **Mod Engine 2** 2.1.0 | [ME2 releases](https://github.com/soulsmods/ModEngine2/releases), extract into the game root |
+| vanilla | **me3** (standalone) | [me3 releases](https://github.com/garyttierney/me3/releases); pick "me3 (standalone)" in the installer, it writes `<Game>\er-echo.me3` |
+| Convergence 3.x | **me3** (bundled) | [The Convergence](https://www.nexusmods.com/eldenring/mods/3419); the installer patches `me3\convergence*.me3` |
+
+Standalone me3 is found via `ME3_PATH`, PATH, the me3 uninstall registry entry, common folders, or
+the Browse button. Loader files are **not** bundled or redistributed; download them from the
+official pages and follow their licences.
+
+---
+
 ## 1. Fresh install (an untested machine)
 
 Run from the game root (next to `eldenring.exe`).
@@ -54,6 +70,11 @@ Run from the game root (next to `eldenring.exe`).
 > **not** inside the game folder. In the commands below, `er-echo\tools\...` means the repo
 > root (`D:\Projects\ER-Echo\tools\...`). Scripts locate the game automatically
 > (`-GameDir` / `$env:ER_ECHO_GAME_DIR` / Steam registry); you no longer put the sources in `Game\`.
+>
+> **Already installed with the one-click installer?** The game-side `mods\ER-Echo\` takes the
+> place of `er-echo\` here. Replace `er-echo\...` with `mods\ER-Echo\...`
+> (e.g. `er-echo\tools\doctor.ps1` → `mods\ER-Echo\tools\doctor.ps1`). With the manual
+> archive (extracted into the game root) the paths stay `er-echo\...`.
 2. Copy the release package over `...\ELDEN RING\Game`. Minimum set:
    `er_echo.dll`, `er_echo.ini`, `profiles\`, `er-echo\tools\`, `er-echo\bridge\`,
    `er-echo\docs\`, and **`mod\script\talk\m00_00_00_00.talkesdbnd.dcx`** — the grace-menu
@@ -75,6 +96,10 @@ Run from the game root (next to `eldenring.exe`).
    python er-echo\tools\export_profile_from_save.py --slot 2 -o profiles\me.slot2.json
    ```
    then set `profiles=profiles/me.slot2.json` under `[clone]` in `er_echo.ini`.
+   A built-in companion, **Sanvenir** (`profiles\builtin_sanvenir.json`, Lv1), is already
+   pinned at the end of the default list, so the mod works before you export anything. Export
+   tools only write/delete `slot<N>_*.json` and keep the `builtin_*` entry, so your exports
+   never replace it (a re-install restores the shipped version).
 5. Launch with `.\launchmod_eldenring.bat` — **not** via Steam's Play button (that starts
    EAC).
 6. Verify:
@@ -121,9 +146,19 @@ Run from the game root (next to `eldenring.exe`).
 
 ## 4. Localization
 
-`er_echo.ini` → `[i18n] language=en|auto|zh-CN|zh-TW|ja`. New installs default to English;
-`auto` follows the Windows display language. Any other language code (e.g. `ko`, `de`) can be supplied through
-`er_echo_i18n.ini` (copy `er_echo_i18n.example.ini`). See `docs/i18n.md`.
+`er_echo.ini` → `[i18n] language=game|auto|zh-CN|zh-TW|ja`. New installs default to `game`
+(follow the game's own text language); `auto` follows the Windows display language; any other
+language code (e.g. `ko`, `de`) can be supplied through `er_echo_i18n.ini`
+(copy `er_echo_i18n.example.ini`). See `docs/i18n.md`.
+
+`game` asks the game's own `steam_api64.dll` (`ISteamApps::GetCurrentGameLanguage`), then falls
+back to `steamapps\appmanifest_1245620.acf`, Goldberg/SteamEmu settings, and finally the Windows
+display language. Elden Ring has no in-game language switch: the text language is the Steam
+per-game language (Library → ELDEN RING → Properties → General → Language).
+
+The installer's Setup tab has a separate **"In-game menu language"** dropdown (default: follow
+game text). Changing it rewrites `er_echo.ini` immediately (with a backup); restart the game to
+apply. The **"Installer language"** dropdown at the top only localizes the installer UI.
 
 Keep the menu language consistent with the game's text language: the game only loads
 the font atlas of its current language, so mismatches can render as boxes.
