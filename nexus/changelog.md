@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Companions now spawn with their **own body type and proportions** from their profile
+  (`body_type` + the 5 body sliders), instead of the player's/default body. The engine bakes body
+  shape at summon time, so the mod prepares a per-slot `CharaInitParam` / `FACE_PARAM` row and points
+  each carrier Spirit Ash row at it; changes apply on the next summon (menu "Resummon now" / F8).
 - New "Companion AI" entry in the "Comrades" grace sub-menu (a third-level menu): each of the three
   companion slots can be given its own AI style (**Default / Balanced / Melee / Caster / Guardian /
   Aggressive**). The choice is written back to that companion's own profile JSON (`ai`:

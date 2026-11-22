@@ -78,6 +78,26 @@ function Reset-Dir([string]$Path, [string]$Root) {
     New-Item -ItemType Directory -Force -Path $Path | Out-Null
 }
 
+# 用 .NET 的 ZipArchive 而不是 Compress-Archive：后者在 Windows 上把条目名写成
+# 反斜杠（er-echo\tools\...），部分解压工具会当成文件名而不是目录。这里统一用 /。
+function Compress-Dir([string]$Dir, [string]$Zip) {
+    Add-Type -AssemblyName System.IO.Compression
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    if (Test-Path -LiteralPath $Zip) { Remove-Item -LiteralPath $Zip -Force }
+    $root = ([IO.Path]::GetFullPath($Dir)).TrimEnd('\')
+    $archive = [System.IO.Compression.ZipFile]::Open($Zip, [System.IO.Compression.ZipArchiveMode]::Create)
+    try {
+        Get-ChildItem -LiteralPath $Dir -Recurse -File | ForEach-Object {
+            $rel = $_.FullName.Substring($root.Length + 1).Replace('\', '/')
+            [System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile(
+                $archive, $_.FullName, $rel,
+                [System.IO.Compression.CompressionLevel]::Optimal) | Out-Null
+        }
+    } finally {
+        $archive.Dispose()
+    }
+}
+
 # ---------------------------------------------------------------- 0) 构建
 $builtDll = Join-Path $repo 'mod\target\release\er_echo.dll'
 if (-not $SkipBuild) {
@@ -280,8 +300,7 @@ foreach ($stageDir in @($mainDir, $fallbackDir)) {
 Say '[5/5] 压缩 ...' 'Cyan'
 foreach ($pair in @(@($mainDir, $mainZip), @($fallbackDir, $fallbackZip))) {
     $dir = $pair[0]; $zip = $pair[1]
-    if (Test-Path -LiteralPath $zip) { Remove-Item -LiteralPath $zip -Force }
-    Compress-Archive -Path (Join-Path $dir '*') -DestinationPath $zip -CompressionLevel Optimal
+    Compress-Dir $dir $zip
     $mb = [Math]::Round((Get-Item -LiteralPath $zip).Length / 1MB, 2)
     Say ("[ok] {0} ({1} MB)" -f $zip, $mb) 'Green'
 }
