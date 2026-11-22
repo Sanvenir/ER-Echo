@@ -23,6 +23,7 @@
 /tools/profile.*.json
 !/tools/profile.example.json
 /shots/
+/nexus/media/incoming/
 /backups/
 /archive/
 
@@ -41,3 +42,8 @@ __pycache__/
 .idea/
 Thumbs.db
 desktop.ini
+/NVIDIA Corporation/
+
+# ---- one-off local artifacts (never source) ----
+/build_output.txt
+/selftest-setup*.json
