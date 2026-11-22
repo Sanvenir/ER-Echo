@@ -232,6 +232,8 @@ static TRAMPOLINE: AtomicUsize = AtomicUsize::new(0);
 static INJECT: AtomicUsize = AtomicUsize::new(0);
 static PATCHED_GROUP: AtomicUsize = AtomicUsize::new(0);
 static PATCHED_INITIAL: AtomicUsize = AtomicUsize::new(0);
+/// 当初把「战友」事件插进了哪个 state；用来确认补丁还在（group 地址可能被复用）。
+static PATCHED_ADD_STATE: AtomicUsize = AtomicUsize::new(0);
 static GROUP_OFFSET: AtomicUsize = AtomicUsize::new(usize::MAX);
 /// 首次在 `machine+0x28` 验证到合法 state_group 后置真；
 /// 之后热路径直接裸读指针，不再每帧做 VirtualQuery（提示类 talk machine
@@ -955,6 +957,36 @@ unsafe fn find_list_start_state(g: &StateGroup) -> Option<(*mut State, usize, *m
     None
 }
 
+/// 当前 live group 上**我们的补丁还在**吗？
+///
+/// `PATCHED_GROUP` 只是一个地址：ESD（talk machine 的 state group）在「回标题 →
+/// 进游戏 / 读档」之后会重新实例化，旧地址失效；极端情况下分配器甚至会把同一块
+/// 内存还给新的 group。所以不能只比地址，还要回读当初插入「战友」的那个 state，
+/// 确认 `AddTalkListData(_, 69100000)` 还在。
+unsafe fn patch_intact(group: *mut StateGroup) -> bool {
+    if PATCHED_GROUP.load(Ordering::Acquire) != group as usize {
+        return false;
+    }
+    let g = &*group;
+    if PATCHED_INITIAL.load(Ordering::Acquire) != g.initial_state as usize {
+        return false;
+    }
+    let add = PATCHED_ADD_STATE.load(Ordering::Acquire);
+    if add == 0 || !memory_readable(add, std::mem::size_of::<State>()) {
+        return false;
+    }
+    let list = (*((add as *const State))).entry_events;
+    if list.ptr.is_null() || list.len == 0 || list.len > 64 {
+        return false;
+    }
+    if !memory_readable(list.ptr as usize, list.len * std::mem::size_of::<Event>()) {
+        return false;
+    }
+    std::slice::from_raw_parts(list.ptr, list.len)
+        .iter()
+        .any(|ev| add_talk_message(ev) == Some(ROOT_MSG))
+}
+
 /// 在赐福 group 上打补丁。返回是否成功。
 unsafe fn patch_group(group: *mut StateGroup) -> bool {
     let inject_ptr = INJECT.load(Ordering::Acquire);
@@ -972,8 +1004,8 @@ unsafe fn patch_group(group: *mut StateGroup) -> bool {
 
     let mut result_state: *mut State = ptr::null_mut();
     let mut result_idx = usize::MAX;
-    let mut already = false;
-
+    // 已经带「战友」事件的 state（同一个实例被重复进入 / 地址复用）。
+    let mut already_at: *mut State = ptr::null_mut();
     for i in 0..states.len {
         let state_ptr = states.ptr.add(i);
         let state = &*state_ptr;
@@ -983,7 +1015,7 @@ unsafe fn patch_group(group: *mut StateGroup) -> bool {
         if !list.ptr.is_null() && list.len > 0 {
             for ev in std::slice::from_raw_parts(list.ptr, list.len).iter() {
                 if add_talk_message(ev) == Some(ROOT_MSG) {
-                    already = true;
+                    already_at = state_ptr;
                 }
             }
         }
@@ -1021,7 +1053,13 @@ unsafe fn patch_group(group: *mut StateGroup) -> bool {
         }
     }
 
-    if already {
+    if !already_at.is_null() {
+        // 补丁已经在里面：补记 latch，别让 on_enter_state 每次坐火都重新扫一遍
+        // （早先这里直接 return，PATCHED_GROUP 一直是 0 → menu_reset 之后每次
+        // 进赐福初始 state 都会全量扫描，肉眼可见的卡顿）。
+        PATCHED_GROUP.store(group as usize, Ordering::Release);
+        PATCHED_INITIAL.store(g.initial_state as usize, Ordering::Release);
+        PATCHED_ADD_STATE.store(already_at as usize, Ordering::Release);
         log::info!("ezstate: grace group already has 战友 item, skip patch");
         return true;
     }
@@ -1072,6 +1110,7 @@ unsafe fn patch_group(group: *mut StateGroup) -> bool {
 
     PATCHED_GROUP.store(group as usize, Ordering::Release);
     PATCHED_INITIAL.store(g.initial_state as usize, Ordering::Release);
+    PATCHED_ADD_STATE.store(add_state as usize, Ordering::Release);
     PATCH_COUNT.fetch_add(1, Ordering::AcqRel);
     log::info!(
         "ezstate: patched grace group x{} ({:#x}): item at state {:#x} (id {}) event[{at}], \
@@ -1096,11 +1135,15 @@ unsafe fn on_enter_state(state: *mut State, machine: *mut u8) {
     if state.is_null() || machine.is_null() {
         return;
     }
-    // 已注入后直接放行：不再做 VirtualQuery / group 扫描。
-    // 正常游戏里 ESD 只加载一次；万一整份重载，用 menu_reset 清掉标记再坐火。
-    if PATCHED_GROUP.load(Ordering::Acquire) != 0 {
-        return;
-    }
+    // 每次进入 state 都重新确认「当前 live group 上补丁还在不在」。
+    //
+    // 早先这里是 `if PATCHED_GROUP != 0 { return; }`：一次打补丁后永久不再检查。
+    // 但 talk machine 的 state group 会在**回标题 → 进游戏 / 读档**后重新实例化：
+    // 旧的 group 地址失效，新 group 永远打不上补丁 → 赐福里看不到「战友」，
+    // 只能重启游戏（新进程里第一次坐火重新打补丁）才恢复。
+    // 2026-11-22 实测：+450s 打在 0x…a807c8，+597s 进游戏后 group 变成
+    // 0x…d74178，之后三次坐火都没有「战友」；menu_reset 后在同样位置重新
+    // 打上补丁、菜单立刻恢复。
     let Some(group) = group_of(machine) else {
         return;
     };
@@ -1123,9 +1166,7 @@ unsafe fn on_enter_state(state: *mut State, machine: *mut u8) {
     if state != g.initial_state {
         return;
     }
-    if PATCHED_GROUP.load(Ordering::Acquire) == group as usize
-        && PATCHED_INITIAL.load(Ordering::Acquire) == g.initial_state as usize
-    {
+    if patch_intact(group) {
         return;
     }
     // 负缓存：非赐福 group（NPC 对话 / 交互提示）只检查一次，避免每次 EnterState
@@ -1298,6 +1339,7 @@ pub fn request_dump() {
 pub fn reset_patch() {
     PATCHED_GROUP.store(0, Ordering::Release);
     PATCHED_INITIAL.store(0, Ordering::Release);
+    PATCHED_ADD_STATE.store(0, Ordering::Release);
 }
 
 pub fn status() -> String {

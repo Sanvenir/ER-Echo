@@ -6,16 +6,24 @@
 //! * 内置 `zh-CN` / `zh-TW` / `en` / `ja`；缺键一律回退 `en`，再缺就原样返回 key；
 //! * `er_echo_i18n.ini`（游戏根目录，可选）可以覆盖内置文案，也可以新增语言，
 //!   新增语言只要在 `er_echo.ini` 里写 `[i18n] language=ko` 就行；
-//! * `language=auto`（默认）读 Windows 显示语言，认不出来用英文。
+//! * `language=game`（推荐，安装器默认）**直接跟游戏自己的文本语言**；
+//! * `language=auto` 读 Windows 显示语言；也有人写死 `zh-CN` / `en` / …。
 //!
-//! 为什么不用游戏自己的语言设置：`CSMsgRepository` 的查找函数只在菜单打开时才被
-//! 调用，而且传进来的 `lang` 索引没有公开的 0..n → 语言名映射；Windows 显示语言
-//! 是最稳的近似值，实在不准就让玩家显式写 `language=`。
+//! 游戏文本语言从哪来：Elden Ring 自己没有「游戏内语言」开关，它读的是 Steam
+//! 的 per-game 语言（`ISteamApps::GetCurrentGameLanguage`，用户没选过时回退
+//! Steam 界面语言）。所以这里按下面顺序取，拿到就停：
 //!
-//! 注意：文字最终由游戏的字体图集渲染，**菜单语言最好和游戏文本语言一致**，
-//! 否则可能出现方块（游戏只加载当前语言的字体）。
+//! 1. 进程里的 `steam_api64.dll` → `SteamAPI_ISteamApps_GetCurrentGameLanguage`
+//!    （和游戏读的是同一个值；Goldberg 之类模拟器也实现这个接口）；
+//! 2. `<库>\steamapps\appmanifest_1245620.acf` 的 `UserConfig` → `MountedConfig`；
+//! 3. Goldberg / SteamEmu 的 `settings\language` 或 `steam_settings\configs.user.ini`；
+//! 4. 都不行才退回 Windows 显示语言（等同于 `auto`）。
+//!
+//! 注意：文字最终由游戏的字体图集渲染，**菜单语言要和游戏文本语言一致**，
+//! 否则可能出现方块（游戏只加载当前语言的字体）——这正是 `game` 模式要解决的问题。
 
 use std::collections::HashMap;
+use std::os::windows::ffi::OsStringExt;
 use std::sync::{Mutex, OnceLock};
 
 /// 可选的外部翻译文件（相对游戏根目录，或 DLL 同目录）。
@@ -29,14 +37,47 @@ pub fn override_path() -> std::path::PathBuf {
 /// 内置语言代码。顺序无关，仅用于文档/日志。
 pub const BUILTIN_LANGS: &[&str] = &["zh-CN", "zh-TW", "en", "ja"];
 
-/// 当前语言代码；`None` = 还没 `configure`，按 auto 现算。
-static LANG: Mutex<Option<String>> = Mutex::new(None);
+/// Elden Ring 的 Steam AppID（`appmanifest_1245620.acf`）。
+const STEAM_APP_MANIFEST: &str = "appmanifest_1245620.acf";
+/// Goldberg / SteamEmu 的全局语言文件。
+const EMU_LANG_FILE: &str = r"Goldberg SteamEmu Saves\settings\language";
+/// Goldberg 的 per-user 配置（新版）。
+const EMU_USER_CONFIG: &str = r"Goldberg SteamEmu Saves\settings\configs.user.ini";
+/// 游戏目录里的模拟器配置（`<Game>\steam_settings\configs.user.ini`）。
+const EMU_GAME_CONFIG: &str = r"steam_settings\configs.user.ini";
+
+/// 语言来源（`er_echo.ini` 里 `[i18n] language=` 的写法）。
+#[derive(Clone, Copy, PartialEq, Eq)]
+enum Mode {
+    /// 写死的语言代码
+    Fixed,
+    /// `game`：跟随游戏文本语言
+    Game,
+    /// `auto`：跟 Windows 显示语言
+    Os,
+}
+
+struct State {
+    mode: Mode,
+    /// 当前生效的语言代码
+    code: String,
+    /// 这个代码从哪来的（日志 / status 用）
+    source: &'static str,
+    /// `game` 模式是否已经从进程内 Steam 接口读到过语言（读到前每次取值都重试）
+    steam_ok: bool,
+}
+
+/// 当前状态；`None` = 还没 `configure`，按 auto 现算。
+static STATE: Mutex<Option<State>> = Mutex::new(None);
 /// `"<lang>\u{1}<key>"` → 文案。
 static OVERRIDES: OnceLock<HashMap<String, String>> = OnceLock::new();
 
 #[link(name = "kernel32")]
 unsafe extern "system" {
     fn GetUserDefaultUILanguage() -> u16;
+    fn GetModuleHandleA(name: *const u8) -> *mut std::ffi::c_void;
+    fn GetProcAddress(module: *mut std::ffi::c_void, name: *const u8) -> *mut std::ffi::c_void;
+    fn GetModuleFileNameW(module: *mut std::ffi::c_void, buf: *mut u16, len: u32) -> u32;
 }
 
 /// 把用户写的语言名归一化成语言代码。`None` 表示 "auto"/空。
@@ -75,11 +116,264 @@ fn detect_os() -> String {
     }
 }
 
-/// 设置语言（`auto` / `zh-CN` / `en` / 自定义）。返回实际生效的语言代码。
+/// `language=` 写 `game` 时表示「跟随游戏文本语言」（这些别名都认）。
+fn is_game_spec(spec: &str) -> bool {
+    matches!(
+        spec.trim().to_ascii_lowercase().as_str(),
+        "game" | "steam" | "follow" | "follow-game" | "game-language"
+    )
+}
+
+/// Steam 的语言名 → 我们的语言代码（Steam 的 `GetCurrentGameLanguage` 返回值）。
+///
+/// 只认 Steamworks 支持的语言名；认不出来返回 `None`（调用方继续走兜底）。
+fn steam_name_to_code(name: &str) -> Option<String> {
+    let name = name.trim().to_ascii_lowercase().replace('_', "-");
+    let code = match name.as_str() {
+        "english" => "en",
+        "schinese" => "zh-CN",
+        "tchinese" => "zh-TW",
+        "japanese" => "ja",
+        "koreana" => "ko",
+        "brazilian" => "pt-BR",
+        "portuguese" => "pt",
+        "latam" => "es-419",
+        "spanish" => "es",
+        "french" => "fr",
+        "german" => "de",
+        "italian" => "it",
+        "polish" => "pl",
+        "russian" => "ru",
+        "ukrainian" => "uk",
+        "turkish" => "tr",
+        "czech" => "cs",
+        "danish" => "da",
+        "dutch" => "nl",
+        "finnish" => "fi",
+        "norwegian" => "no",
+        "romanian" => "ro",
+        "swedish" => "sv",
+        "hungarian" => "hu",
+        "greek" => "el",
+        "bulgarian" => "bg",
+        "thai" => "th",
+        "vietnamese" => "vi",
+        "arabic" => "ar",
+        _ => return None,
+    };
+    Some(code.to_string())
+}
+
+/// 配置/模拟器文件里的一种写法 → 语言代码：先按 Steam 语言名认，再按代码认。
+///
+/// 只接受像代码的值（字母数字/`-`/`_`），避免把 `auto` 或垃圾值误判成英文。
+fn language_value(value: &str) -> Option<String> {
+    let value = value.trim();
+    if value.is_empty() || value.eq_ignore_ascii_case("auto") {
+        return None;
+    }
+    if let Some(code) = steam_name_to_code(value) {
+        return Some(code);
+    }
+    let looks_like_code = value.len() <= 12
+        && value
+            .chars()
+            .all(|c| c.is_ascii_alphanumeric() || c == '-' || c == '_');
+    if looks_like_code {
+        canonical_code(value)
+    } else {
+        None
+    }
+}
+
+/// 当前进程 exe 所在目录（用来往上找 `steamapps`）。
+fn exe_dir() -> Option<std::path::PathBuf> {
+    unsafe {
+        let mut buf = vec![0u16; 1024];
+        let n = GetModuleFileNameW(std::ptr::null_mut(), buf.as_mut_ptr(), buf.len() as u32) as usize;
+        if n == 0 || n >= buf.len() {
+            return None;
+        }
+        let s = std::ffi::OsString::from_wide(&buf[..n]);
+        std::path::Path::new(&s).parent().map(|p| p.to_path_buf())
+    }
+}
+
+/// 进程内问 Steam：游戏自己读的就是这个值。
+///
+/// 三个导出都要在，而且 `SteamAPI_Init` 已经跑完（`GetHSteamUser` 非 0）才敢调
+/// 接口——否则 steam_api 自己的上下文还没建好，调了会崩。
+unsafe fn steam_language() -> Option<String> {
+    let module = GetModuleHandleA(b"steam_api64.dll\0".as_ptr());
+    if module.is_null() {
+        return None;
+    }
+    let user_fn = GetProcAddress(module, b"SteamAPI_GetHSteamUser\0".as_ptr());
+    let apps_fn = GetProcAddress(module, b"SteamAPI_SteamApps_v008\0".as_ptr());
+    let lang_fn = GetProcAddress(
+        module,
+        b"SteamAPI_ISteamApps_GetCurrentGameLanguage\0".as_ptr(),
+    );
+    if user_fn.is_null() || apps_fn.is_null() || lang_fn.is_null() {
+        return None;
+    }
+    let get_user: unsafe extern "C" fn() -> u32 = std::mem::transmute(user_fn);
+    if get_user() == 0 {
+        return None;
+    }
+    let get_apps: unsafe extern "C" fn() -> *mut std::ffi::c_void = std::mem::transmute(apps_fn);
+    let apps = get_apps();
+    if apps.is_null() {
+        return None;
+    }
+    let get_lang: unsafe extern "C" fn(*mut std::ffi::c_void) -> *const u8 =
+        std::mem::transmute(lang_fn);
+    let p = get_lang(apps);
+    if p.is_null() {
+        return None;
+    }
+    // 防御：只接受短的、可打印的 ASCII
+    let mut len = 0usize;
+    while len < 32 && *p.add(len) != 0 {
+        len += 1;
+    }
+    let bytes = std::slice::from_raw_parts(p, len);
+    if !bytes.iter().all(|b| b.is_ascii_graphic() || *b == b' ') {
+        return None;
+    }
+    let name = std::str::from_utf8(bytes).ok()?.trim();
+    steam_name_to_code(name)
+}
+
+/// 在 VDF 块里找 `"language" "xxx"`。
+fn vdf_language(block: &str) -> Option<String> {
+    let mut rest = block;
+    while let Some(i) = rest.find("\"language\"") {
+        rest = &rest[i + "\"language\"".len()..];
+        let Some(open) = rest.find('"') else { return None };
+        let after = &rest[open + 1..];
+        let Some(close) = after.find('"') else { return None };
+        if let Some(code) = language_value(&after[..close]) {
+            return Some(code);
+        }
+    }
+    None
+}
+
+/// 解析 `appmanifest_<appid>.acf`：先 `UserConfig`（玩家在 Steam 属性里选的），
+/// 再 `MountedConfig`（上次安装时的语言）。
+fn manifest_language(text: &str) -> Option<String> {
+    for section in ["UserConfig", "MountedConfig"] {
+        let Some(start) = text.find(&format!("\"{section}\"")) else {
+            continue;
+        };
+        let rest = &text[start..];
+        let end = rest.find('}').unwrap_or(rest.len());
+        if let Some(code) = vdf_language(&rest[..end]) {
+            return Some(code);
+        }
+    }
+    None
+}
+
+/// Steam 库根目录（`...\steamapps`` 的父目录）：从 exe 目录往上找 manifest。
+fn steam_manifest_language() -> Option<String> {
+    let dir = exe_dir()?;
+    for anc in dir.ancestors().take(6) {
+        let manifest = anc.join("steamapps").join(STEAM_APP_MANIFEST);
+        if let Ok(text) = std::fs::read_to_string(&manifest) {
+            return manifest_language(&text);
+        }
+    }
+    None
+}
+
+/// `key=value` 形式的模拟器配置里取 `language=`。
+fn language_from_config_text(text: &str) -> Option<String> {
+    for line in text.lines() {
+        let line = line.trim();
+        if line.is_empty() || line.starts_with([';', '#', '[']) {
+            continue;
+        }
+        let Some((key, value)) = line.split_once('=') else {
+            continue;
+        };
+        if key.trim().eq_ignore_ascii_case("language") {
+            if let Some(code) = language_value(value) {
+                return Some(code);
+            }
+        }
+    }
+    None
+}
+
+fn language_from_plain_file(path: &std::path::Path) -> Option<String> {
+    let raw = std::fs::read_to_string(path).ok()?;
+    language_value(&raw)
+}
+
+fn language_from_config_file(path: &std::path::Path) -> Option<String> {
+    let raw = std::fs::read_to_string(path).ok()?;
+    language_from_config_text(&raw)
+}
+
+/// Goldberg / SteamEmu：`settings\language` 纯文本，或 `configs.user.ini` 的 `language=`。
+fn emu_language() -> Option<String> {
+    let mut roots: Vec<std::path::PathBuf> = Vec::new();
+    if let Some(dir) = exe_dir() {
+        roots.push(dir);
+    }
+    if let Ok(cwd) = std::env::current_dir() {
+        roots.push(cwd);
+    }
+    for root in &roots {
+        if let Some(code) = language_from_config_file(&root.join(EMU_GAME_CONFIG)) {
+            return Some(code);
+        }
+    }
+    if let Some(appdata) = std::env::var_os("APPDATA") {
+        let base = std::path::PathBuf::from(appdata);
+        if let Some(code) = language_from_plain_file(&base.join(EMU_LANG_FILE)) {
+            return Some(code);
+        }
+        if let Some(code) = language_from_config_file(&base.join(EMU_USER_CONFIG)) {
+            return Some(code);
+        }
+    }
+    None
+}
+
+/// `game` 模式的第一轮解析：进程内 Steam → Steam manifest → 模拟器文件 → Windows。
+fn detect_game_initial() -> (String, &'static str) {
+    if let Some(code) = unsafe { steam_language() } {
+        return (code, "steam");
+    }
+    if let Some(code) = steam_manifest_language() {
+        return (code, "manifest");
+    }
+    if let Some(code) = emu_language() {
+        return (code, "goldberg");
+    }
+    (detect_os(), "windows")
+}
+
+/// 设置语言（`game` / `auto` / `zh-CN` / `en` / 自定义）。返回实际生效的语言代码。
 pub fn configure(spec: &str) -> String {
-    let code = canonical_code(spec).unwrap_or_else(detect_os);
-    if let Ok(mut g) = LANG.lock() {
-        *g = Some(code.clone());
+    let (mode, code, source) = if is_game_spec(spec) {
+        let (code, source) = detect_game_initial();
+        (Mode::Game, code, source)
+    } else if let Some(code) = canonical_code(spec) {
+        (Mode::Fixed, code, "config")
+    } else {
+        (Mode::Os, detect_os(), "windows")
+    };
+    if let Ok(mut g) = STATE.lock() {
+        *g = Some(State {
+            mode,
+            code: code.clone(),
+            source,
+            steam_ok: false,
+        });
     }
     // 预热覆盖表：没有文件也是一次空表，之后不再碰磁盘。
     let _ = OVERRIDES.get_or_init(load_overrides);
@@ -87,15 +381,54 @@ pub fn configure(spec: &str) -> String {
 }
 
 /// 当前生效的语言代码。
+///
+/// `game` 模式在第一次成功读到进程内 Steam 语言之前，每次取值都会重试
+/// （DLL 启动时 `SteamAPI_Init` 可能还没跑完，那时只能靠 manifest/系统语言兜底）；
+/// 读到就换掉兜底值并打一行日志。
 pub fn current() -> String {
-    if let Some(code) = LANG.lock().ok().and_then(|g| g.clone()) {
-        return code;
-    }
-    let code = detect_os();
-    if let Ok(mut g) = LANG.lock() {
-        *g = Some(code.clone());
+    let mut changed: Option<(String, String)> = None;
+    let code = {
+        let mut guard = match STATE.lock() {
+            Ok(g) => g,
+            Err(_) => return detect_os(),
+        };
+        if guard.is_none() {
+            let code = detect_os();
+            *guard = Some(State {
+                mode: Mode::Os,
+                code: code.clone(),
+                source: "windows",
+                steam_ok: false,
+            });
+            return code;
+        }
+        let st = guard.as_mut().expect("state just checked");
+        if st.mode == Mode::Game && !st.steam_ok {
+            if let Some(code) = unsafe { steam_language() } {
+                st.steam_ok = true;
+                if code != st.code {
+                    changed = Some((st.code.clone(), code.clone()));
+                    st.code = code;
+                }
+                st.source = "steam";
+            }
+        }
+        st.code.clone()
+    };
+    if let Some((old, new)) = changed {
+        log::info!("i18n: language=game -> {new} (steam_api；之前 {old} 来自 manifest/系统)");
     }
     code
+}
+
+/// 当前语言代码是从哪来的：`steam` / `manifest` / `goldberg` / `windows` / `config`。
+pub fn source() -> String {
+    let _ = current();
+    STATE
+        .lock()
+        .ok()
+        .and_then(|g| g.as_ref().map(|s| s.source.to_string()))
+        .unwrap_or_else(|| "windows".into())
 }
 
 fn overrides() -> &'static HashMap<String, String> {
@@ -312,6 +645,67 @@ mod tests {
     }
 
     #[test]
+    fn game_spec_aliases_are_recognised() {
+        for spec in ["game", " GAME ", "steam", "follow", "game-language"] {
+            assert!(is_game_spec(spec), "{spec} 应识别为 game 模式");
+        }
+        for spec in ["auto", "zh-CN", "en", "", "gamers"] {
+            assert!(!is_game_spec(spec), "{spec} 不应识别为 game 模式");
+        }
+    }
+
+    #[test]
+    fn steam_language_names_map_to_codes() {
+        assert_eq!(steam_name_to_code("schinese").as_deref(), Some("zh-CN"));
+        assert_eq!(steam_name_to_code("tchinese").as_deref(), Some("zh-TW"));
+        assert_eq!(steam_name_to_code("english").as_deref(), Some("en"));
+        assert_eq!(steam_name_to_code("japanese").as_deref(), Some("ja"));
+        assert_eq!(steam_name_to_code("brazilian").as_deref(), Some("pt-BR"));
+        assert_eq!(steam_name_to_code("klingon"), None);
+    }
+
+    #[test]
+    fn language_value_rejects_auto_and_junk() {
+        assert_eq!(language_value("schinese").as_deref(), Some("zh-CN"));
+        assert_eq!(language_value("zh_TW").as_deref(), Some("zh-TW"));
+        assert_eq!(language_value("auto"), None);
+        assert_eq!(language_value(""), None);
+        assert_eq!(language_value("bad lang!"), None);
+    }
+
+    #[test]
+    fn manifest_prefers_user_config_then_mounted() {
+        let both = "\"AppState\"\n{\n\t\"UserConfig\"\n\t{\n\t\t\"language\"\t\t\"schinese\"\n\t}\n\t\"MountedConfig\"\n\t{\n\t\t\"language\"\t\t\"tchinese\"\n\t}\n}\n";
+        assert_eq!(manifest_language(both).as_deref(), Some("zh-CN"));
+
+        let mounted_only = "\"AppState\"\n{\n\t\"MountedConfig\"\n\t{\n\t\t\"language\"\t\t\"japanese\"\n\t}\n}\n";
+        assert_eq!(manifest_language(mounted_only).as_deref(), Some("ja"));
+        assert_eq!(manifest_language("\"AppState\"\n{\n}\n"), None);
+    }
+
+    #[test]
+    fn emu_config_reads_language_line() {
+        assert_eq!(
+            language_from_config_text("[user::general]\nlanguage=schinese\n").as_deref(),
+            Some("zh-CN")
+        );
+        assert_eq!(
+            language_from_config_text("language = zh_TW\n").as_deref(),
+            Some("zh-TW")
+        );
+        // 模拟器里写 auto 等于没选，不能当成英文
+        assert_eq!(language_from_config_text("language=auto\n"), None);
+    }
+
+    #[test]
+    fn game_detection_reports_a_known_source() {
+        let (code, source) = detect_game_initial();
+        assert!(!code.is_empty(), "game 模式必须给出一个代码");
+        assert!(
+            ["steam", "manifest", "goldberg", "windows"].contains(&source),
+            "unexpected language source {source}"
+        );
+    }    #[test]
     fn text_assembles_for_each_builtin_language() {
         let cases = [
             ("zh-CN", "战友（2/3）"),

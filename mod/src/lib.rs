@@ -2785,7 +2785,7 @@ fn status_json() -> Result<serde_json::Value, String> {
             "ai_think_rows": ai_think_rows,
             "buddy_think": buddy_think,
         },
-        "ui": { "msg_hook": ui::hook_status(), "ezstate": ezstate::status(), "language": i18n::current() },
+        "ui": { "msg_hook": ui::hook_status(), "ezstate": ezstate::status(), "language": i18n::current(), "language_source": i18n::source() },
         "flags": {
             "anywhere": ANYWHERE.load(Ordering::Acquire),
             "events": ON_EVENTS.load(Ordering::Acquire),
@@ -3588,7 +3588,10 @@ fn run_command(cmd: &ipc::Command) -> Result<(), String> {
                 .unwrap_or("auto");
             let code = i18n::configure(spec);
             ui::refresh_texts();
-            log::info!("set_language: {spec:?} -> {code} (menu texts rebuilt)");
+            log::info!(
+                "set_language: {spec:?} -> {code} (source={}, menu texts rebuilt)",
+                i18n::source()
+            );
             Ok(())
         }
         "summon_groups" => {
@@ -4547,7 +4550,10 @@ impl Config {
             friendly_fire_rate: 0.2,
             enemy_hp_scaling: true,
             enemy_hp_rates: balance::DEFAULT_RATES.to_vec(),
-            language: "en".into(),
+            // 兜底 `game`（跟随游戏文本语言；拿不到就退 Windows 显示语言），和安装器
+            // `INI_TEMPLATE` 一致，见 docs/i18n.md。配置**没读到**时也是这个值 ——
+            // 日志会打印 config 路径、loaded / not read 和语言来源。
+            language: "game".into(),
         };
         // TODO: 用 ini 解析（或直接读环境变量），MVP 先支持 env：
         if let Ok(v) = std::env::var("ER_ECHO_ADDR") {
@@ -4556,7 +4562,9 @@ impl Config {
         if let Ok(v) = std::env::var("ER_ECHO_TOKEN") {
             cfg.ipc_token = v;
         }
-        let _ = std::fs::read_to_string(path).map(|text| {
+        let read = std::fs::read_to_string(path);
+        let read_ok = read.is_ok();
+        if let Ok(text) = read {
             for line in text.lines() {
                 let line = line.trim();
                 if line.is_empty() || line.starts_with([';', '#', '[']) {
@@ -4663,11 +4671,18 @@ impl Config {
                     _ => {}
                 }
             }
-        });
+        }
         let resolved = i18n::configure(&cfg.language);
         log::info!(
-            "i18n: language={resolved} (er_echo.ini language={:?}, override file {}, builtin: {})",
-            cfg.language,
+            "i18n: language={resolved} (source={}, config {}: {}, language={:?}, override file {}, builtin: {})",
+            i18n::source(),
+            path.display(),
+            if read_ok { "loaded" } else { "not read — defaults" },
+            if cfg.language.is_empty() {
+                "(unset → auto)"
+            } else {
+                cfg.language.as_str()
+            },
             if i18n::override_path().exists() {
                 "loaded"
             } else {
