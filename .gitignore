@@ -1,0 +1,43 @@
+# ---- build outputs (regenerated) ----
+/mod/target/
+/build/
+/dist/
+*.pdb
+*.dll
+*.exe
+*.zip
+*.7z
+*.rar
+
+# ---- runtime dumps / logs (game root, never source) ----
+/er_echo*.log
+/er_echo*.json
+/er_echo_heartbeat.txt
+/er_echo.new.dll
+*.dmp
+
+# ---- personal data: exported characters / saves / screenshots ----
+/profiles/
+/tools/from_save/
+/tools/from_save_account/
+/tools/profile.*.json
+!/tools/profile.example.json
+/shots/
+/backups/
+/archive/
+
+# ---- python ----
+__pycache__/
+*.pyc
+.venv/
+*/__pycache__/
+
+# ---- pyinstaller / local tooling ----
+*.spec
+.tools/
+
+# ---- editors / OS ----
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini

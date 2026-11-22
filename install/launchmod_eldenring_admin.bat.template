@@ -1,0 +1,27 @@
+@echo off
+chcp 65001 >nul
+:: ER Echo launcher (root layout) (self-elevating).
+:: Use this if the normal launcher makes the game core-dump after ~10 s
+:: (Steam overlay vs ModEngine2 hooks). Cost: no Steam overlay in game.
+
+cd /d "%~dp0"
+
+whoami /groups 2>nul | findstr /C:"S-1-16-12288" >nul
+if errorlevel 1 (
+    echo Requesting administrator privileges ...
+    powershell -NoProfile -Command "Start-Process -FilePath '%~f0' -Verb RunAs"
+    if errorlevel 1 (
+        echo.
+        echo [ERROR] Elevation was cancelled.
+        pause
+    )
+    exit /b
+)
+
+.\modengine2_launcher.exe -t er -c ".\config_eldenring.toml" -p ".\eldenring.exe"
+set "ME2RC=%ERRORLEVEL%"
+if not "%ME2RC%"=="0" (
+    echo.
+    echo [ERROR] Mod Engine 2 launcher failed, exit code %ME2RC%.
+    pause
+)

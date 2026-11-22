@@ -1,0 +1,21 @@
+@echo off
+chcp 65001 >nul
+:: ER Echo launcher (root layout) (non-elevated).
+::
+:: - cd to the game root (this file lives in mods\ER-Echo\)
+:: - -c points at our own config, so config_eldenring.toml is untouched
+:: - -p skips ModEngine2 2.1.0's Steam path detection (0xC0000409 in ucrtbase.dll)
+::
+:: If the game window closes after ~10 s (WER: eldenring.exe / 0xc0000005 /
+:: offset 0x1EBCEF9), use launch-er-echo-admin.bat instead.
+
+cd /d "%~dp0"
+
+.\modengine2_launcher.exe -t er -c ".\config_eldenring.toml" -p ".\eldenring.exe"
+set "ME2RC=%ERRORLEVEL%"
+if not "%ME2RC%"=="0" (
+    echo.
+    echo [ERROR] Mod Engine 2 launcher failed, exit code %ME2RC%.
+    echo         See modengine2\logs and er_echo.log for details.
+    pause
+)

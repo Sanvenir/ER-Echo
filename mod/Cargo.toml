@@ -1,0 +1,25 @@
+[package]
+name = "er_echo"
+version = "0.1.0"
+edition = "2021"
+description = "ER Echo — summon an AI companion from another save (offline only)"
+license = "MIT OR Apache-2.0"
+
+[lib]
+name = "er_echo"
+crate-type = ["cdylib"]
+
+[dependencies]
+# 0.14.0（crates.io）只支持 exe 2.6.2.0；本机是 2.7.2.0。
+# 用 fromsoftware-rs main 的源码（vendor/fromsoftware-rs-main），其 rva.rs 支持 2.7.2.0。
+eldenring = { path = "../vendor/fromsoftware-rs-main/crates/eldenring" }
+fromsoftware-shared = { path = "../vendor/fromsoftware-rs-main/crates/shared" }
+
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+log = "0.4"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1

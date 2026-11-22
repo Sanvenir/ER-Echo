@@ -1,0 +1,79 @@
+ER Echo - third-party licenses and credits
+==========================================
+
+This distribution contains a compiled DLL (er_echo.dll) that links the following third-party
+software. The full license texts are reproduced below and in the LICENSES/ folder.
+
+
+1. ER Echo (this mod)
+----------------------
+License: MIT OR Apache-2.0
+Copyright (c) 2026 the ER Echo authors.
+
+The source code of this mod is available from the author on request. It is released under
+MIT OR Apache-2.0; you may reuse and modify it with credit. The distributed archive itself
+must not be re-uploaded to other sites.
+
+
+2. fromsoftware-rs / eldenring crate
+------------------------------------
+Copyright (c) 2025 Vincent Swarte
+Project: https://github.com/vswarte/fromsoftware-rs
+License: MIT NON-AI License OR Apache NON-AI License, Version 2.0
+
+This mod is built on the `eldenring` and `fromsoftware-shared` crates from that project
+(offset tables, engine structure definitions, game-version detection). The crates are
+licensed under a MIT/Apache-2.0 variant with an additional restriction: the software and
+any modifications may not be used to train or improve machine-learning models, and may not
+be included in any AI training dataset. Full texts:
+
+  LICENSES/fromsoftware-rs-LICENSE-MIT-NON-AI.txt
+  LICENSES/fromsoftware-rs-LICENSE-ASL2-NON-AI.txt
+
+MIT NON-AI License (summary of the added restriction):
+  The Software and any modifications made to it may not be used for the purpose of training
+  or improving machine learning algorithms, including but not limited to artificial
+  intelligence, natural language processing, or data mining. This condition applies to any
+  derivatives, modifications, or updates based on the Software code. Any usage of the
+  Software in an AI-training dataset is considered a breach of this License.
+
+
+3. Rust dependencies
+--------------------
+The DLL statically links the following crates, all dual-licensed MIT OR Apache-2.0:
+
+  serde        https://crates.io/crates/serde        (MIT OR Apache-2.0)
+  serde_json   https://crates.io/crates/serde_json   (MIT OR Apache-2.0)
+  log          https://crates.io/crates/log          (MIT OR Apache-2.0)
+
+Their license texts are available at the crate pages above.
+
+
+4. Tools credited but NOT redistributed here
+--------------------------------------------
+ESDLang / esdtool (thefifthmatt) - used to build the optional root-menu ESD fallback.
+  https://github.com/thefifthmatt/ESDLang
+
+Mod Engine 2 (Soulsmods) - the DLL loader this mod is developed and tested against.
+  https://github.com/soulsmods/ModEngine2
+
+Paramdex - parameter definitions and names used by the community tooling.
+  https://github.com/soulsmods/Paramdex
+
+
+5. Game content
+---------------
+No original ELDEN RING game assets are included in the main archive. The optional
+"ESD fallback" archive contains a patched copy of the vanilla talk ESD
+(m00_00_00_00.talkesdbnd.dcx) that is required only for the legacy root-menu mode; it is a
+modification of game data and is not licensed for redistribution.
+
+ELDEN RING is a trademark of FromSoftware, Inc. and Bandai Namco Entertainment. This mod is
+an unofficial fan work, not affiliated with or endorsed by either company.
+
+
+6. Note on machine learning
+---------------------------
+This mod ships no AI models. It contains an optional bridge script that can call a language
+model API chosen by the user at runtime; that is not part of this archive's content and is
+disabled by default (mock mode).

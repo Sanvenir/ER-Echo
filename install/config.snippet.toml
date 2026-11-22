@@ -1,0 +1,17 @@
+# ER Echo — Mod Engine 2 配置片段
+#
+# 不要整个替换你的 config_eldenring.toml，只把下面的内容合并进去。
+# 如果 [modengine] 段已经有 external_dlls，把 "er_echo.dll" 追加到数组里：
+#
+#   external_dlls = ["some_other.dll", "er_echo.dll"]
+#
+# 另外需要启用 mod_loader 并挂载 mod/（赐福菜单的 ESD 在那里）：
+# 如果已经有一个 [extension.mod_loader] 段，把 { ... path = "mod" } 追加到 mods 数组。
+
+[modengine]
+external_dlls = ["er_echo.dll"]
+
+[extension.mod_loader]
+enabled = true
+loose_params = false
+mods = [ { enabled = true, name = "er-echo", path = "mod" } ]

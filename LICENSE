@@ -1,0 +1,7 @@
+ER Echo is licensed under either of the following, at your option:
+
+  * MIT License            - see LICENSE-MIT
+  * Apache License 2.0     - see LICENSE-APACHE
+
+Third-party components and their licenses are listed in
+nexus/THIRD-PARTY-LICENSES.txt and in the vendor/ directory.

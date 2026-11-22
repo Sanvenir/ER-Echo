@@ -1,0 +1,7365 @@
+{
+  "count": 736,
+  "rows": [
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4000,
+      "mp": 7,
+      "requirement_faith": 0,
+      "requirement_intellect": 10,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4001,
+      "mp": 14,
+      "requirement_faith": 0,
+      "requirement_intellect": 17,
+      "slot_length": 1,
+      "stamina": 13
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4010,
+      "mp": 6,
+      "requirement_faith": 0,
+      "requirement_intellect": 8,
+      "slot_length": 1,
+      "stamina": 6
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4020,
+      "mp": 23,
+      "requirement_faith": 0,
+      "requirement_intellect": 49,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4021,
+      "mp": 31,
+      "requirement_faith": 0,
+      "requirement_intellect": 61,
+      "slot_length": 1,
+      "stamina": 17
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4030,
+      "mp": 17,
+      "requirement_faith": 0,
+      "requirement_intellect": 33,
+      "slot_length": 1,
+      "stamina": 14
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4040,
+      "mp": 17,
+      "requirement_faith": 15,
+      "requirement_intellect": 15,
+      "slot_length": 1,
+      "stamina": 21
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4050,
+      "mp": 28,
+      "requirement_faith": 17,
+      "requirement_intellect": 17,
+      "slot_length": 1,
+      "stamina": 17
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4060,
+      "mp": 14,
+      "requirement_faith": 0,
+      "requirement_intellect": 23,
+      "slot_length": 1,
+      "stamina": 26
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4070,
+      "mp": 12,
+      "requirement_faith": 0,
+      "requirement_intellect": 13,
+      "slot_length": 1,
+      "stamina": 8
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4080,
+      "mp": 43,
+      "requirement_faith": 0,
+      "requirement_intellect": 42,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4090,
+      "mp": 14,
+      "requirement_faith": 0,
+      "requirement_intellect": 18,
+      "slot_length": 1,
+      "stamina": 9
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4100,
+      "mp": 12,
+      "requirement_faith": 0,
+      "requirement_intellect": 13,
+      "slot_length": 1,
+      "stamina": 14
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4110,
+      "mp": 12,
+      "requirement_faith": 0,
+      "requirement_intellect": 22,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4120,
+      "mp": 25,
+      "requirement_faith": 0,
+      "requirement_intellect": 40,
+      "slot_length": 1,
+      "stamina": 32
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4130,
+      "mp": 35,
+      "requirement_faith": 0,
+      "requirement_intellect": 70,
+      "slot_length": 1,
+      "stamina": 29
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4131,
+      "mp": 35,
+      "requirement_faith": 0,
+      "requirement_intellect": 69,
+      "slot_length": 1,
+      "stamina": 29
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4140,
+      "mp": 16,
+      "requirement_faith": 0,
+      "requirement_intellect": 47,
+      "slot_length": 1,
+      "stamina": 5
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4150,
+      "mp": 55,
+      "requirement_faith": 0,
+      "requirement_intellect": 56,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4160,
+      "mp": 25,
+      "requirement_faith": 0,
+      "requirement_intellect": 15,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4170,
+      "mp": 20,
+      "requirement_faith": 0,
+      "requirement_intellect": 38,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4171,
+      "mp": 20,
+      "requirement_faith": 0,
+      "requirement_intellect": 38,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4200,
+      "mp": 48,
+      "requirement_faith": 0,
+      "requirement_intellect": 68,
+      "slot_length": 1,
+      "stamina": 34
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4210,
+      "mp": 36,
+      "requirement_faith": 37,
+      "requirement_intellect": 37,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4220,
+      "mp": 46,
+      "requirement_faith": 33,
+      "requirement_intellect": 33,
+      "slot_length": 1,
+      "stamina": 33
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4300,
+      "mp": 20,
+      "requirement_faith": 0,
+      "requirement_intellect": 22,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4301,
+      "mp": 31,
+      "requirement_faith": 0,
+      "requirement_intellect": 52,
+      "slot_length": 1,
+      "stamina": 8
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4302,
+      "mp": 42,
+      "requirement_faith": 0,
+      "requirement_intellect": 36,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4360,
+      "mp": 62,
+      "requirement_faith": 0,
+      "requirement_intellect": 63,
+      "slot_length": 1,
+      "stamina": 16
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4361,
+      "mp": 42,
+      "requirement_faith": 0,
+      "requirement_intellect": 30,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4370,
+      "mp": 34,
+      "requirement_faith": 0,
+      "requirement_intellect": 49,
+      "slot_length": 1,
+      "stamina": 13
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4380,
+      "mp": 34,
+      "requirement_faith": 0,
+      "requirement_intellect": 54,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4381,
+      "mp": 52,
+      "requirement_faith": 0,
+      "requirement_intellect": 65,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4390,
+      "mp": 7,
+      "requirement_faith": 0,
+      "requirement_intellect": 10,
+      "slot_length": 1,
+      "stamina": 5
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4395,
+      "mp": 7,
+      "requirement_faith": 0,
+      "requirement_intellect": 10,
+      "slot_length": 1,
+      "stamina": 5
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4396,
+      "mp": 20,
+      "requirement_faith": 0,
+      "requirement_intellect": 25,
+      "slot_length": 1,
+      "stamina": 17
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4400,
+      "mp": 14,
+      "requirement_faith": 0,
+      "requirement_intellect": 11,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4401,
+      "mp": 11,
+      "requirement_faith": 0,
+      "requirement_intellect": 9,
+      "slot_length": 1,
+      "stamina": 6
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4402,
+      "mp": 32,
+      "requirement_faith": 0,
+      "requirement_intellect": 27,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4403,
+      "mp": 48,
+      "requirement_faith": 0,
+      "requirement_intellect": 33,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4410,
+      "mp": 22,
+      "requirement_faith": 0,
+      "requirement_intellect": 12,
+      "slot_length": 1,
+      "stamina": 27
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4411,
+      "mp": 26,
+      "requirement_faith": 0,
+      "requirement_intellect": 13,
+      "slot_length": 1,
+      "stamina": 16
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4412,
+      "mp": 22,
+      "requirement_faith": 0,
+      "requirement_intellect": 12,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4413,
+      "mp": 22,
+      "requirement_faith": 0,
+      "requirement_intellect": 14,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4414,
+      "mp": 22,
+      "requirement_faith": 0,
+      "requirement_intellect": 40,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4415,
+      "mp": 20,
+      "requirement_faith": 0,
+      "requirement_intellect": 41,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4416,
+      "mp": 22,
+      "requirement_faith": 0,
+      "requirement_intellect": 25,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4420,
+      "mp": 16,
+      "requirement_faith": 0,
+      "requirement_intellect": 8,
+      "slot_length": 1,
+      "stamina": 13
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4421,
+      "mp": 30,
+      "requirement_faith": 0,
+      "requirement_intellect": 16,
+      "slot_length": 1,
+      "stamina": 27
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4422,
+      "mp": 23,
+      "requirement_faith": 0,
+      "requirement_intellect": 18,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4423,
+      "mp": 24,
+      "requirement_faith": 0,
+      "requirement_intellect": 22,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4424,
+      "mp": 58,
+      "requirement_faith": 0,
+      "requirement_intellect": 37,
+      "slot_length": 1,
+      "stamina": 28
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4430,
+      "mp": 17,
+      "requirement_faith": 0,
+      "requirement_intellect": 31,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4431,
+      "mp": 31,
+      "requirement_faith": 0,
+      "requirement_intellect": 19,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4432,
+      "mp": 31,
+      "requirement_faith": 0,
+      "requirement_intellect": 15,
+      "slot_length": 1,
+      "stamina": 7
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4440,
+      "mp": 14,
+      "requirement_faith": 0,
+      "requirement_intellect": 10,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4450,
+      "mp": 23,
+      "requirement_faith": 0,
+      "requirement_intellect": 24,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4460,
+      "mp": 16,
+      "requirement_faith": 0,
+      "requirement_intellect": 22,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4461,
+      "mp": 16,
+      "requirement_faith": 0,
+      "requirement_intellect": 22,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4470,
+      "mp": 13,
+      "requirement_faith": 0,
+      "requirement_intellect": 19,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4471,
+      "mp": 13,
+      "requirement_faith": 0,
+      "requirement_intellect": 19,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4480,
+      "mp": 20,
+      "requirement_faith": 0,
+      "requirement_intellect": 26,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4481,
+      "mp": 20,
+      "requirement_faith": 0,
+      "requirement_intellect": 26,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4490,
+      "mp": 24,
+      "requirement_faith": 0,
+      "requirement_intellect": 10,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4491,
+      "mp": 65,
+      "requirement_faith": 0,
+      "requirement_intellect": 35,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4492,
+      "mp": 25,
+      "requirement_faith": 0,
+      "requirement_intellect": 18,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4493,
+      "mp": 43,
+      "requirement_faith": 0,
+      "requirement_intellect": 20,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4494,
+      "mp": 31,
+      "requirement_faith": 0,
+      "requirement_intellect": 31,
+      "slot_length": 1,
+      "stamina": 7
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4495,
+      "mp": 45,
+      "requirement_faith": 0,
+      "requirement_intellect": 39,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4500,
+      "mp": 32,
+      "requirement_faith": 0,
+      "requirement_intellect": 38,
+      "slot_length": 1,
+      "stamina": 35
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4510,
+      "mp": 38,
+      "requirement_faith": 0,
+      "requirement_intellect": 41,
+      "slot_length": 1,
+      "stamina": 26
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4520,
+      "mp": 24,
+      "requirement_faith": 0,
+      "requirement_intellect": 64,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4530,
+      "mp": 14,
+      "requirement_faith": 0,
+      "requirement_intellect": 19,
+      "slot_length": 1,
+      "stamina": 6
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4531,
+      "mp": 35,
+      "requirement_faith": 0,
+      "requirement_intellect": 55,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4540,
+      "mp": 24,
+      "requirement_faith": 0,
+      "requirement_intellect": 37,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4550,
+      "mp": 22,
+      "requirement_faith": 0,
+      "requirement_intellect": 31,
+      "slot_length": 1,
+      "stamina": 9
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4551,
+      "mp": 42,
+      "requirement_faith": 0,
+      "requirement_intellect": 58,
+      "slot_length": 1,
+      "stamina": 27
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4555,
+      "mp": 22,
+      "requirement_faith": 0,
+      "requirement_intellect": 31,
+      "slot_length": 1,
+      "stamina": 9
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4556,
+      "mp": 42,
+      "requirement_faith": 0,
+      "requirement_intellect": 58,
+      "slot_length": 1,
+      "stamina": 27
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4560,
+      "mp": 43,
+      "requirement_faith": 0,
+      "requirement_intellect": 61,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4570,
+      "mp": 75,
+      "requirement_faith": 0,
+      "requirement_intellect": 67,
+      "slot_length": 1,
+      "stamina": 24
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4580,
+      "mp": 24,
+      "requirement_faith": 0,
+      "requirement_intellect": 71,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4581,
+      "mp": 24,
+      "requirement_faith": 0,
+      "requirement_intellect": 74,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4590,
+      "mp": 19,
+      "requirement_faith": 0,
+      "requirement_intellect": 16,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4595,
+      "mp": 19,
+      "requirement_faith": 0,
+      "requirement_intellect": 16,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4600,
+      "mp": 19,
+      "requirement_faith": 14,
+      "requirement_intellect": 14,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4601,
+      "mp": 18,
+      "requirement_faith": 9,
+      "requirement_intellect": 9,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4602,
+      "mp": 31,
+      "requirement_faith": 16,
+      "requirement_intellect": 16,
+      "slot_length": 1,
+      "stamina": 28
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4603,
+      "mp": 29,
+      "requirement_faith": 19,
+      "requirement_intellect": 19,
+      "slot_length": 1,
+      "stamina": 17
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4604,
+      "mp": 31,
+      "requirement_faith": 25,
+      "requirement_intellect": 25,
+      "slot_length": 1,
+      "stamina": 28
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4605,
+      "mp": 30,
+      "requirement_faith": 15,
+      "requirement_intellect": 15,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4606,
+      "mp": 18,
+      "requirement_faith": 9,
+      "requirement_intellect": 9,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4607,
+      "mp": 31,
+      "requirement_faith": 16,
+      "requirement_intellect": 16,
+      "slot_length": 1,
+      "stamina": 28
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4608,
+      "mp": 29,
+      "requirement_faith": 19,
+      "requirement_intellect": 19,
+      "slot_length": 1,
+      "stamina": 17
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4609,
+      "mp": 31,
+      "requirement_faith": 25,
+      "requirement_intellect": 25,
+      "slot_length": 1,
+      "stamina": 28
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4610,
+      "mp": 8,
+      "requirement_faith": 8,
+      "requirement_intellect": 8,
+      "slot_length": 1,
+      "stamina": 9
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4620,
+      "mp": 30,
+      "requirement_faith": 25,
+      "requirement_intellect": 25,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4621,
+      "mp": 38,
+      "requirement_faith": 35,
+      "requirement_intellect": 35,
+      "slot_length": 1,
+      "stamina": 32
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4622,
+      "mp": 38,
+      "requirement_faith": 35,
+      "requirement_intellect": 35,
+      "slot_length": 1,
+      "stamina": 32
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4630,
+      "mp": 6,
+      "requirement_faith": 0,
+      "requirement_intellect": 29,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4640,
+      "mp": 12,
+      "requirement_faith": 0,
+      "requirement_intellect": 34,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4641,
+      "mp": 12,
+      "requirement_faith": 0,
+      "requirement_intellect": 34,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4642,
+      "mp": 12,
+      "requirement_faith": 0,
+      "requirement_intellect": 34,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4650,
+      "mp": 30,
+      "requirement_faith": 21,
+      "requirement_intellect": 21,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4651,
+      "mp": 58,
+      "requirement_faith": 32,
+      "requirement_intellect": 32,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4652,
+      "mp": 65,
+      "requirement_faith": 21,
+      "requirement_intellect": 21,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4653,
+      "mp": 0,
+      "requirement_faith": 21,
+      "requirement_intellect": 21,
+      "slot_length": 1,
+      "stamina": 0
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4660,
+      "mp": 29,
+      "requirement_faith": 12,
+      "requirement_intellect": 12,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4670,
+      "mp": 24,
+      "requirement_faith": 27,
+      "requirement_intellect": 27,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4671,
+      "mp": 22,
+      "requirement_faith": 38,
+      "requirement_intellect": 38,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4672,
+      "mp": 22,
+      "requirement_faith": 40,
+      "requirement_intellect": 40,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4680,
+      "mp": 20,
+      "requirement_faith": 30,
+      "requirement_intellect": 30,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4690,
+      "mp": 20,
+      "requirement_faith": 13,
+      "requirement_intellect": 13,
+      "slot_length": 1,
+      "stamina": 9
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4691,
+      "mp": 9,
+      "requirement_faith": 13,
+      "requirement_intellect": 13,
+      "slot_length": 1,
+      "stamina": 9
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4700,
+      "mp": 30,
+      "requirement_faith": 0,
+      "requirement_intellect": 31,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4701,
+      "mp": 48,
+      "requirement_faith": 0,
+      "requirement_intellect": 48,
+      "slot_length": 1,
+      "stamina": 40
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4702,
+      "mp": 68,
+      "requirement_faith": 0,
+      "requirement_intellect": 66,
+      "slot_length": 1,
+      "stamina": 50
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4710,
+      "mp": 19,
+      "requirement_faith": 0,
+      "requirement_intellect": 19,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4711,
+      "mp": 14,
+      "requirement_faith": 0,
+      "requirement_intellect": 16,
+      "slot_length": 1,
+      "stamina": 16
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4712,
+      "mp": 34,
+      "requirement_faith": 0,
+      "requirement_intellect": 57,
+      "slot_length": 1,
+      "stamina": 32
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4720,
+      "mp": 8,
+      "requirement_faith": 0,
+      "requirement_intellect": 10,
+      "slot_length": 1,
+      "stamina": 11
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4721,
+      "mp": 22,
+      "requirement_faith": 0,
+      "requirement_intellect": 28,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4722,
+      "mp": 31,
+      "requirement_faith": 0,
+      "requirement_intellect": 54,
+      "slot_length": 1,
+      "stamina": 27
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4730,
+      "mp": 28,
+      "requirement_faith": 0,
+      "requirement_intellect": 34,
+      "slot_length": 1,
+      "stamina": 21
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4731,
+      "mp": 36,
+      "requirement_faith": 0,
+      "requirement_intellect": 43,
+      "slot_length": 1,
+      "stamina": 27
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4732,
+      "mp": 36,
+      "requirement_faith": 0,
+      "requirement_intellect": 43,
+      "slot_length": 1,
+      "stamina": 27
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4740,
+      "mp": 24,
+      "requirement_faith": 0,
+      "requirement_intellect": 40,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4750,
+      "mp": 42,
+      "requirement_faith": 0,
+      "requirement_intellect": 63,
+      "slot_length": 1,
+      "stamina": 35
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4760,
+      "mp": 30,
+      "requirement_faith": 0,
+      "requirement_intellect": 51,
+      "slot_length": 1,
+      "stamina": 23
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4770,
+      "mp": 24,
+      "requirement_faith": 0,
+      "requirement_intellect": 25,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4771,
+      "mp": 24,
+      "requirement_faith": 0,
+      "requirement_intellect": 25,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4780,
+      "mp": 18,
+      "requirement_faith": 0,
+      "requirement_intellect": 45,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4781,
+      "mp": 18,
+      "requirement_faith": 0,
+      "requirement_intellect": 45,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4785,
+      "mp": 28,
+      "requirement_faith": 0,
+      "requirement_intellect": 36,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4790,
+      "mp": 24,
+      "requirement_faith": 0,
+      "requirement_intellect": 72,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4791,
+      "mp": 10,
+      "requirement_faith": 0,
+      "requirement_intellect": 69,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4800,
+      "mp": 22,
+      "requirement_faith": 9,
+      "requirement_intellect": 9,
+      "slot_length": 1,
+      "stamina": 14
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4801,
+      "mp": 12,
+      "requirement_faith": 8,
+      "requirement_intellect": 8,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4802,
+      "mp": 19,
+      "requirement_faith": 13,
+      "requirement_intellect": 13,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4810,
+      "mp": 24,
+      "requirement_faith": 21,
+      "requirement_intellect": 21,
+      "slot_length": 1,
+      "stamina": 17
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4811,
+      "mp": 30,
+      "requirement_faith": 16,
+      "requirement_intellect": 16,
+      "slot_length": 1,
+      "stamina": 21
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4820,
+      "mp": 30,
+      "requirement_faith": 19,
+      "requirement_intellect": 19,
+      "slot_length": 1,
+      "stamina": 19
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4830,
+      "mp": 31,
+      "requirement_faith": 28,
+      "requirement_intellect": 28,
+      "slot_length": 1,
+      "stamina": 28
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4840,
+      "mp": 42,
+      "requirement_faith": 29,
+      "requirement_intellect": 29,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4841,
+      "mp": 34,
+      "requirement_faith": 31,
+      "requirement_intellect": 31,
+      "slot_length": 1,
+      "stamina": 26
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4842,
+      "mp": 37,
+      "requirement_faith": 33,
+      "requirement_intellect": 33,
+      "slot_length": 1,
+      "stamina": 16
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4850,
+      "mp": 24,
+      "requirement_faith": 14,
+      "requirement_intellect": 14,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4851,
+      "mp": 28,
+      "requirement_faith": 23,
+      "requirement_intellect": 23,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4852,
+      "mp": 60,
+      "requirement_faith": 40,
+      "requirement_intellect": 40,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4853,
+      "mp": 20,
+      "requirement_faith": 17,
+      "requirement_intellect": 17,
+      "slot_length": 1,
+      "stamina": 16
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4854,
+      "mp": 45,
+      "requirement_faith": 39,
+      "requirement_intellect": 39,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4860,
+      "mp": 36,
+      "requirement_faith": 24,
+      "requirement_intellect": 24,
+      "slot_length": 1,
+      "stamina": 24
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4861,
+      "mp": 24,
+      "requirement_faith": 11,
+      "requirement_intellect": 11,
+      "slot_length": 1,
+      "stamina": 11
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4870,
+      "mp": 43,
+      "requirement_faith": 36,
+      "requirement_intellect": 36,
+      "slot_length": 1,
+      "stamina": 23
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4871,
+      "mp": 48,
+      "requirement_faith": 34,
+      "requirement_intellect": 34,
+      "slot_length": 1,
+      "stamina": 32
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4872,
+      "mp": 43,
+      "requirement_faith": 38,
+      "requirement_intellect": 38,
+      "slot_length": 1,
+      "stamina": 28
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4880,
+      "mp": 23,
+      "requirement_faith": 10,
+      "requirement_intellect": 10,
+      "slot_length": 1,
+      "stamina": 19
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4881,
+      "mp": 28,
+      "requirement_faith": 22,
+      "requirement_intellect": 22,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4890,
+      "mp": 36,
+      "requirement_faith": 15,
+      "requirement_intellect": 15,
+      "slot_length": 1,
+      "stamina": 26
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4891,
+      "mp": 19,
+      "requirement_faith": 30,
+      "requirement_intellect": 30,
+      "slot_length": 1,
+      "stamina": 16
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4900,
+      "mp": 18,
+      "requirement_faith": 0,
+      "requirement_intellect": 10,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4901,
+      "mp": 26,
+      "requirement_faith": 0,
+      "requirement_intellect": 13,
+      "slot_length": 1,
+      "stamina": 17
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4910,
+      "mp": 26,
+      "requirement_faith": 0,
+      "requirement_intellect": 14,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4911,
+      "mp": 31,
+      "requirement_faith": 0,
+      "requirement_intellect": 22,
+      "slot_length": 1,
+      "stamina": 21
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4920,
+      "mp": 18,
+      "requirement_faith": 0,
+      "requirement_intellect": 8,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4921,
+      "mp": 22,
+      "requirement_faith": 0,
+      "requirement_intellect": 12,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4930,
+      "mp": 14,
+      "requirement_faith": 0,
+      "requirement_intellect": 18,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4931,
+      "mp": 40,
+      "requirement_faith": 0,
+      "requirement_intellect": 33,
+      "slot_length": 1,
+      "stamina": 23
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4932,
+      "mp": 20,
+      "requirement_faith": 0,
+      "requirement_intellect": 27,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4940,
+      "mp": 18,
+      "requirement_faith": 0,
+      "requirement_intellect": 16,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4941,
+      "mp": 24,
+      "requirement_faith": 0,
+      "requirement_intellect": 15,
+      "slot_length": 1,
+      "stamina": 17
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4950,
+      "mp": 30,
+      "requirement_faith": 0,
+      "requirement_intellect": 30,
+      "slot_length": 1,
+      "stamina": 26
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4951,
+      "mp": 43,
+      "requirement_faith": 0,
+      "requirement_intellect": 36,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4960,
+      "mp": 24,
+      "requirement_faith": 0,
+      "requirement_intellect": 24,
+      "slot_length": 1,
+      "stamina": 5
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4970,
+      "mp": 17,
+      "requirement_faith": 0,
+      "requirement_intellect": 11,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4971,
+      "mp": 24,
+      "requirement_faith": 0,
+      "requirement_intellect": 17,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4972,
+      "mp": 18,
+      "requirement_faith": 0,
+      "requirement_intellect": 19,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4980,
+      "mp": 24,
+      "requirement_faith": 0,
+      "requirement_intellect": 9,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4990,
+      "mp": 22,
+      "requirement_faith": 0,
+      "requirement_intellect": 38,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 4991,
+      "mp": 22,
+      "requirement_faith": 0,
+      "requirement_intellect": 40,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5000,
+      "mp": 18,
+      "requirement_faith": 14,
+      "requirement_intellect": 14,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5001,
+      "mp": 29,
+      "requirement_faith": 21,
+      "requirement_intellect": 21,
+      "slot_length": 1,
+      "stamina": 16
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5002,
+      "mp": 22,
+      "requirement_faith": 26,
+      "requirement_intellect": 26,
+      "slot_length": 1,
+      "stamina": 11
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5010,
+      "mp": 35,
+      "requirement_faith": 28,
+      "requirement_intellect": 28,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5011,
+      "mp": 43,
+      "requirement_faith": 31,
+      "requirement_intellect": 31,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5012,
+      "mp": 50,
+      "requirement_faith": 36,
+      "requirement_intellect": 36,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5020,
+      "mp": 18,
+      "requirement_faith": 8,
+      "requirement_intellect": 8,
+      "slot_length": 1,
+      "stamina": 13
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5021,
+      "mp": 19,
+      "requirement_faith": 16,
+      "requirement_intellect": 16,
+      "slot_length": 1,
+      "stamina": 9
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5022,
+      "mp": 36,
+      "requirement_faith": 24,
+      "requirement_intellect": 24,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5023,
+      "mp": 42,
+      "requirement_faith": 29,
+      "requirement_intellect": 29,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5030,
+      "mp": 10,
+      "requirement_faith": 9,
+      "requirement_intellect": 9,
+      "slot_length": 1,
+      "stamina": 8
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5031,
+      "mp": 20,
+      "requirement_faith": 13,
+      "requirement_intellect": 13,
+      "slot_length": 1,
+      "stamina": 27
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5040,
+      "mp": 32,
+      "requirement_faith": 51,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 32
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5041,
+      "mp": 17,
+      "requirement_faith": 25,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 14
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5042,
+      "mp": 22,
+      "requirement_faith": 37,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5043,
+      "mp": 35,
+      "requirement_faith": 49,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5044,
+      "mp": 26,
+      "requirement_faith": 62,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 14
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5050,
+      "mp": 38,
+      "requirement_faith": 23,
+      "requirement_intellect": 23,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5060,
+      "mp": 26,
+      "requirement_faith": 34,
+      "requirement_intellect": 34,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5061,
+      "mp": 36,
+      "requirement_faith": 33,
+      "requirement_intellect": 33,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5070,
+      "mp": 18,
+      "requirement_faith": 11,
+      "requirement_intellect": 11,
+      "slot_length": 1,
+      "stamina": 8
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5080,
+      "mp": 25,
+      "requirement_faith": 19,
+      "requirement_intellect": 19,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5081,
+      "mp": 22,
+      "requirement_faith": 18,
+      "requirement_intellect": 18,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5082,
+      "mp": 14,
+      "requirement_faith": 12,
+      "requirement_intellect": 12,
+      "slot_length": 1,
+      "stamina": 5
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5090,
+      "mp": 20,
+      "requirement_faith": 38,
+      "requirement_intellect": 38,
+      "slot_length": 1,
+      "stamina": 40
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5091,
+      "mp": 35,
+      "requirement_faith": 40,
+      "requirement_intellect": 40,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5100,
+      "mp": 12,
+      "requirement_faith": 0,
+      "requirement_intellect": 13,
+      "slot_length": 1,
+      "stamina": 5
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5110,
+      "mp": 16,
+      "requirement_faith": 0,
+      "requirement_intellect": 28,
+      "slot_length": 1,
+      "stamina": 7
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5120,
+      "mp": 30,
+      "requirement_faith": 0,
+      "requirement_intellect": 46,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5130,
+      "mp": 24,
+      "requirement_faith": 0,
+      "requirement_intellect": 22,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5131,
+      "mp": 36,
+      "requirement_faith": 0,
+      "requirement_intellect": 52,
+      "slot_length": 1,
+      "stamina": 27
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5135,
+      "mp": 24,
+      "requirement_faith": 0,
+      "requirement_intellect": 22,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5136,
+      "mp": 36,
+      "requirement_faith": 0,
+      "requirement_intellect": 52,
+      "slot_length": 1,
+      "stamina": 27
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5140,
+      "mp": 22,
+      "requirement_faith": 0,
+      "requirement_intellect": 40,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5150,
+      "mp": 24,
+      "requirement_faith": 0,
+      "requirement_intellect": 17,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5155,
+      "mp": 24,
+      "requirement_faith": 0,
+      "requirement_intellect": 17,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5160,
+      "mp": 20,
+      "requirement_faith": 0,
+      "requirement_intellect": 27,
+      "slot_length": 1,
+      "stamina": 14
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5170,
+      "mp": 37,
+      "requirement_faith": 0,
+      "requirement_intellect": 45,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5180,
+      "mp": 25,
+      "requirement_faith": 0,
+      "requirement_intellect": 56,
+      "slot_length": 1,
+      "stamina": 21
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5190,
+      "mp": 24,
+      "requirement_faith": 0,
+      "requirement_intellect": 69,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5200,
+      "mp": 7,
+      "requirement_faith": 8,
+      "requirement_intellect": 8,
+      "slot_length": 1,
+      "stamina": 6
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5201,
+      "mp": 22,
+      "requirement_faith": 15,
+      "requirement_intellect": 15,
+      "slot_length": 1,
+      "stamina": 14
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5202,
+      "mp": 22,
+      "requirement_faith": 24,
+      "requirement_intellect": 24,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5210,
+      "mp": 12,
+      "requirement_faith": 9,
+      "requirement_intellect": 9,
+      "slot_length": 1,
+      "stamina": 6
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5211,
+      "mp": 16,
+      "requirement_faith": 27,
+      "requirement_intellect": 27,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5215,
+      "mp": 16,
+      "requirement_faith": 27,
+      "requirement_intellect": 27,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5220,
+      "mp": 30,
+      "requirement_faith": 18,
+      "requirement_intellect": 18,
+      "slot_length": 1,
+      "stamina": 27
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5221,
+      "mp": 35,
+      "requirement_faith": 29,
+      "requirement_intellect": 29,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5222,
+      "mp": 42,
+      "requirement_faith": 36,
+      "requirement_intellect": 36,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5230,
+      "mp": 26,
+      "requirement_faith": 25,
+      "requirement_intellect": 25,
+      "slot_length": 1,
+      "stamina": 24
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5231,
+      "mp": 41,
+      "requirement_faith": 38,
+      "requirement_intellect": 38,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5232,
+      "mp": 31,
+      "requirement_faith": 38,
+      "requirement_intellect": 38,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5240,
+      "mp": 24,
+      "requirement_faith": 16,
+      "requirement_intellect": 16,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5241,
+      "mp": 20,
+      "requirement_faith": 20,
+      "requirement_intellect": 20,
+      "slot_length": 1,
+      "stamina": 17
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5242,
+      "mp": 42,
+      "requirement_faith": 34,
+      "requirement_intellect": 34,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5250,
+      "mp": 18,
+      "requirement_faith": 11,
+      "requirement_intellect": 11,
+      "slot_length": 1,
+      "stamina": 8
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5255,
+      "mp": 18,
+      "requirement_faith": 11,
+      "requirement_intellect": 11,
+      "slot_length": 1,
+      "stamina": 8
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5260,
+      "mp": 12,
+      "requirement_faith": 22,
+      "requirement_intellect": 22,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5261,
+      "mp": 30,
+      "requirement_faith": 31,
+      "requirement_intellect": 31,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5265,
+      "mp": 12,
+      "requirement_faith": 22,
+      "requirement_intellect": 22,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5266,
+      "mp": 30,
+      "requirement_faith": 31,
+      "requirement_intellect": 31,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5270,
+      "mp": 30,
+      "requirement_faith": 33,
+      "requirement_intellect": 33,
+      "slot_length": 1,
+      "stamina": 14
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5271,
+      "mp": 10,
+      "requirement_faith": 13,
+      "requirement_intellect": 13,
+      "slot_length": 1,
+      "stamina": 6
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5275,
+      "mp": 30,
+      "requirement_faith": 33,
+      "requirement_intellect": 33,
+      "slot_length": 1,
+      "stamina": 14
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5276,
+      "mp": 10,
+      "requirement_faith": 13,
+      "requirement_intellect": 13,
+      "slot_length": 1,
+      "stamina": 6
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5280,
+      "mp": 22,
+      "requirement_faith": 40,
+      "requirement_intellect": 40,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5281,
+      "mp": 22,
+      "requirement_faith": 42,
+      "requirement_intellect": 42,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5282,
+      "mp": 20,
+      "requirement_faith": 26,
+      "requirement_intellect": 26,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5285,
+      "mp": 20,
+      "requirement_faith": 26,
+      "requirement_intellect": 26,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5290,
+      "mp": 17,
+      "requirement_faith": 19,
+      "requirement_intellect": 19,
+      "slot_length": 1,
+      "stamina": 13
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5291,
+      "mp": 38,
+      "requirement_faith": 41,
+      "requirement_intellect": 41,
+      "slot_length": 1,
+      "stamina": 35
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5292,
+      "mp": 32,
+      "requirement_faith": 35,
+      "requirement_intellect": 35,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 5293,
+      "mp": 7,
+      "requirement_faith": 12,
+      "requirement_intellect": 12,
+      "slot_length": 1,
+      "stamina": 4
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6000,
+      "mp": 12,
+      "requirement_faith": 9,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 13
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6001,
+      "mp": 19,
+      "requirement_faith": 30,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6010,
+      "mp": 13,
+      "requirement_faith": 12,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 14
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6020,
+      "mp": 22,
+      "requirement_faith": 40,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6030,
+      "mp": 18,
+      "requirement_faith": 15,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6031,
+      "mp": 60,
+      "requirement_faith": 64,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 27
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6040,
+      "mp": 17,
+      "requirement_faith": 24,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6050,
+      "mp": 30,
+      "requirement_faith": 52,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6060,
+      "mp": 19,
+      "requirement_faith": 21,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 16
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6070,
+      "mp": 24,
+      "requirement_faith": 70,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6080,
+      "mp": 15,
+      "requirement_faith": 18,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6081,
+      "mp": 15,
+      "requirement_faith": 18,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6082,
+      "mp": 15,
+      "requirement_faith": 18,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6100,
+      "mp": 32,
+      "requirement_faith": 46,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 16
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6110,
+      "mp": 42,
+      "requirement_faith": 43,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6111,
+      "mp": 80,
+      "requirement_faith": 67,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 40
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6120,
+      "mp": 36,
+      "requirement_faith": 55,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6130,
+      "mp": 50,
+      "requirement_faith": 61,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6140,
+      "mp": 32,
+      "requirement_faith": 58,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 27
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6150,
+      "mp": 25,
+      "requirement_faith": 69,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6190,
+      "mp": 1,
+      "requirement_faith": 27,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 2
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6191,
+      "mp": 4,
+      "requirement_faith": 51,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 3
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6200,
+      "mp": 11,
+      "requirement_faith": 8,
+      "requirement_intellect": 8,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6201,
+      "mp": 13,
+      "requirement_faith": 9,
+      "requirement_intellect": 9,
+      "slot_length": 1,
+      "stamina": 13
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6202,
+      "mp": 19,
+      "requirement_faith": 31,
+      "requirement_intellect": 31,
+      "slot_length": 1,
+      "stamina": 13
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6210,
+      "mp": 22,
+      "requirement_faith": 13,
+      "requirement_intellect": 13,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6211,
+      "mp": 28,
+      "requirement_faith": 18,
+      "requirement_intellect": 18,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6220,
+      "mp": 55,
+      "requirement_faith": 27,
+      "requirement_intellect": 27,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6221,
+      "mp": 19,
+      "requirement_faith": 10,
+      "requirement_intellect": 10,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6222,
+      "mp": 30,
+      "requirement_faith": 26,
+      "requirement_intellect": 26,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6223,
+      "mp": 33,
+      "requirement_faith": 32,
+      "requirement_intellect": 32,
+      "slot_length": 1,
+      "stamina": 21
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6224,
+      "mp": 26,
+      "requirement_faith": 17,
+      "requirement_intellect": 17,
+      "slot_length": 1,
+      "stamina": 13
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6225,
+      "mp": 45,
+      "requirement_faith": 41,
+      "requirement_intellect": 41,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6230,
+      "mp": 25,
+      "requirement_faith": 15,
+      "requirement_intellect": 15,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6231,
+      "mp": 42,
+      "requirement_faith": 29,
+      "requirement_intellect": 29,
+      "slot_length": 1,
+      "stamina": 26
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6240,
+      "mp": 36,
+      "requirement_faith": 24,
+      "requirement_intellect": 24,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6250,
+      "mp": 18,
+      "requirement_faith": 11,
+      "requirement_intellect": 11,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6251,
+      "mp": 18,
+      "requirement_faith": 11,
+      "requirement_intellect": 11,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6260,
+      "mp": 30,
+      "requirement_faith": 22,
+      "requirement_intellect": 22,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6261,
+      "mp": 30,
+      "requirement_faith": 40,
+      "requirement_intellect": 40,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6262,
+      "mp": 22,
+      "requirement_faith": 42,
+      "requirement_intellect": 42,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6270,
+      "mp": 38,
+      "requirement_faith": 25,
+      "requirement_intellect": 25,
+      "slot_length": 1,
+      "stamina": 35
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6280,
+      "mp": 22,
+      "requirement_faith": 20,
+      "requirement_intellect": 20,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6290,
+      "mp": 18,
+      "requirement_faith": 16,
+      "requirement_intellect": 16,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6291,
+      "mp": 48,
+      "requirement_faith": 38,
+      "requirement_intellect": 38,
+      "slot_length": 1,
+      "stamina": 35
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6292,
+      "mp": 36,
+      "requirement_faith": 34,
+      "requirement_intellect": 34,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6293,
+      "mp": 40,
+      "requirement_faith": 36,
+      "requirement_intellect": 36,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6300,
+      "mp": 9,
+      "requirement_faith": 9,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6301,
+      "mp": 10,
+      "requirement_faith": 8,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 13
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6302,
+      "mp": 22,
+      "requirement_faith": 24,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6303,
+      "mp": 21,
+      "requirement_faith": 18,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6304,
+      "mp": 0,
+      "requirement_faith": 27,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6310,
+      "mp": 15,
+      "requirement_faith": 14,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 34
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6311,
+      "mp": 13,
+      "requirement_faith": 15,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6312,
+      "mp": 18,
+      "requirement_faith": 22,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6313,
+      "mp": 31,
+      "requirement_faith": 34,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6314,
+      "mp": 19,
+      "requirement_faith": 25,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 16
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6315,
+      "mp": 35,
+      "requirement_faith": 36,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 24
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6320,
+      "mp": 17,
+      "requirement_faith": 13,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6321,
+      "mp": 25,
+      "requirement_faith": 33,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6322,
+      "mp": 6,
+      "requirement_faith": 11,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 2
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6323,
+      "mp": 38,
+      "requirement_faith": 31,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6324,
+      "mp": 32,
+      "requirement_faith": 16,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6325,
+      "mp": 8,
+      "requirement_faith": 20,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6330,
+      "mp": 30,
+      "requirement_faith": 24,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 13
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6340,
+      "mp": 36,
+      "requirement_faith": 25,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 50
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6350,
+      "mp": 30,
+      "requirement_faith": 29,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6360,
+      "mp": 77,
+      "requirement_faith": 38,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 45
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6370,
+      "mp": 24,
+      "requirement_faith": 40,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6371,
+      "mp": 24,
+      "requirement_faith": 42,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6400,
+      "mp": 11,
+      "requirement_faith": 8,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 24
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6410,
+      "mp": 28,
+      "requirement_faith": 39,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6420,
+      "mp": 20,
+      "requirement_faith": 21,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6421,
+      "mp": 32,
+      "requirement_faith": 12,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 35
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6422,
+      "mp": 25,
+      "requirement_faith": 34,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6423,
+      "mp": 35,
+      "requirement_faith": 47,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 28
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6424,
+      "mp": 45,
+      "requirement_faith": 60,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6430,
+      "mp": 36,
+      "requirement_faith": 24,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6431,
+      "mp": 47,
+      "requirement_faith": 57,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 50
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6440,
+      "mp": 7,
+      "requirement_faith": 10,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6441,
+      "mp": 26,
+      "requirement_faith": 46,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6450,
+      "mp": 20,
+      "requirement_faith": 10,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 13
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6460,
+      "mp": 20,
+      "requirement_faith": 10,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 13
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6470,
+      "mp": 20,
+      "requirement_faith": 10,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 13
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6480,
+      "mp": 20,
+      "requirement_faith": 10,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 13
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6490,
+      "mp": 22,
+      "requirement_faith": 37,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6500,
+      "mp": 16,
+      "requirement_faith": 10,
+      "requirement_intellect": 10,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6501,
+      "mp": 37,
+      "requirement_faith": 23,
+      "requirement_intellect": 23,
+      "slot_length": 1,
+      "stamina": 24
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6505,
+      "mp": 16,
+      "requirement_faith": 10,
+      "requirement_intellect": 10,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6506,
+      "mp": 37,
+      "requirement_faith": 23,
+      "requirement_intellect": 23,
+      "slot_length": 1,
+      "stamina": 24
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6510,
+      "mp": 26,
+      "requirement_faith": 13,
+      "requirement_intellect": 13,
+      "slot_length": 1,
+      "stamina": 13
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6511,
+      "mp": 7,
+      "requirement_faith": 7,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6520,
+      "mp": 11,
+      "requirement_faith": 7,
+      "requirement_intellect": 7,
+      "slot_length": 1,
+      "stamina": 9
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6530,
+      "mp": 23,
+      "requirement_faith": 11,
+      "requirement_intellect": 11,
+      "slot_length": 1,
+      "stamina": 11
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6540,
+      "mp": 23,
+      "requirement_faith": 11,
+      "requirement_intellect": 11,
+      "slot_length": 1,
+      "stamina": 11
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6541,
+      "mp": 23,
+      "requirement_faith": 11,
+      "requirement_intellect": 11,
+      "slot_length": 1,
+      "stamina": 11
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6600,
+      "mp": 30,
+      "requirement_faith": 29,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6610,
+      "mp": 12,
+      "requirement_faith": 11,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 7
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6620,
+      "mp": 42,
+      "requirement_faith": 32,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 14
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6630,
+      "mp": 46,
+      "requirement_faith": 65,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 35
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6640,
+      "mp": 54,
+      "requirement_faith": 62,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6641,
+      "mp": 26,
+      "requirement_faith": 37,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6700,
+      "mp": 24,
+      "requirement_faith": 24,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6701,
+      "mp": 30,
+      "requirement_faith": 42,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 14
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6710,
+      "mp": 36,
+      "requirement_faith": 55,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6720,
+      "mp": 36,
+      "requirement_faith": 67,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6730,
+      "mp": 30,
+      "requirement_faith": 29,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6740,
+      "mp": 15,
+      "requirement_faith": 18,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6741,
+      "mp": 25,
+      "requirement_faith": 52,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6750,
+      "mp": 12,
+      "requirement_faith": 13,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6760,
+      "mp": 26,
+      "requirement_faith": 49,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6770,
+      "mp": 15,
+      "requirement_faith": 26,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6780,
+      "mp": 42,
+      "requirement_faith": 20,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6790,
+      "mp": 30,
+      "requirement_faith": 16,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6791,
+      "mp": 30,
+      "requirement_faith": 31,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6792,
+      "mp": 30,
+      "requirement_faith": 44,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6793,
+      "mp": 30,
+      "requirement_faith": 57,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6794,
+      "mp": 30,
+      "requirement_faith": 70,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6800,
+      "mp": 8,
+      "requirement_faith": 11,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6801,
+      "mp": 11,
+      "requirement_faith": 13,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6810,
+      "mp": 30,
+      "requirement_faith": 53,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 27
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6811,
+      "mp": 50,
+      "requirement_faith": 63,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 32
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6820,
+      "mp": 12,
+      "requirement_faith": 23,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6821,
+      "mp": 8,
+      "requirement_faith": 8,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6822,
+      "mp": 12,
+      "requirement_faith": 21,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6830,
+      "mp": 28,
+      "requirement_faith": 51,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 28
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6840,
+      "mp": 22,
+      "requirement_faith": 26,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6841,
+      "mp": 60,
+      "requirement_faith": 56,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 40
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6842,
+      "mp": 22,
+      "requirement_faith": 46,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6850,
+      "mp": 24,
+      "requirement_faith": 38,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6851,
+      "mp": 24,
+      "requirement_faith": 71,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6852,
+      "mp": 24,
+      "requirement_faith": 73,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6860,
+      "mp": 19,
+      "requirement_faith": 28,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 26
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6861,
+      "mp": 40,
+      "requirement_faith": 58,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6870,
+      "mp": 70,
+      "requirement_faith": 68,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 45
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6871,
+      "mp": 15,
+      "requirement_faith": 41,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6890,
+      "mp": 36,
+      "requirement_faith": 61,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6891,
+      "mp": 40,
+      "requirement_faith": 36,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6900,
+      "mp": 22,
+      "requirement_faith": 17,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 17
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6901,
+      "mp": 3,
+      "requirement_faith": 10,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 5
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6902,
+      "mp": 28,
+      "requirement_faith": 27,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6903,
+      "mp": 31,
+      "requirement_faith": 46,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6910,
+      "mp": 36,
+      "requirement_faith": 56,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6920,
+      "mp": 25,
+      "requirement_faith": 22,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6921,
+      "mp": 31,
+      "requirement_faith": 0,
+      "requirement_intellect": 43,
+      "slot_length": 1,
+      "stamina": 28
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6922,
+      "mp": 32,
+      "requirement_faith": 44,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 24
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6930,
+      "mp": 14,
+      "requirement_faith": 15,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6931,
+      "mp": 18,
+      "requirement_faith": 34,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 24
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6932,
+      "mp": 34,
+      "requirement_faith": 39,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6940,
+      "mp": 24,
+      "requirement_faith": 36,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6941,
+      "mp": 30,
+      "requirement_faith": 53,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6950,
+      "mp": 29,
+      "requirement_faith": 65,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 28
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6960,
+      "mp": 15,
+      "requirement_faith": 12,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6970,
+      "mp": 40,
+      "requirement_faith": 48,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6971,
+      "mp": 30,
+      "requirement_faith": 24,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6980,
+      "mp": 32,
+      "requirement_faith": 68,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6981,
+      "mp": 85,
+      "requirement_faith": 70,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 45
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6990,
+      "mp": 25,
+      "requirement_faith": 60,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6991,
+      "mp": 24,
+      "requirement_faith": 29,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6992,
+      "mp": 5,
+      "requirement_faith": 35,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 6
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 6993,
+      "mp": 25,
+      "requirement_faith": 63,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7000,
+      "mp": 34,
+      "requirement_faith": 33,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7001,
+      "mp": 43,
+      "requirement_faith": 49,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7010,
+      "mp": 32,
+      "requirement_faith": 18,
+      "requirement_intellect": 18,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7011,
+      "mp": 34,
+      "requirement_faith": 26,
+      "requirement_intellect": 26,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7020,
+      "mp": 43,
+      "requirement_faith": 0,
+      "requirement_intellect": 17,
+      "slot_length": 1,
+      "stamina": 28
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7021,
+      "mp": 58,
+      "requirement_faith": 0,
+      "requirement_intellect": 24,
+      "slot_length": 1,
+      "stamina": 42
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7030,
+      "mp": 43,
+      "requirement_faith": 22,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 48
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7031,
+      "mp": 58,
+      "requirement_faith": 29,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 60
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7040,
+      "mp": 34,
+      "requirement_faith": 0,
+      "requirement_intellect": 45,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7041,
+      "mp": 43,
+      "requirement_faith": 0,
+      "requirement_intellect": 59,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7050,
+      "mp": 62,
+      "requirement_faith": 36,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 75
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7060,
+      "mp": 16,
+      "requirement_faith": 27,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 23
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7080,
+      "mp": 24,
+      "requirement_faith": 33,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7090,
+      "mp": 26,
+      "requirement_faith": 48,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7200,
+      "mp": 19,
+      "requirement_faith": 15,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7201,
+      "mp": 25,
+      "requirement_faith": 34,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7210,
+      "mp": 14,
+      "requirement_faith": 11,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 14
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7211,
+      "mp": 10,
+      "requirement_faith": 9,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 9
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7212,
+      "mp": 20,
+      "requirement_faith": 16,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 14
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7220,
+      "mp": 8,
+      "requirement_faith": 8,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 8
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7221,
+      "mp": 16,
+      "requirement_faith": 9,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7222,
+      "mp": 17,
+      "requirement_faith": 18,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7230,
+      "mp": 13,
+      "requirement_faith": 10,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7240,
+      "mp": 43,
+      "requirement_faith": 31,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 23
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7241,
+      "mp": 33,
+      "requirement_faith": 36,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 24
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7242,
+      "mp": 30,
+      "requirement_faith": 39,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 11
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7250,
+      "mp": 18,
+      "requirement_faith": 13,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7251,
+      "mp": 18,
+      "requirement_faith": 25,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7252,
+      "mp": 12,
+      "requirement_faith": 20,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7260,
+      "mp": 24,
+      "requirement_faith": 27,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 16
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7270,
+      "mp": 6,
+      "requirement_faith": 38,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 4
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7271,
+      "mp": 32,
+      "requirement_faith": 24,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7280,
+      "mp": 30,
+      "requirement_faith": 35,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7281,
+      "mp": 20,
+      "requirement_faith": 41,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7282,
+      "mp": 36,
+      "requirement_faith": 37,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 5
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7283,
+      "mp": 27,
+      "requirement_faith": 23,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7284,
+      "mp": 26,
+      "requirement_faith": 30,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7290,
+      "mp": 24,
+      "requirement_faith": 40,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7291,
+      "mp": 24,
+      "requirement_faith": 42,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7292,
+      "mp": 25,
+      "requirement_faith": 33,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7300,
+      "mp": 38,
+      "requirement_faith": 16,
+      "requirement_intellect": 16,
+      "slot_length": 1,
+      "stamina": 31
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7301,
+      "mp": 2,
+      "requirement_faith": 7,
+      "requirement_intellect": 7,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7310,
+      "mp": 19,
+      "requirement_faith": 9,
+      "requirement_intellect": 9,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7311,
+      "mp": 36,
+      "requirement_faith": 27,
+      "requirement_intellect": 27,
+      "slot_length": 1,
+      "stamina": 40
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7312,
+      "mp": 24,
+      "requirement_faith": 33,
+      "requirement_intellect": 33,
+      "slot_length": 1,
+      "stamina": 40
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7320,
+      "mp": 23,
+      "requirement_faith": 11,
+      "requirement_intellect": 11,
+      "slot_length": 1,
+      "stamina": 33
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7321,
+      "mp": 8,
+      "requirement_faith": 6,
+      "requirement_intellect": 6,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7322,
+      "mp": 30,
+      "requirement_faith": 10,
+      "requirement_intellect": 10,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7323,
+      "mp": 18,
+      "requirement_faith": 18,
+      "requirement_intellect": 18,
+      "slot_length": 1,
+      "stamina": 19
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7330,
+      "mp": 25,
+      "requirement_faith": 20,
+      "requirement_intellect": 20,
+      "slot_length": 1,
+      "stamina": 28
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7331,
+      "mp": 25,
+      "requirement_faith": 13,
+      "requirement_intellect": 13,
+      "slot_length": 1,
+      "stamina": 38
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7332,
+      "mp": 48,
+      "requirement_faith": 23,
+      "requirement_intellect": 23,
+      "slot_length": 1,
+      "stamina": 36
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7340,
+      "mp": 21,
+      "requirement_faith": 15,
+      "requirement_intellect": 15,
+      "slot_length": 1,
+      "stamina": 38
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7341,
+      "mp": 42,
+      "requirement_faith": 25,
+      "requirement_intellect": 25,
+      "slot_length": 1,
+      "stamina": 34
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7350,
+      "mp": 24,
+      "requirement_faith": 14,
+      "requirement_intellect": 14,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7351,
+      "mp": 48,
+      "requirement_faith": 31,
+      "requirement_intellect": 31,
+      "slot_length": 1,
+      "stamina": 23
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7360,
+      "mp": 34,
+      "requirement_faith": 29,
+      "requirement_intellect": 29,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7361,
+      "mp": 73,
+      "requirement_faith": 36,
+      "requirement_intellect": 36,
+      "slot_length": 1,
+      "stamina": 38
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7370,
+      "mp": 40,
+      "requirement_faith": 39,
+      "requirement_intellect": 39,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7380,
+      "mp": 24,
+      "requirement_faith": 38,
+      "requirement_intellect": 38,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7381,
+      "mp": 24,
+      "requirement_faith": 40,
+      "requirement_intellect": 40,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7390,
+      "mp": 20,
+      "requirement_faith": 22,
+      "requirement_intellect": 22,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7400,
+      "mp": 2,
+      "requirement_faith": 8,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 2
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7401,
+      "mp": 26,
+      "requirement_faith": 10,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7402,
+      "mp": 18,
+      "requirement_faith": 12,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7410,
+      "mp": 20,
+      "requirement_faith": 16,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7411,
+      "mp": 14,
+      "requirement_faith": 20,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 5
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7412,
+      "mp": 30,
+      "requirement_faith": 28,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 19
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7413,
+      "mp": 24,
+      "requirement_faith": 22,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7414,
+      "mp": 19,
+      "requirement_faith": 36,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 7
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7420,
+      "mp": 19,
+      "requirement_faith": 26,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 16
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7421,
+      "mp": 23,
+      "requirement_faith": 24,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7422,
+      "mp": 31,
+      "requirement_faith": 34,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7430,
+      "mp": 36,
+      "requirement_faith": 35,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 21
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7431,
+      "mp": 34,
+      "requirement_faith": 31,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7432,
+      "mp": 17,
+      "requirement_faith": 30,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7440,
+      "mp": 50,
+      "requirement_faith": 37,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 23
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7441,
+      "mp": 10,
+      "requirement_faith": 38,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 7
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7442,
+      "mp": 8,
+      "requirement_faith": 14,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 2
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7450,
+      "mp": 16,
+      "requirement_faith": 19,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 8
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7460,
+      "mp": 27,
+      "requirement_faith": 32,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 16
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7470,
+      "mp": 32,
+      "requirement_faith": 33,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 11
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7471,
+      "mp": 22,
+      "requirement_faith": 29,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7480,
+      "mp": 24,
+      "requirement_faith": 39,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7481,
+      "mp": 24,
+      "requirement_faith": 40,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7482,
+      "mp": 20,
+      "requirement_faith": 28,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7490,
+      "mp": 24,
+      "requirement_faith": 21,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7491,
+      "mp": 55,
+      "requirement_faith": 33,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7492,
+      "mp": 65,
+      "requirement_faith": 41,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 27
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7500,
+      "mp": 16,
+      "requirement_faith": 43,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7510,
+      "mp": 13,
+      "requirement_faith": 16,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7520,
+      "mp": 28,
+      "requirement_faith": 27,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 40
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7530,
+      "mp": 31,
+      "requirement_faith": 33,
+      "requirement_intellect": 33,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7900,
+      "mp": 31,
+      "requirement_faith": 36,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 28
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 7903,
+      "mp": 30,
+      "requirement_faith": 24,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 8000,
+      "mp": 9,
+      "requirement_faith": 0,
+      "requirement_intellect": 24,
+      "slot_length": 1,
+      "stamina": 26
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 8001,
+      "mp": 9,
+      "requirement_faith": 0,
+      "requirement_intellect": 21,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 30000,
+      "mp": 0,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 0
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53010,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53011,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53012,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53040,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53041,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53042,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53043,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53044,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53045,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53050,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53051,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53052,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53060,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53061,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53062,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53070,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53080,
+      "mp": 0,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 0
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53081,
+      "mp": 0,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 0
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53082,
+      "mp": 0,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 0
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53090,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53091,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53095,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53100,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53110,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53111,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53120,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53160,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53161,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53162,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53163,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53165,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53166,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53167,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53168,
+      "mp": 2,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 2
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53180,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53181,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53182,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53183,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53185,
+      "mp": 0,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 0
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53186,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53190,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53191,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53192,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53210,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53240,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53241,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53242,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53243,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53244,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53245,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53246,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53247,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53248,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53250,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53251,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53252,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53253,
+      "mp": 0,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 0
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53260,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53261,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53270,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53271,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53275,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53276,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53277,
+      "mp": 0,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 0
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53278,
+      "mp": 0,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 0
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53290,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53291,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53300,
+      "mp": 0,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 0
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53301,
+      "mp": 0,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 0
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53302,
+      "mp": 0,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 0
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53303,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53310,
+      "mp": 0,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 0
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53311,
+      "mp": 0,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 0
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53320,
+      "mp": 0,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 0
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53321,
+      "mp": 0,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 0
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53330,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53350,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53390,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53510,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53520,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53521,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53522,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53523,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53524,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53525,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53530,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53560,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53561,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53570,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53571,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53590,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53610,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53630,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53720,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53750,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53751,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53760,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53770,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53800,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53801,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53802,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53803,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53804,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53805,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53810,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53811,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53812,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53813,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53814,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53815,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53820,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53821,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53822,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53823,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53830,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53840,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53841,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53842,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53843,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53844,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53845,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53850,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53851,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53852,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53860,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53861,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53862,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53870,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53871,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53872,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53875,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53876,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53877,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53900,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 0,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53910,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53911,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 53912,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2004300,
+      "mp": 9,
+      "requirement_faith": 0,
+      "requirement_intellect": 32,
+      "slot_length": 1,
+      "stamina": 5
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2004310,
+      "mp": 20,
+      "requirement_faith": 0,
+      "requirement_intellect": 25,
+      "slot_length": 1,
+      "stamina": 17
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2004320,
+      "mp": 65,
+      "requirement_faith": 0,
+      "requirement_intellect": 72,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2004500,
+      "mp": 15,
+      "requirement_faith": 0,
+      "requirement_intellect": 11,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2004510,
+      "mp": 26,
+      "requirement_faith": 0,
+      "requirement_intellect": 20,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2004520,
+      "mp": 60,
+      "requirement_faith": 0,
+      "requirement_intellect": 50,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2004530,
+      "mp": 35,
+      "requirement_faith": 0,
+      "requirement_intellect": 34,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2004700,
+      "mp": 26,
+      "requirement_faith": 0,
+      "requirement_intellect": 60,
+      "slot_length": 1,
+      "stamina": 23
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2004710,
+      "mp": 18,
+      "requirement_faith": 0,
+      "requirement_intellect": 24,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2004900,
+      "mp": 26,
+      "requirement_faith": 0,
+      "requirement_intellect": 20,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2004910,
+      "mp": 30,
+      "requirement_faith": 0,
+      "requirement_intellect": 23,
+      "slot_length": 1,
+      "stamina": 17
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2004920,
+      "mp": 30,
+      "requirement_faith": 0,
+      "requirement_intellect": 28,
+      "slot_length": 1,
+      "stamina": 17
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2004930,
+      "mp": 52,
+      "requirement_faith": 0,
+      "requirement_intellect": 32,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2004940,
+      "mp": 60,
+      "requirement_faith": 0,
+      "requirement_intellect": 39,
+      "slot_length": 1,
+      "stamina": 28
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2005000,
+      "mp": 25,
+      "requirement_faith": 27,
+      "requirement_intellect": 27,
+      "slot_length": 1,
+      "stamina": 16
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006200,
+      "mp": 36,
+      "requirement_faith": 32,
+      "requirement_intellect": 32,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006210,
+      "mp": 26,
+      "requirement_faith": 22,
+      "requirement_intellect": 22,
+      "slot_length": 1,
+      "stamina": 17
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006220,
+      "mp": 44,
+      "requirement_faith": 15,
+      "requirement_intellect": 15,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006230,
+      "mp": 33,
+      "requirement_faith": 41,
+      "requirement_intellect": 41,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006250,
+      "mp": 22,
+      "requirement_faith": 10,
+      "requirement_intellect": 10,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006260,
+      "mp": 22,
+      "requirement_faith": 35,
+      "requirement_intellect": 35,
+      "slot_length": 1,
+      "stamina": 12
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006300,
+      "mp": 18,
+      "requirement_faith": 26,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006310,
+      "mp": 19,
+      "requirement_faith": 12,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 21
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006320,
+      "mp": 10,
+      "requirement_faith": 17,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 17
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006330,
+      "mp": 20,
+      "requirement_faith": 32,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006340,
+      "mp": 18,
+      "requirement_faith": 23,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006350,
+      "mp": 25,
+      "requirement_faith": 39,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006400,
+      "mp": 35,
+      "requirement_faith": 25,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006650,
+      "mp": 23,
+      "requirement_faith": 31,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006660,
+      "mp": 25,
+      "requirement_faith": 19,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006670,
+      "mp": 40,
+      "requirement_faith": 40,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006680,
+      "mp": 25,
+      "requirement_faith": 0,
+      "requirement_intellect": 25,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006690,
+      "mp": 18,
+      "requirement_faith": 12,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006700,
+      "mp": 50,
+      "requirement_faith": 68,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 40
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006710,
+      "mp": 30,
+      "requirement_faith": 53,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006800,
+      "mp": 35,
+      "requirement_faith": 66,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006900,
+      "mp": 35,
+      "requirement_faith": 32,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 25
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006910,
+      "mp": 35,
+      "requirement_faith": 58,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2006920,
+      "mp": 38,
+      "requirement_faith": 20,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007000,
+      "mp": 46,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 72
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007010,
+      "mp": 43,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 35
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007020,
+      "mp": 40,
+      "requirement_faith": 32,
+      "requirement_intellect": 32,
+      "slot_length": 1,
+      "stamina": 32
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007200,
+      "mp": 52,
+      "requirement_faith": 43,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 35
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007210,
+      "mp": 32,
+      "requirement_faith": 37,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 26
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007300,
+      "mp": 15,
+      "requirement_faith": 24,
+      "requirement_intellect": 24,
+      "slot_length": 1,
+      "stamina": 24
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007310,
+      "mp": 21,
+      "requirement_faith": 10,
+      "requirement_intellect": 10,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007320,
+      "mp": 20,
+      "requirement_faith": 34,
+      "requirement_intellect": 34,
+      "slot_length": 1,
+      "stamina": 16
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007330,
+      "mp": 47,
+      "requirement_faith": 15,
+      "requirement_intellect": 15,
+      "slot_length": 1,
+      "stamina": 34
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007400,
+      "mp": 24,
+      "requirement_faith": 0,
+      "requirement_intellect": 18,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007410,
+      "mp": 34,
+      "requirement_faith": 0,
+      "requirement_intellect": 49,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007420,
+      "mp": 28,
+      "requirement_faith": 0,
+      "requirement_intellect": 36,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007430,
+      "mp": 18,
+      "requirement_faith": 0,
+      "requirement_intellect": 37,
+      "slot_length": 1,
+      "stamina": 14
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007440,
+      "mp": 55,
+      "requirement_faith": 0,
+      "requirement_intellect": 67,
+      "slot_length": 1,
+      "stamina": 30
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007450,
+      "mp": 24,
+      "requirement_faith": 0,
+      "requirement_intellect": 33,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007600,
+      "mp": 20,
+      "requirement_faith": 15,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007610,
+      "mp": 36,
+      "requirement_faith": 27,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007700,
+      "mp": 18,
+      "requirement_faith": 17,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 15
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007710,
+      "mp": 26,
+      "requirement_faith": 44,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 20
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007720,
+      "mp": 25,
+      "requirement_faith": 52,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007730,
+      "mp": 27,
+      "requirement_faith": 43,
+      "requirement_intellect": 43,
+      "slot_length": 1,
+      "stamina": 18
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007740,
+      "mp": 20,
+      "requirement_faith": 18,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 10
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007750,
+      "mp": 29,
+      "requirement_faith": 29,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 22
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007760,
+      "mp": 75,
+      "requirement_faith": 67,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 33
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007800,
+      "mp": 21,
+      "requirement_faith": 16,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 16
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007810,
+      "mp": 28,
+      "requirement_faith": 29,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 16
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2007820,
+      "mp": 35,
+      "requirement_faith": 38,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 28
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2050000,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2050001,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 2,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2050010,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2050011,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2050020,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2050021,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2050030,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2050040,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2050050,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2050060,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2050061,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2050062,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2050063,
+      "mp": 0,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 0
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2050064,
+      "mp": 0,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 0
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2050070,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2050080,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2050081,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2050082,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2050090,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 2050095,
+      "mp": 1,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 1
+    },
+    {
+      "ai_notify_type": 0,
+      "behavior_id": 0,
+      "id": 999999999,
+      "mp": 7,
+      "requirement_faith": 0,
+      "requirement_intellect": 0,
+      "slot_length": 1,
+      "stamina": 0
+    }
+  ]
+}

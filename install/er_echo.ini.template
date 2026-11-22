@@ -1,0 +1,68 @@
+; er_echo.dll 閰嶇疆锛堟斁鍦?DLL 鍚岀洰褰曪紝娓告垙宸ヤ綔鐩綍涓嬶級
+; 鍙В鏋?key=value锛圼section] 浼氳蹇界暐锛屾柟渚垮垎缁勯槄璇伙級銆?; 鐩稿璺緞浠?*娓告垙鏍圭洰褰?*涓哄熀鍑嗭紙DLL 鐨?CWD锛夈€?
+[ipc]
+addr=127.0.0.1:7811
+token=change-me
+
+[clone]
+; 姣忔杩涙父鎴忚嚜鍔ㄥ姞杞界殑妗ｆ锛涚 i 涓厠闅嗕綋濂楃 i % n 涓。妗?; 鐩稿娓告垙鏍圭洰褰曘€備笅闈袱浠芥槸鐢?tools/export_profile_from_save.py 浠庢湰璐﹀彿涓诲瓨妗?; 锛?APPDATA%\EldenRing\<SteamID>\ER0000.sl2锛夌绾垮鍑虹殑
+profiles=er-echo/tools/from_save_account/sl2/slot0_Sv.json,er-echo/tools/from_save_account/sl2/slot1_May.json
+; 鍙敜鍚庢寔缁敞鍏ワ紙榛樿寮€锛?auto_apply=true
+; 鍚屾椂鍐欑瓑绾?灞炴€э紙HP 绛夋淳鐢熷€兼殏涓嶉噸绠楋級
+apply_stats=true
+
+[summon]
+; 杩涙父鎴忓悗鑷姩鎶婅繖鍑犺楠ㄧ伆 BuddyParam 鏀规垚銆屼汉褰㈡唱婊淬€嶅弬鏁?; 鐣欑┖ = 涓嶈嚜鍔ㄦ敼锛堟兂淇濈暀鍘熺増楠ㄧ伆鏃舵妸 buddy_rows 娓呯┖锛?buddy_rows=23200000,23200001,23200002
+buddy_npc=100000010
+buddy_think=100000010
+buddy_init=26050
+buddy_follow=0
+; 鎶娿€屾嫙鎬佹唱婊存湰浣撱€嶈繖涓€琛?BuddyParam 鏁磋澶嶅埗杩囧幓锛堜繚鐣欏悇鑷?trigger spEffect锛夈€?; 璺熼殢/鎺夐槦澶勭悊鏈潵鐢遍鐏拌璐熻矗锛岄€愬瓧娈靛彧鏀?npc/think/init/follow 鏄笉澶熺殑銆?buddy_copy_from=20700001
+; 璺宠繃楠ㄧ伆鐨勫尯鍩?鍙敜鐭宠寖鍥撮檺鍒讹細姣忓抚鎶?SummonBuddyManager 鐨?; is_within_activation_range / warn_range / 鍐峰嵈 缃湡锛堝師鐗堛€宒ead zone銆嶇敱姝よ€屾潵锛?summon_anywhere=true
+; 鍚姩鏃舵妸姣忚 BuddyStoneParam.activate_range 鎶埌杩欎箞澶э紙0 = 涓嶆敼锛?; 鍘熺増鏄?30~60 绫筹紝鎶埌 9999 绛変簬銆屾暣寮犲浘閮界畻鍙敜鐭宠寖鍥村唴銆?stone_range=9999
+; 鍘绘帀鐏典綋鐨勮摑鐧藉彂鍏?鍗婇€忔槑锛堟憳鎺夈€岄鐏板瑙傘€峴pEffect锛屼笉鍔?regulation.bin锛?no_spirit_glow=true
+; 楠ㄧ伆澶栬 spEffect锛?95000 = 鏅€氶鐏扮櫧闆撅紝295200 = 鍌€鍎￠鐏帮紝295190 = 鐏典綋鐫€鑹诧級
+glow_speffects=295000,295200,295190
+; 鍏佽銆屽凡缁忔湁鍙敜鐗┿€嶆椂鍐嶇敤楠ㄧ伆锛堝師鐗堜竴娆″彧鑳戒竴闃燂級
+multi_summon=true
+; 鍧愮伀 / 浼犻€?/ 澶嶆椿涔嬪悗鑷姩鍙敜锛堜笉鍋氬父椹荤淮鎸侊級锛汧8 浠嶅彲闅忔椂鎵嬪姩鍙?summon_events=true
+
+[tuning]
+; 璺熼殢鏃ュ織闃堝€硷紙绫筹級
+follow_distance=35.0
+; 鎺夐槦鏃跺彧鎵撳憡璀︼紙浼犻€佸凡纭涓嶅彲鐢細鍐欏潗鏍囦細璁╁厠闅嗕綋鎺夊嚭涓栫晫锛岃 docs 搂14.6锛?auto_recall=false
+; 鎺夐槦淇濆簳锛?*鍏ㄤ綋**鍏嬮殕浣撻兘鎺夊埌 lost_distance 涔嬪銆佹寔缁?lost_seconds 绉?鈫?瑙ｆ暎閲嶅彫
+; 锛堥噸鍙槸鍞竴鍙潬鐨勬媺鍥炴墜娈碉細鍙敜璇锋眰灞傚彲鐩村啓锛岃 docs 搂15.3锛?lost_resummon=true
+lost_distance=150
+lost_seconds=15
+
+[balance]
+; 鎴樺弸妯″紡锛氭寜褰撳墠鍑烘垬鍙嬩汉鏁拌ˉ姝ｆ晫浜虹敓鍛戒笂闄愶紙榛樿寮€锛?; 0 浜?= 涓嶈ˉ姝ｏ紱1 / 2 / 3 浜?= 涓嬪垪鍊嶇巼锛涜秴杩?3 浜烘寜 3 浜虹畻銆?; 瀹炵幇鏄繍琛屾椂鍐欐晫浜虹殑 CSChrDataModule锛屼笉鏀?NpcParam / regulation.bin锛岄噸鍚嵆杩樺師銆?enemy_hp_scaling=true
+enemy_hp_rates=1.5,1.8,2.0
+
+[ai]
+; 鍚屼即銆屾棤闄愯摑銆嶏細鍏嬮殕浣撴柦娉曡 FP锛屾瘡甯ф妸 FP 椤跺洖涓婇檺锛屽惁鍒欐斁鍑犱釜娉曟湳灏遍€€鍖栨垚骞崇爫
+; 锛堟硶鏈垪琛ㄦ潵鑷。妗堢殑 magic 瀛楁锛岃 docs 搂16锛?infinite_fp=true
+; 鏉冮噸钀藉埌鍝嚑琛岋紙0 = 涓嶅啓锛夈€倀hink 榛樿鎷熸€佹唱婊存湰浣撹 100000010锛屾墍浠?; set_weights 寮€绠卞嵆鐢紱behavior/npc 涓ゅ紶琛ㄧ殑妲戒綅璇箟杩樻病閫愭潯瀹炴祴锛岄粯璁や笉鍔?think_row=100000010
+behavior_row=0
+npc_row=0
+; 銆岄槦鍙?AI銆嶇粰 1/2/3 鍙蜂綅鍚勫€熶竴琛?NpcThinkParam锛堟嫙鎬佹唱婊村鏃忛噷琛屼负鐩稿悓鐨勫嚑琛岋級銆?; 杩愯鏃跺厛鎶?think_row 鏁磋澶嶅埗杩囧幓锛屽啀鍙敼璇ュ彿浣嶇殑 aggression/guard/target_switch锛?; 濉?0 鎴栬涓嶅瓨鍦?= 璇ュ彿浣嶈窡闅忓叏灞€銆傚彧鍦ㄥ綋鍓嶈繖灞€鍐呭瓨閲屾敼锛岄噸鍚父鎴忓嵆杩樺師銆?teammate_think_rows=100000020,100000030,100000040
+
+[debug]
+; 闂€€鎺掓煡鐢細鍏虫帀浜嬩欢鍙敜 / 鐏典綋鎽橀櫎 / 鏈ㄦ々 / 璋冭瘯鐢熸垚
+safe_mode=false
+; 姣?30 绉掑線鏃ュ織閲屾墦涓€浠界揣鍑戠姸鎬?auto_status=true
+
+[ui]
+; 璧愮銆屾垬鍙嬨€嶄簩绾ц彍鍗曪細DLL 鍦ㄨ繍琛屾椂寰€ live EzState 娉ㄥ叆
+;   璧愮鏍瑰垪琛ㄣ€屾垬鍙嬶紙n/m锛夈€嶁啋 浜烘暟 / 1-3 鍙蜂綅 / 闃熷弸 AI锛堜笁绾э級 / 绔嬪嵆閲嶅彫 / 鍙嬩激 / 杩斿洖
+; false = 涓嶅仛娉ㄥ叆锛屾敼鐢ㄧ绾?ESD 鏍瑰垪琛ㄧ増鏈紙fallback锛夈€?; 涓ょ妯″紡鐢?tools/switch_menu_mode.ps1 涓€閿垏鎹紙ESD 鍜岃繖涓€艰涓€璧锋崲锛夈€?nested_menu=true
+
+[i18n]
+; 璧愮鑿滃崟鏂囨璇█锛堝彧褰卞搷 mod 鑷繁娉ㄥ叆鐨勯偅鍑犺瀛楋紝涓嶅奖鍝嶆父鎴忓師鐗堟枃鏈級
+;   auto   = 璺?Windows 鏄剧ず璇█锛堢畝涓?/ 绻佷腑 / 鏃ユ枃锛屽叾浠栧洖閫€鑻辨枃锛?;   zh-CN  = 绠€浣撲腑鏂囷紙鍐呯疆锛岀瓑浜庢棫鐗堢‖缂栫爜鏂囨锛?;   zh-TW  = 绻佷綋涓枃
+;   en     = English
+;   ja     = 鏃ユ湰瑾?; 涔熷彲浠ュ啓浠绘剰鑷畾涔変唬鐮侊紙濡?ko / de锛夛紝鍐嶇敤 er_echo_i18n.ini 鎻愪緵璇ヨ瑷€鐨勬枃妗堬紱
+; 璇﹁ docs/i18n.md銆傚缓璁笌娓告垙銆屾枃鏈瑷€銆嶄繚鎸佷竴鑷达細鑿滃崟鏂囧瓧鐢ㄦ父鎴忓瓧浣撴覆鏌擄紝
+; 璇█閫夐敊锛堜緥濡傛父鎴忔槸鑻辨枃鍗存樉绀烘棩鏂囷級鍙兘鍑虹幇鏂瑰潡銆?language=auto
+

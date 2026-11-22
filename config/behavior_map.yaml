@@ -1,0 +1,142 @@
+# 权重 → 游戏参数映射（可校准）
+#
+# 注意：
+#  - 这里所有 param 行 id / 槽位编号都是「待实测」的社区标注，不是官方文档。
+#  - NpcAiBehaviorProbability 的槽位名在不同工具里可能显示为 param000..param199。
+#  - NpcThinkParam 的改动对「已存在的实体」可能不刷新（需重召或 hook），见 design.md §9.3。
+#  - 标 dll: true 表示没有可靠 param 落点，需要 DLL 自己实现。
+
+meta:
+  game_version: "1.17.2 / exe 2.7.2.0"
+  param_tables:
+    behavior_probability: "NpcAiBehaviorProbability"   # NPC_AI_BEHAVIOR_PROBABILITY_PARAM_ST
+    think: "NpcThinkParam"                             # NPC_THINK_PARAM_ST
+    npc: "NpcParam"                                    # NPC_PARAM_ST
+    odds: "AiOddsParam"                                # AI_ODDS_PARAM
+  clone_param_rows:
+    npc_param: "c0000_echo"          # 复制 Mimic Tear / c0000 行
+    think_param: "c0000_echo_think"  # 复制 Mimic Tear think 行
+    buddy_param: "c0000_echo_buddy"  # 复制 Mimic Tear buddy 行
+
+weights:
+  aggression:
+    0.0: "只反击，不主动开战"
+    1.0: "视野内立刻冲脸"
+    param:
+      - table: think
+        field: BattleStartDist
+        map: { min: 3, max: 30, unit: m }
+      - table: think
+        field: eye_dist
+        map: { min: 8, max: 40, unit: m }
+      - table: think
+        field: backhomeDist
+        map: { min: 10, max: 60, unit: m, note: "越大越敢追" }
+      - table: behavior_probability
+        slots: [130, 131]          # [Find Attack] 相关槽
+        map: { min: 0, max: 100, unit: score }
+
+  dodge_rate:
+    param:
+      - table: behavior_probability
+        slots: [101, 102, 103]     # [Parrytime] 前/侧/后滚
+        map: { min: 0, max: 100 }
+      - table: behavior_probability
+        slots: [110, 111, 116]     # [Damaged] 受击后回避
+        map: { min: 0, max: 100 }
+      - table: behavior_probability
+        slots: [120, 121]
+        map: { min: 0, max: 100 }
+      - table: think
+        field: disableLocalSteering
+        map: { 0: "允许侧移", 1: "关闭侧移" }
+
+  guard_rate:
+    param:
+      - table: think
+        field: isGuard_Act
+        map: { 0: "不主动举盾", 1: "行动时举盾" }
+      - table: behavior_probability
+        slots: [105, 112, 113, 118]  # guard move / [Damaged] guard
+        map: { min: 0, max: 100 }
+      - table: npc
+        field: guardAngle
+        map: { min: 60, max: 180, unit: deg }
+      - table: npc
+        field: physGuardCutRate
+        map: { min: 20, max: 90, unit: "%" }
+
+  combo_rate:
+    param:
+      - table: behavior_probability
+        slots: [0, 1]              # R1 / R2 combo
+        map: { min: 0, max: 100 }
+      - table: behavior_probability
+        slots: [115]               # [Damaged] R1 combo counter
+        map: { min: 0, max: 100 }
+
+  heal_priority:
+    param:
+      - table: behavior_probability
+        slots: [23]                # HP recovery magic
+        map: { min: 0, max: 100 }
+      - table: behavior_probability
+        slots: [97]                # Do not interrupt [Estus]
+        map: { min: 0, max: 100 }
+      - table: npc
+        field: estusFlaskLotPoint  # 0..10000 分母
+        map: { min: 0, max: 10000 }
+    note: "真正的血量阈值在 logic 脚本里，param 只能提高喝药意愿"
+
+  spell_rate:
+    param:
+      - table: behavior_probability
+        slots: [13, 14]            # 各距离魔法
+        map: { min: 0, max: 100 }
+      - table: behavior_probability
+        slots: [20, 21, 22, 23, 24, 25, 26, 27, 28]
+        map: { min: 0, max: 100 }
+
+  item_rate:
+    param:
+      - table: npc
+        field: hpEstusFlaskLotPoint
+        map: { min: 0, max: 10000 }
+      - table: npc
+        field: mpEstusFlaskLotPoint
+        map: { min: 0, max: 10000 }
+
+  spacing:
+    param:
+      - table: behavior_probability
+        slots: [126]               # dash approach
+        map: { min: 0, max: 100 }
+      - table: behavior_probability
+        slots: [10, 11]            # 远程 R1/R2
+        map: { min: 0, max: 100 }
+      - table: think
+        field: BattleStartDist
+        map: { min: 3, max: 30, unit: m }
+
+  target_switch:
+    param:
+      - table: think
+        field: TeamAttackEffectivity
+        map: { min: 0, max: 100, note: "越大同时围攻的人越少" }
+      - table: think
+        field: searchTargetLv1ForgetTime
+        map: { min: 1, max: 20, unit: s }
+      - table: think
+        field: searchTargetLv2ForgetTime
+        map: { min: 1, max: 30, unit: s }
+
+  follow_distance:
+    dll: true
+    note: "BuddyParam.pcFollowType 只有 0/1；距离常量在代码里。DLL 用距离检测 + warp 保底。"
+
+safety:
+  max_delta_per_tick: 0.15
+  hysteresis: 0.03
+  min_tick_seconds: 1.0
+  max_tick_seconds: 3.0
+  strategy_switch_cooldown_ticks: 3
