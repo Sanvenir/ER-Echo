@@ -1,7 +1,7 @@
 ﻿#requires -Version 5.1
 <#
 .SYNOPSIS
-  Build the ER Echo installer + profile exporter (PyQt5, onedir) and embed the mod payload.
+  Build the ER Echo installer + profile exporter (PySide6/Qt6, onedir) and embed the mod payload.
 
 .DESCRIPTION
   Output:
@@ -47,7 +47,9 @@ function Has-Module([string]$name) {
 # ---------------------------------------------------------------- deps
 if (-not $SkipInstall) {
     $need = @()
-    if (-not (Has-Module 'PyQt5')) { $need += 'PyQt5' }
+    # GUI 用 PySide6（LGPLv3）。**不要**再用 PyQt5：它是 GPLv3/商业双许可，
+    # 打包进安装器会让整个 exe 变成 GPL 作品（2026-11-23 迁移，见 nexus/credits-and-licenses.md）。
+    if (-not (Has-Module 'PySide6')) { $need += 'PySide6' }
     if (-not (Has-Module 'PyInstaller')) { $need += 'pyinstaller' }
     if (-not (Has-Module 'PIL')) { $need += 'pillow' }
     if ($need.Count -gt 0) {
@@ -113,6 +115,25 @@ if ($rc -ne 0) { throw "PyInstaller(onedir) failed (exit $rc)" }
 $onedir = Join-Path $dist $name
 $exe = Join-Path $onedir ($name + '.exe')
 if (-not (Test-Path $exe)) { throw "no artifact: $exe" }
+
+# PySide6 的 PyInstaller hook 会把整个 Qt 都装进来；这个安装器只用 Qt Widgets（raster 渲染），
+# Quick/Qml/Pdf/Network 和软件 OpenGL 回退（opengl32sw.dll，约 20 MB）都用不到。
+# 删完下面的 --selftest-setup 会验证 exe 仍能跑；GUI 不依赖这些。
+$trim = @(
+    'PySide6\opengl32sw.dll',
+    'Qt6Quick.dll', 'Qt6QuickWidgets.dll', 'Qt6QuickControls2.dll', 'Qt6QuickControls2Impl.dll',
+    'Qt6Qml.dll', 'Qt6QmlModels.dll', 'Qt6QmlMeta.dll', 'Qt6QmlWorkerScript.dll',
+    'Qt6Pdf.dll', 'Qt6Network.dll'
+)
+$freed = 0
+foreach ($rel in $trim) {
+    $p = Join-Path $onedir ('_internal\' + $rel)
+    if (Test-Path -LiteralPath $p) {
+        $freed += (Get-Item -LiteralPath $p).Length
+        Remove-Item -LiteralPath $p -Force
+    }
+}
+Write-Host ("[ok] trimmed unused Qt modules: {0} MB" -f [math]::Round($freed / 1MB, 1)) -ForegroundColor Green
 Write-Host ("[ok] {0} ({1} MB)" -f $exe, [math]::Round((Get-Item $exe).Length / 1MB, 1)) -ForegroundColor Green
 
 $readme = Join-Path $dist 'README-Setup.txt'

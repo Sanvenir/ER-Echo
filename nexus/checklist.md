@@ -19,6 +19,10 @@
 - [ ] 手动包（Optional）里**有** `er_echo.dll`、`er_echo.ini`、`er_echo_i18n.example.ini`、
       `profiles\profile.example.json`、`profiles\builtin_sanvenir.json`、两个 `launchmod_eldenring*.bat`
       （CRLF）、`THIRD-PARTY-LICENSES.txt`、`er-echo\docs\`
+- [ ] 安装器 zip 的 `_internal\payload\shared\LICENSES\` 里有 `LICENSE-MIT-NON-AI` +
+      `LICENSE-ASL2-NON-AI`（fromsoftware-rs）、`LGPL-3.0.txt` + `GPL-3.0.txt`（Qt/PySide6）、
+      `PSF-Python-3.11.txt`、`Apache-2.0.txt`（OpenSSL）、`libffi-LICENSE.txt`、
+      `PyInstaller-COPYING.txt`、`Qt-PySide6-NOTICE.txt`
 - [ ] bat 都带 `-p ".\eldenring.exe"`；admin 版能自提权
 - [ ] 版本号统一为 `0.1.0`（DLL / 页面 / 文件名）
 - [ ] 三个 zip 的大小 / SHA256 与 `nexus\release-checksums.txt` 一致

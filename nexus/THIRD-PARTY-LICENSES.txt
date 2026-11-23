@@ -96,3 +96,32 @@ This mod ships no AI models. It contains an optional bridge script that can call
 model API chosen by the user at runtime; that is not part of this archive's content and is
 disabled by default (mock mode). The fromsoftware-rs NON-AI restriction (§2) still applies to
 the compiled DLL.
+
+
+7. Installer runtime (ER-Echo-Setup.exe only)
+---------------------------------------------
+The one-click installer is a PyInstaller bundle. Besides ER Echo's own Python code it contains
+third-party runtime components, all used unmodified:
+
+  Qt 6.12 + PySide6 6.12 + shiboken6   LGPL-3.0 (no commercial Qt license used)
+  CPython 3.11                          Python Software Foundation License 2.0
+  OpenSSL 3 (libcrypto-3.dll)           Apache License 2.0
+  libffi (libffi-8.dll)                 MIT
+  PyInstaller 6 bootloader              GPL-2.0-or-later, with the exception that allows
+                                        distributing non-free programs
+  Microsoft Visual C++ runtime          Microsoft Visual Studio redistributable terms
+
+Qt and PySide6 are linked dynamically (the DLLs sit next to the exe inside _internal\), so you
+can replace them with your own compatible builds; ER Echo's licence does not restrict reverse
+engineering for debugging such modifications. ER Echo's own source is MIT OR Apache-2.0 and
+contains no Qt/PySide6 code.
+
+Full texts (also in the LICENSES folder):
+  LICENSES/LGPL-3.0.txt
+  LICENSES/GPL-3.0.txt
+  LICENSES/PSF-Python-3.11.txt
+  LICENSES/Apache-2.0.txt
+  LICENSES/libffi-LICENSE.txt
+  LICENSES/PyInstaller-COPYING.txt
+  LICENSES/Qt-PySide6-NOTICE.txt
+

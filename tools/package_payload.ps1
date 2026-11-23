@@ -147,6 +147,11 @@ $licDir = Join-Path $shared 'LICENSES'
 New-Item -ItemType Directory -Force -Path $licDir | Out-Null
 Copy-One (Join-Path $repo 'vendor\fromsoftware-rs-main\LICENSE-MIT-NON-AI') $licDir
 Copy-One (Join-Path $repo 'vendor\fromsoftware-rs-main\LICENSE-ASL2-NON-AI') $licDir
+# 安装器运行时（Qt6/PySide6/Python/OpenSSL/libffi/PyInstaller）的许可全文与 LGPL 声明
+$thirdParty = Join-Path $repo 'nexus\third-party'
+if (Test-Path -LiteralPath $thirdParty) {
+    Copy-Item -Path (Join-Path $thirdParty '*') -Destination $licDir -Force
+}
 Copy-One (Join-Path $repo 'nexus\THIRD-PARTY-LICENSES.txt') $shared
 
 $readme = @'

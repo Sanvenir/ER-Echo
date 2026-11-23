@@ -12,7 +12,8 @@
 | `file-description.md` | Files 标签页里主文件的说明 | ✅ |
 | `changelog.md` | Changelogs 标签页 / 更新说明 | ✅ |
 | `credits-and-licenses.md` | 署名、代码许可、AI 披露、联网行为、 multiplayer 声明 | ✅ |
-| `THIRD-PARTY-LICENSES.txt` | 压缩包内必须带的三方许可全文说明 | ✅ 打包脚本会放进去 |
+| `THIRD-PARTY-LICENSES.txt` | 压缩包内必须带的三方许可全文说明（含安装器运行时那一节） | ✅ 打包脚本会放进去 |
+| `third-party/` | 安装器运行时（Qt6/PySide6/Python/OpenSSL/libffi/PyInstaller）许可全文 + `Qt-PySide6-NOTICE.txt` | ✅ 打包时进两个包的 `LICENSES\` |
 | `shotlist.md` | **需要你在游戏里录/截的素材清单**（含技术设置、构图、视频分镜） | ✅ 图已齐（视频可选） |
 | `make_media.py` | `media/incoming/*.jpg` → 裁 16:9 / 1400×400、压到 2 MB 内、写 `media/manifest.json` | ✅ 可重跑 |
 | `make_placeholder_media.py` | 旧脚本：把更早的开发截图做成占位图（已被 `make_media.py` 取代） | 🗄️ 仅存档 |

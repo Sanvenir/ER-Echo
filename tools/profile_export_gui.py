@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""ER Echo 存档导出工具（PyQt5，中英双语）。
+"""ER Echo 存档导出工具（PySide6 / Qt6，中英双语）。
 
 功能：
   * 选存档 → 列出 0–9 号槽角色 → 多选导出 profile.json
@@ -453,7 +453,7 @@ ER Echo files and appends references to configs you already have (with backups).
 
 def system_lang() -> str:
     try:
-        from PyQt5.QtCore import QLocale
+        from PySide6.QtCore import QLocale
         if QLocale.system().language() == QLocale.Chinese:
             return "zh"
     except Exception:
@@ -675,9 +675,9 @@ def cli_paths(out_path: str) -> int:
 # ------------------------------------------------------------------ GUI
 
 def run_gui(start_lang: str | None = None) -> int:
-    from PyQt5.QtCore import QSettings, Qt, QThread, QTimer, pyqtSignal
-    from PyQt5.QtGui import QFont
-    from PyQt5.QtWidgets import (
+    from PySide6.QtCore import QSettings, Qt, QThread, QTimer, Signal as pyqtSignal
+    from PySide6.QtGui import QFont
+    from PySide6.QtWidgets import (
         QApplication, QCheckBox, QComboBox, QDialog, QDialogButtonBox, QFileDialog,
         QHBoxLayout, QHeaderView, QLabel, QLineEdit, QMainWindow, QMessageBox,
         QPlainTextEdit, QPushButton, QTabWidget, QTableWidget, QTableWidgetItem,
@@ -1167,7 +1167,7 @@ def run_gui(start_lang: str | None = None) -> int:
             admin_btn = box.addButton(self.t("menu_lang_retry_admin"),
                                       QMessageBox.AcceptRole)
             box.addButton(self.t("cancel"), QMessageBox.RejectRole)
-            box.exec_()
+            box.exec()
             if box.clickedButton() is not admin_btn:
                 return
             try:
@@ -1251,7 +1251,7 @@ def run_gui(start_lang: str | None = None) -> int:
                 item = self.table.item(i, 4)
                 if item is not None:
                     item.setText(status)
-                    item.setTextAlignment(Qt.AlignCenter)
+                    item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
 
         # ---------------- 工具
         def log(self, text: str):
@@ -1458,7 +1458,7 @@ def run_gui(start_lang: str | None = None) -> int:
             b_conv.clicked.connect(lambda: self.open_loader_page("conv"))
             box.rejected.connect(dlg.reject)
             lay.addWidget(box)
-            dlg.exec_()
+            dlg.exec()
 
         def _loader_name(self, which: str) -> str:
             return "Mod Engine 2" if which == "me2" else "me3"
@@ -1472,7 +1472,7 @@ def run_gui(start_lang: str | None = None) -> int:
             b_me3 = box.addButton(self.t("loader_open_me3"), QMessageBox.ActionRole)
             b_any = box.addButton(self.t("install_anyway"), QMessageBox.AcceptRole)
             box.addButton(self.t("cancel"), QMessageBox.RejectRole)
-            box.exec_()
+            box.exec()
             clicked = box.clickedButton()
             if clicked is b_open:
                 self.open_loader_page(loader)
@@ -1493,7 +1493,7 @@ def run_gui(start_lang: str | None = None) -> int:
             b_open = box.addButton(self.t("loader_open_page"), QMessageBox.ActionRole)
             b_me3 = box.addButton(self.t("loader_open_me3"), QMessageBox.ActionRole)
             box.addButton(QMessageBox.Close)
-            box.exec_()
+            box.exec()
             if box.clickedButton() is b_open:
                 self.open_loader_page(loader)
             elif box.clickedButton() is b_me3:
@@ -1830,7 +1830,7 @@ def run_gui(start_lang: str | None = None) -> int:
                 for c, text in enumerate(cells):
                     item = QTableWidgetItem(text)
                     if c in (0, 2, 3, 4, 5):
-                        item.setTextAlignment(Qt.AlignCenter)
+                        item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
                     self.table.setItem(i, c, item)
             self.statusBar().showMessage(self.t("row_count").format(n=len(rows)))
 
@@ -1898,12 +1898,15 @@ def run_gui(start_lang: str | None = None) -> int:
                 self, self.t("ini_done_title"),
                 self.t("ini_done_msg").format(p=ini, v=value, b=backup))
 
-    QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
-    QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps, True)
+    # Qt6 默认就开高 DPI；这两个属性在 PySide6 里只是兼容用的弃用项，存在才设。
+    for _attr in ("AA_EnableHighDpiScaling", "AA_UseHighDpiPixmaps"):
+        _value = getattr(QApplication, _attr, None)
+        if _value is not None:
+            QApplication.setAttribute(_value, True)
     app = QApplication(sys.argv)
     win = Window()
     win.show()
-    return app.exec_()
+    return app.exec()
 
 
 # ------------------------------------------------------------------ 入口
@@ -2010,7 +2013,7 @@ if __name__ == "__main__":
     except BaseException:
         log = _crash_log(sys.exc_info()[1])
         try:
-            from PyQt5.QtWidgets import QApplication, QMessageBox
+            from PySide6.QtWidgets import QApplication, QMessageBox
             app = QApplication.instance() or QApplication([])
             QMessageBox.critical(None, "ER Echo", f"Startup failed. Log: {log}")
         except Exception:

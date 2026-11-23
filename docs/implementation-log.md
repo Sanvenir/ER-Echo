@@ -2242,3 +2242,41 @@ PS 5.1 把无 BOM 的 UTF-8 源码按 **ANSI（GBK）** 读入再写回，源文
 4. 用同样的 cp936 往返“重新制造损坏”，与现场文件逐字相同（仅 `Set-Content` 多加的结尾换行）。
 
 教训：**不要用 PS 5.1 的 Get-Content/Set-Content 改源码**；用编辑工具或显式 UTF-8 的 Python I/O。
+
+## 34. 安装器从 PyQt5 迁到 PySide6（2026-11-23）
+
+**起因**：发布前核对许可，发现 `PyQt5-5.15.11.dist-info/METADATA` 写的是 `License: GPL v3`，
+而安装器把 `PyQt5\*.pyd` + `Qt5*.dll` 一起打包进 `ER-Echo-Setup-0.1.0.zip`。
+GPLv3 的绑定意味着分发这个 exe 就等于把安装器整体按 GPLv3 发布（或买 Riverbank 商业许可）；
+更麻烦的是 DLL 里的 `fromsoftware-rs` 是 **Apache NON-AI**，和 GPLv3 做「聚合」边界有争议。
+选项：买商业许可 / 换 PySide6（LGPLv3）/ 安装器整体 GPLv3 / 不发安装器 → 选 PySide6。
+
+### 34.1 代码改动（`tools/profile_export_gui.py`）
+
+Qt 只用在 GUI 一个文件，改动很小：
+
+* 4 处 `from PyQt5...` → `from PySide6...`；
+* `pyqtSignal` → `from PySide6.QtCore import Signal as pyqtSignal`（保留原名，4 个信号不用改）；
+* 5 处 `.exec_()` → `.exec()`（Qt6 去掉了 `exec_` 别名）；
+* `Qt.AlignCenter` → `Qt.AlignmentFlag.AlignCenter`（scoped enum）；
+* `Qt.AA_EnableHighDpiScaling` / `AA_UseHighDpiPixmaps`：Qt6 默认开高 DPI，改成
+  `getattr` 存在才设，避免属性被删后启动即崩；
+* `tools/er_echo_setup.py` 本来就是纯 Python，无 Qt 依赖，不用动。
+
+### 34.2 打包（`tools/build_gui_exe.ps1`）
+
+* 依赖检查 `PyQt5` → `PySide6`，并加注释写清**不要**换回 PyQt5 的原因；
+* PySide6 的 PyInstaller hook 会把整个 Qt 装进来：`opengl32sw.dll`（19.7 MB，软件 OpenGL
+  回退）、`Qt6Quick/Qml/QmlModels/Pdf/Network` 对 Widgets 应用没用，打包后统一删掉 →
+  onedir 从 111.6 MB 降到 73.2 MB，zip 从 44.3 MB 降到 28.4 MB；
+* 验证：`--selftest-setup` 0 error（66 个 payload 文件），frozen exe 启动后窗口正常
+  （`ER Echo - Setup / Profiles`，Responding）；Python 层 offscreen 构造 GUI 也通过。
+
+### 34.3 许可材料
+
+`nexus/third-party/` 新增：`LGPL-3.0.txt`、`GPL-3.0.txt`、`PSF-Python-3.11.txt`、
+`Apache-2.0.txt`、`libffi-LICENSE.txt`、`PyInstaller-COPYING.txt`、`Qt-PySide6-NOTICE.txt`
+（说明 Qt/PySide6 动态链接、DLL 可替换）。两个打包脚本把它们复制进 `LICENSES\`；
+`THIRD-PARTY-LICENSES.txt` 新增 §7「Installer runtime」，`credits-and-licenses.md` §5 加一行
+Qt/PySide6：LGPL 只要附全文 + 可替换 DLL，不用申请/付费。
+

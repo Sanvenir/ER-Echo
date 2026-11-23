@@ -1,0 +1,54 @@
+ER Echo installer (ER-Echo-Setup.exe) - bundled runtime notices
+================================================================
+
+ER-Echo-Setup.exe is a PyInstaller "onedir" build. The folder you extracted contains the
+Python program plus the runtime libraries it needs. They are third-party components, not part
+of ER Echo's own code:
+
+  Qt 6.12 (QtCore / QtGui / QtWidgets / plugins)
+      Copyright (C) The Qt Company Ltd.
+      License: GNU Lesser General Public License v3 (LGPL-3.0), no commercial Qt license used.
+      https://www.qt.io/licensing/open-source-lgpl-obligations
+
+  PySide6 6.12 and shiboken6 6.12
+      Copyright (C) The Qt Company Ltd.
+      License: LGPL-3.0 (Qt for Python).
+      https://www.qt.io/qt-for-python
+
+  CPython 3.11
+      Copyright (c) Python Software Foundation.
+      License: Python Software Foundation License 2.0 (PSF-2.0).
+      https://docs.python.org/3/license.html
+
+  OpenSSL 3 (libcrypto-3.dll, used by Python's hashlib)
+      Copyright (c) The OpenSSL Project.
+      License: Apache License 2.0.
+
+  libffi (libffi-8.dll, used by Python's ctypes)
+      Copyright (c) 1996-2024 Anthony Green, Red Hat, Inc and others.
+      License: MIT (see libffi-LICENSE.txt).
+
+  PyInstaller 6 (bundle loader)
+      Copyright (c) 2010-2026 PyInstaller Development Team.
+      License: GPL-2.0-or-later with a special exception that explicitly allows building and
+      distributing non-free/closed-source programs (see PyInstaller-COPYING.txt).
+
+  Microsoft Visual C++ runtime (MSVCP140.dll, VCRUNTIME140*.dll)
+      Redistributable under the Microsoft Visual Studio license terms.
+
+Full texts are in this LICENSES folder:
+  LGPL-3.0.txt, GPL-3.0.txt, PSF-Python-3.11.txt, Apache-2.0.txt,
+  libffi-LICENSE.txt, PyInstaller-COPYING.txt
+
+LGPL compliance note
+--------------------
+Qt and PySide6 are used unmodified and are linked dynamically: the Qt DLLs and the PySide6
+extension modules sit next to ER-Echo-Setup.exe inside _internal\, so you can replace them with
+your own compatible builds (or delete them and supply them yourself) without recompiling ER
+Echo. Nothing in the ER Echo license restricts reverse engineering of these libraries for the
+purpose of debugging your modifications. ER Echo's own source is at
+https://github.com/Sanvenir/ER-Echo (MIT OR Apache-2.0); it does not include Qt or PySide6 code.
+
+The ER Echo mod itself (er_echo.dll) is NOT part of the Qt/PySide6 work: it is a separate
+component, embedded as data, built in Rust on fromsoftware-rs under its own NON-AI license (see
+THIRD-PARTY-LICENSES.txt §2).

@@ -133,6 +133,12 @@ $licDir = Join-Path $mainDir 'LICENSES'
 New-Item -ItemType Directory -Force -Path $licDir | Out-Null
 Copy-One (Join-Path $repo 'vendor\fromsoftware-rs-main\LICENSE-MIT-NON-AI') $licDir
 Copy-One (Join-Path $repo 'vendor\fromsoftware-rs-main\LICENSE-ASL2-NON-AI') $licDir
+# 安装器运行时（Qt6/PySide6/Python/OpenSSL/libffi/PyInstaller）的许可全文与 LGPL 声明；
+# 手动包本身不需要它们，但两个包共用同一份 THIRD-PARTY-LICENSES.txt，放齐更省解释。
+$thirdParty = Join-Path $repo 'nexus\third-party'
+if (Test-Path -LiteralPath $thirdParty) {
+    Copy-Item -Path (Join-Path $thirdParty '*') -Destination $licDir -Force
+}
 
 # er_echo.ini：沿用默认值，profiles 先指向内置的 Sanvenir；去掉作者存档相关注释
 $iniSource = Join-Path $repo 'install\er_echo.ini.template'
