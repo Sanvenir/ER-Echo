@@ -1,18 +1,20 @@
 ER Echo - third-party licenses and credits
 ==========================================
 
-This distribution contains a compiled DLL (er_echo.dll) that links the following third-party
+This distribution contains a compiled DLL (er_echo.dll) built on the following third-party
 software. The full license texts are reproduced below and in the LICENSES/ folder.
 
 
 1. ER Echo (this mod)
-----------------------
+---------------------
 License: MIT OR Apache-2.0
 Copyright (c) 2026 the ER Echo authors.
+Source:  https://github.com/Sanvenir/ER-Echo
 
-The source code of this mod is available from the author on request. It is released under
-MIT OR Apache-2.0; you may reuse and modify it with credit. The distributed archive itself
-must not be re-uploaded to other sites.
+The source code is public under MIT OR Apache-2.0: you may reuse and modify it with credit.
+Note that the bundled fromsoftware-rs crates add a NON-AI restriction (§2), so the compiled DLL
+inherits it. The assembled release archive itself should not be re-uploaded to other sites -
+link to the mod page instead.
 
 
 2. fromsoftware-rs / eldenring crate
@@ -27,8 +29,8 @@ licensed under a MIT/Apache-2.0 variant with an additional restriction: the soft
 any modifications may not be used to train or improve machine-learning models, and may not
 be included in any AI training dataset. Full texts:
 
-  LICENSES/fromsoftware-rs-LICENSE-MIT-NON-AI.txt
-  LICENSES/fromsoftware-rs-LICENSE-ASL2-NON-AI.txt
+  LICENSES/LICENSE-MIT-NON-AI
+  LICENSES/LICENSE-ASL2-NON-AI
 
 MIT NON-AI License (summary of the added restriction):
   The Software and any modifications made to it may not be used for the purpose of training
@@ -51,22 +53,38 @@ Their license texts are available at the crate pages above.
 
 4. Tools credited but NOT redistributed here
 --------------------------------------------
-ESDLang / esdtool (thefifthmatt) - used to build the optional root-menu ESD fallback.
+ESDLang / esdtool (thefifthmatt) - used to build the ESD variants shipped with this mod.
   https://github.com/thefifthmatt/ESDLang
 
 Mod Engine 2 (Soulsmods) - the DLL loader this mod is developed and tested against.
   https://github.com/soulsmods/ModEngine2
 
+me3 (garyttierney) - the alternative loader supported by the installer (vanilla + me3 and
+The Convergence 3.x).
+  https://github.com/garyttierney/me3
+
 Paramdex - parameter definitions and names used by the community tooling.
   https://github.com/soulsmods/Paramdex
 
 
-5. Game content
----------------
-No original ELDEN RING game assets are included in the main archive. The optional
-"ESD fallback" archive contains a patched copy of the vanilla talk ESD
-(m00_00_00_00.talkesdbnd.dcx) that is required only for the legacy root-menu mode; it is a
-modification of game data and is not licensed for redistribution.
+5. Game content and parameter data
+----------------------------------
+The DLL patches the game in memory; this archive ships no regulation.bin and no unpacked game
+files. Two things in it are derived from game data:
+
+  * mod/script/talk/m00_00_00_00.talkesdbnd.dcx (also inside the installer payload) - a
+    modified copy of the vanilla talk ESD. The grace-menu patch needs this file mounted through
+    the mod loader; without it the "Comrades" entry cannot be injected. It is a modification of
+    ELDEN RING game data, not original content, and it is included only so that this mod works.
+    Do not redistribute it on its own.
+  * tables/convergence/er_echo_equip.json and er_echo_magic.json - numeric parameter-ID lists
+    dumped at runtime from the game's own regulation data; the exporter uses them to check that
+    an item ID really exists. They contain no files, models, textures or code from
+    The Convergence - only plain numbers. The numbers reflect a Convergence-installed regulation
+    because that is the environment they were dumped in.
+
+The optional "root menu ESD fallback" archive carries a second variant of the same talk ESD
+(root-menu layout) plus the switch script.
 
 ELDEN RING is a trademark of FromSoftware, Inc. and Bandai Namco Entertainment. This mod is
 an unofficial fan work, not affiliated with or endorsed by either company.
@@ -76,4 +94,5 @@ an unofficial fan work, not affiliated with or endorsed by either company.
 ---------------------------
 This mod ships no AI models. It contains an optional bridge script that can call a language
 model API chosen by the user at runtime; that is not part of this archive's content and is
-disabled by default (mock mode).
+disabled by default (mock mode). The fromsoftware-rs NON-AI restriction (§2) still applies to
+the compiled DLL.

@@ -13,8 +13,9 @@
 - [ ] 安装器 payload 里**没有** `config_eldenring.toml` / 作者 profile；`mod\script\talk` 的 ESD 作为 payload 一部分是**必需**的
 - [ ] 安装器 `_internal\payload` 里**有** `er_echo.dll`、`er_echo_i18n.example.ini`、
       `profiles\profile.example.json`、`profiles\builtin_sanvenir.json`（内置彩蛋；安装后 `profiles=`
-      末尾要有它）、两个 `launch-er-echo*.bat`（CRLF）、`THIRD-PARTY-LICENSES.txt`、`er-echo\docs\`
-      （`er_echo.ini` 由安装器按内置模板生成，不在 payload 里）
+      末尾要有它）、两个 `launch-er-echo*.bat`（CRLF）、`tools\doctor.ps1` + `bridge\`、
+      `THIRD-PARTY-LICENSES.txt`、`docs\`（安装后落在 `mods\ER-Echo\`；
+      `er_echo.ini` 由安装器按内置模板生成，不在 payload 里）
 - [ ] 手动包（Optional）里**有** `er_echo.dll`、`er_echo.ini`、`er_echo_i18n.example.ini`、
       `profiles\profile.example.json`、`profiles\builtin_sanvenir.json`、两个 `launchmod_eldenring*.bat`
       （CRLF）、`THIRD-PARTY-LICENSES.txt`、`er-echo\docs\`

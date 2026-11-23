@@ -45,6 +45,9 @@ Nexus 的标签要在表单里从候选列表选，不要自己造词。优先�
 
 ## Permissions（权限区块）
 
+这一组只是**页面声明**，选完即生效，**没有「申请」流程**（也不用等 Nexus 审核）。
+真正要事先确认的第三方授权见 `credits-and-licenses.md` §5 的结论表（结论：都不需要申请）。
+
 推荐这一组（和 MIT/Apache 代码许可不冲突，又保留对发布物的控制）：
 
 | 项 | 选 |
@@ -54,9 +57,15 @@ Nexus 的标签要在表单里从候选列表选，不要自己造词。优先�
 | Conversion permission | You are **not** allowed to convert this file |
 | Asset use permission | You **must get permission** before using assets |
 | Donation Points | 允许 |
-| AI training / fork（2026 新增字段） | `Ask me`（默认即可） |
+| AI training / fork（2026 新增字段） | `Ask me`（默认即可；不想被拿去训练就选 `Disallow`） |
 
-> 正文里已经写了「代码 MIT/Apache，可复用但请先问一声」，两处保持一致。
+> 正文里已经写了「代码 MIT/Apache，可复用但请先问一声，源码在 GitHub」，两处保持一致。
+> 如果审核问「为什么代码是 MIT 却选 must get permission」：Nexus 权限约束的是**本页压缩包**，
+> 代码许可是另一回事——正文里已分开写。
+>
+> **不用申请的三项**（详见 `credits-and-licenses.md` §5）：fromsoftware-rs 只需附 NON-AI 全文；
+> ME2 / me3 / ESDLang 不随包分发、署名即可；Convergence 参数表是运行时 dump 的数值，不是它的资产。
+> 改过的 talk ESD 属于游戏数据，**没有授权渠道可申请**，只能按 Nexus 规则在页面披露。
 
 ## AI 声明（2026 起强制）
 

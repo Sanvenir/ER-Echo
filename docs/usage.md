@@ -661,5 +661,7 @@ python bridge\director.py --llm ollama --model qwen2.5:7b --allow-tools
 ## 6. 安全
 
 - **只离线**：带 mod 存档上线会被隔离/soft-ban。
-- 改 `regulation.bin` / `.sl2` 前先备份；本仓库不含游戏原始资源或他人存档。
+- 改 `regulation.bin` / `.sl2` 前先备份；本仓库不含存档或他人存档。
+  `ui/` 下是赐福菜单 ESD 的构建资产（`ui/base` 是重打包用的原版模板，`ui/out_*` 是改过的版本）；
+  发布包里只有改过的版本，原版模板不随包分发。
 - 外观数据属于个人信息，分发 mod 时不要打包别人的脸。
