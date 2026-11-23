@@ -277,10 +277,13 @@ python er-echo\bridge\director.py --llm openai --model gpt-4o-mini --api-key $en
 | ME2 本体 | ❌ | 目标机器自己装 |
 | 存档 `.sl2` | — | 不要拷别人的存档（会触发存档校验/隔离） |
 
-工具里只有几个**作者调试用**的临时脚本写死了盘符（`live_*.ps1`、`restart_and_test*.ps1`、
-`restart_and_probe.ps1`、`analyze_dump.py`、`_probe_magic*.py`），发布包已经排除；
-日常用的 `doctor / auto_start / sit_grace / switch_menu_mode / swap_dll_on_exit`
-都是按 `$PSScriptRoot` 推路径的。
+发布包里的 `tools\` 只保留日常用的部分：`doctor`、`gamedir`、档案导出、IPC 客户端、
+`switch_menu_mode`、`reset_to_vanilla`、`diff_profile` / `dump_to_profile` / `make_profile`。
+开发/自动化脚本（`auto_start`、`sit_grace`、`press_key`、`shot`、`swap_dll_on_exit`、
+`watch_state`、`patch_grace_esd`、`pack_talk_esd`、`build_gui_exe`、`package_*` 等）**只在仓库里**，
+发布包已排除——它们会模拟按键/替换 DLL，杀软启发式容易误报，普通用户也用不到。
+写死盘符的临时脚本（`live_*.ps1`、`restart_and_test*.ps1`、`restart_and_probe.ps1`、
+`analyze_dump.py`、`_probe_magic*.py`）同样只在仓库。
 
 ---
 

@@ -302,6 +302,16 @@ aborted. Make sure the .bat passes -p ".\eldenring.exe" (the bundled one does).
 screenshots) is not injected into an elevated process. Steam achievements and cloud saves were not re-tested
 in elevated mode — verify on a throwaway save if that matters to you.
 
+[b]My antivirus (or VirusTotal) flags the installer.[/b] The installer is an [b]unsigned[/b] PyInstaller
+bundle (Python + Qt) and the mod DLL is loaded into the game process — both are well-known heuristic
+false-positive triggers; one engine on VirusTotal (Elastic) regularly flags unsigned installers. There is no
+persistence, no service/driver, no outbound network: the DLL talks only to a loopback socket (127.0.0.1:7811)
+for local tools, and the installer writes only into the game folder you choose and has an Uninstall button.
+The source, build scripts and per-build SHA-256 hashes are public:
+[url]https://github.com/Sanvenir/ER-Echo[/url]. If you would rather not run an .exe, use the manual archive.
+A code-signed build is planned; until then a single-engine hit is not a reason to worry — check the other
+engines and the hash.
+
 [line]
 
 [b][size=4]Credits[/size][/b]

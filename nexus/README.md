@@ -19,6 +19,7 @@
 | `make_placeholder_media.py` | 旧脚本：把更早的开发截图做成占位图（已被 `make_media.py` 取代） | 🗄️ 仅存档 |
 | `media/` | 发布用图（游戏内实拍 7 张：banner + 01..06，全部 1920×1080 / 1400×400） | ✅ |
 | `release-checksums.txt` | 三个 zip + DLL 的 SHA256 / 大小（打完包生成） | ✅ 每次发布更新 |
+| `false-positive-report.md` | 杀毒/VirusTotal 误报的解释、各厂商提交入口、可直接粘贴的申诉文本 | ✅ 上传前过一遍 |
 | `checklist.md` | 上传当天按顺序勾的清单 | ✅ |
 
 ## 发布流程速览（2026 现行规则）

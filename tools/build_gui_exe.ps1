@@ -88,7 +88,7 @@ $name = 'ER-Echo-Setup'
 Write-Host '[..] packaging onedir ...' -ForegroundColor Cyan
 $pyArgs = @(
     '-m', 'PyInstaller', '--noconfirm', '--clean',
-    '--onedir', '--windowed',
+    '--onedir', '--windowed', '--noupx',
     '--name', $name,
     '--paths', $tools,
     '--distpath', $dist,

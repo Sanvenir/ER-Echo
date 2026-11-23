@@ -71,3 +71,8 @@ unzip it into `...\ELDEN RING\Game` and follow its `README.txt` (add `external_d
 - A game update breaks the mod until it is rebuilt for the new version.
 - Other mods that rewrite the same `BuddyParam` / `NpcParam` / `NpcThinkParam` rows, or the same talk
   ESD, may conflict.
+- The installer is **unsigned**, so some heuristic engines (Elastic on VirusTotal in particular) may
+  flag it. It is a PyInstaller bundle: no persistence, no outbound network, writes only into the game
+  folder you pick, and has an Uninstall button. Source, build scripts and the SHA-256 of every release
+  file are public: <https://github.com/Sanvenir/ER-Echo>. Use the manual archive if you prefer not to
+  run an .exe.

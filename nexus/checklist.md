@@ -36,6 +36,9 @@
 - [ ] 安装器「加载器安装步骤…」里的三个官方链接可达；未装 ME2 时弹窗跳转、以及
       「仍然安装文件」两条路都正常；包里**没有** ME2 / me3 / Convergence 的文件
 - [ ] 确认 README.txt 里有「约 10 秒闪退 → admin 版 / 关覆盖层」和「先确认无 mod 能进标题」
+- [ ] 上传前把 `ER-Echo-Setup-0.1.0.zip` + `ER-Echo-0.1.0.zip` 丢 VirusTotal：
+      确认只有个别引擎（典型是 Elastic / 未签名的 PyInstaller 误报），把链接和 hash 记进
+      `nexus\false-positive-report.md`；如果多个引擎命中，先别上传，按该文件里的入口申诉
 
 ## 阶段 1：建页面
 
@@ -56,6 +59,8 @@
 4. 可选文件 2：`ER-Echo-0.1.0-ESD-fallback.zip`，category `Optional files`，
    描述里写清「会替换 `mod/script/talk`，和其它改该文件的 mod 冲突」。
 5. 等病毒扫描通过（zip 一般几秒；`.rar` 容易被误判，我们用的是 zip）。
+   若被 **quarantined**：按 `nexus\nexus-quarantine-appeal.md` 给 `support@nexusmods.com` 发信
+   （附 hash + GitHub 源码 + 构建步骤）；**申诉期间不要重新打包**，重申的必须是同一个文件。
 
 ## 阶段 3：图片
 

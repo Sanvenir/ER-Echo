@@ -166,8 +166,15 @@ Copy-One (Join-Path $repo 'install\profiles\builtin_sanvenir.json') (Join-Path $
 $toolExclude = @(
     'live_*.ps1', 'restart_and_test*.ps1', 'restart_and_probe.ps1', 'restart_with_new_dll.ps1',
     '_probe_magic*.py', 'analyze_dump.py', 'profile.*.json', '_inspect_regulation.mjs',
-    'package_release.ps1', 'package_nexus.ps1',
-    'from_save', 'from_save_account', '__pycache__', '*.pyc'
+    'package_release.ps1', 'package_nexus.ps1', 'package_payload.ps1', 'package_plugin.ps1',
+    'from_save', 'from_save_account', '__pycache__', '*.pyc',
+    # 开发/自动化脚本：不随发布包分发（换 DLL、模拟按键、抓图、ESD 构建、打包脚本）。
+    # 一部分是杀毒启发式的典型目标（keybd_event / 退出后替换 DLL），发布包里不需要它们；
+    # 仓库里保留，docs 会注明「仅在仓库/开发环境」。
+    'auto_start.ps1', 'enter_game.ps1', 'focus_game.ps1', 'press_key.ps1', 'sit_grace.ps1',
+    'shot.ps1', 'swap_dll_on_exit.ps1', 'watch_state.py', 'verify_after_restart.py',
+    'probe_face_memory.py', 'patch_grace_esd.py', 'pack_talk_esd.py', 'extract_game_file.py',
+    'make_gui_icon.py', 'install_plugin.ps1', 'ensure_bom.py', 'build_gui_exe.ps1'
 )
 Copy-Tree (Join-Path $repo 'tools') (Join-Path $mainDir 'er-echo\tools') $toolExclude
 Copy-One (Join-Path $repo 'tools\profile.example.json') (Join-Path $mainDir 'er-echo\tools')
