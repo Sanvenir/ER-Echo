@@ -28,20 +28,20 @@ git push origin main
 `tools\build_all.ps1` 会按顺序跑：DLL → 安装器 payload → `ER-Echo-Setup.exe` → 三个 zip，并打印
 每个产物的路径/大小。构建细节见 README 的「从源码构建」。
 
+> **已经发布的版本不要再跑 `build_all.ps1`**：重新构建会改变 PE 时间戳/zip 内容，hash 与已上传的
+> 资产对不上，Nexus 那边的申诉 hash 也会失效。要改包就升版本号，发新 release。
+
 ---
 
-## 1. 打 tag（当前仓库要先把 v0.1.0 挪到发布提交）
+## 1. 打 tag
 
-`v0.1.0` 这个 tag 之前打在早期提交 `a3e7fd7` 上，而**还没有任何 release 用过它**，所以直接把
-tag 移到发布提交是安全的（GitHub 上也没有 release 会因此错位）。确认过没有 release：
+> **当前状态（2026-11-24）**：`v0.1.0` 已发布在
+> <https://github.com/Sanvenir/ER-Echo/releases/tag/v0.1.0>，tag 指向 `514d7e3`，资产 3 个 zip +
+> `release-checksums.txt`。下面「移动旧 tag」的步骤是首次发布时的一次性历史记录；之后每个版本
+> **新建** tag 即可，不要再 force。
 
-```powershell
-# 查看现有 release（应为空）
-Invoke-RestMethod https://api.github.com/repos/Sanvenir/ER-Echo/releases |
-    Select-Object tag_name, name
-```
-
-把 tag 移到当前 HEAD：
+首次发布时 `v0.1.0` 曾打在早期提交 `a3e7fd7` 上，且当时没有任何 release 用过它，所以把 tag 移到
+发布提交（`514d7e3`）是安全的。历史命令（不要再对已发布的版本执行）：
 
 ```powershell
 git tag -f v0.1.0 HEAD
