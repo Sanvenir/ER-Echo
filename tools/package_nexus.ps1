@@ -166,7 +166,7 @@ Copy-One (Join-Path $repo 'install\profiles\builtin_sanvenir.json') (Join-Path $
 $toolExclude = @(
     'live_*.ps1', 'restart_and_test*.ps1', 'restart_and_probe.ps1', 'restart_with_new_dll.ps1',
     '_probe_magic*.py', 'analyze_dump.py', 'profile.*.json', '_inspect_regulation.mjs',
-    'package_release.ps1', 'package_nexus.ps1', 'package_payload.ps1', 'package_plugin.ps1',
+    'package_release.ps1', 'package_nexus.ps1', 'package_payload.ps1', 'package_plugin.ps1', 'build_all.ps1', 'publish_github_release.ps1',
     'from_save', 'from_save_account', '__pycache__', '*.pyc',
     # 开发/自动化脚本：不随发布包分发（换 DLL、模拟按键、抓图、ESD 构建、打包脚本）。
     # 一部分是杀毒启发式的典型目标（keybd_event / 退出后替换 DLL），发布包里不需要它们；

@@ -108,7 +108,7 @@ Copy-One (Join-Path $repo 'install\er_echo_i18n.example.ini') $shared
 $toolExclude = @(
     'live_*.ps1', 'restart_and_test*.ps1', 'restart_and_probe.ps1', 'restart_with_new_dll.ps1',
     '_probe_magic*.py', 'analyze_dump.py', 'profile.*.json', '_inspect_regulation.mjs',
-    'package_release.ps1', 'package_nexus.ps1', 'package_payload.ps1', 'package_plugin.ps1',
+    'package_release.ps1', 'package_nexus.ps1', 'package_payload.ps1', 'package_plugin.ps1', 'build_all.ps1', 'publish_github_release.ps1',
     'from_save', 'from_save_account', '__pycache__', '*.pyc', 'Setup',
     # 开发/自动化脚本：不随发布包分发（换 DLL、模拟按键、抓图、ESD 构建、打包脚本）。
     'auto_start.ps1', 'enter_game.ps1', 'focus_game.ps1', 'press_key.ps1', 'sit_grace.ps1',

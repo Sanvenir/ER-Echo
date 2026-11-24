@@ -1,217 +1,198 @@
-# ER Echo（褪色残响）· 法环 AI 战友 MOD
+# ER Echo锛堣お鑹叉畫鍝嶏級
 
-> 召唤**你自己另一个存档里的角色**当同伴：外观/装备一致，战斗用**游戏原生 AI**，LLM 只当「战斗导演」调行为权重，骨灰式跟随、掉队才传送。
+> 鍙敜**浣犺嚜宸卞彟涓€涓瓨妗ｉ噷鐨勮鑹?*褰撳悓浼达細澶栬銆佷綋鍨嬨€佽澶囥€佺瓑绾с€佹硶鏈叏閮ㄤ竴鑷达紱鎴樻枟鐢?*娓告垙鍘熺敓 AI**锛?> 楠ㄧ伆寮忚窡闅忥紝鎺夐槦鑷姩鎷夊洖锛涜祼绂忚彍鍗曢噷鎹汉鏁般€佸彿浣嶃€侀槦鍙?AI銆佸紑鍏冲弸浼ゃ€?*鍙绾夸娇鐢ㄣ€?*
 
-## 仓库
+![ER Echo](nexus/media/00-banner-1400x400.jpg)
 
-源码、文档与工具都在本仓库；构建产物与发布包**不提交**（见 `.gitignore`），随时可重新生成：
+[English quick start](#english-quick-start) 路 [涓嬭浇瀹夎](#download) 路 [浠庢簮鐮佹瀯寤篯(#build-from-source) 路
+[椤圭洰缁撴瀯](#project-structure) 路 [鏂囨。绱㈠紩](#docs) 路 [鍙戝竷娴佺▼](#release)
 
-| 内容 | 位置 |
-| --- | --- |
-| 源码 / 文档 / 工具 | 仓库根目录 |
-| Rust DLL 源码 | `mod/` |
-| 第三方 crate 快照（构建必需） | `vendor/fromsoftware-rs-main/`（只保留 `eldenring` / `shared` 及许可证） |
-| 构建产物 | `mod/target/`（`cargo build` 生成，已忽略） |
-| Nexus 发布包 | `dist/nexus/`（`tools/package_nexus.ps1` 生成，已忽略） |
+---
 
-脚本不猜游戏目录，统一用 `tools/gamedir.ps1` / `tools/gamedir.py` 探测
-（`-GameDir` 参数 → `$env:ER_ECHO_GAME_DIR` → 老布局 → 当前目录 → Steam 注册表/libraryfolders.vdf）：
-
-```powershell
-powershell -File tools\doctor.ps1 -Target "<Game>"        # 显式指定
-$env:ER_ECHO_GAME_DIR = "<Game>"                          # 或者设环境变量
-cd D:\Projects\ER-Echo; powershell -File tools\doctor.ps1  # 自动探测
-```
-
-## 状态
-
-| 项 | 状态 |
+## 杩欐槸浠€涔?
+ER Echo 鏄?**ELDEN RING 1.17.2** 鐨?DLL mod锛圧ust锛岃繍琛屽湪 Mod Engine 2 / me3 涓嬶級銆傚畠鎶婃父鎴忛噷鐨?銆岄鐏般€嶆崲鎴愪竴涓粠**浣犺嚜宸辩殑瀛樻。**瀵煎嚭鐨勮鑹诧紝骞朵繚鐣欓鐏板師鐢熺殑璺熼殢銆佽拷鍑汇€佷紶閫併€佹柦娉曡涓恒€?
+| 鑳藉姏 | 璇存槑 |
 |---|---|
-| 技术调研（工具链/存档/AI/LLM） | ✅ 完成 |
-| 追加调研（跟随/爬梯/骑乘/多召唤） | ✅ [docs/follow-mount-multi.md](docs/follow-mount-multi.md) |
-| 设计文档 v0.2 | ✅ [docs/design.md](docs/design.md) |
-| Python sidecar（LLM 导演 + 护栏） | ✅ 可跑（`--simulate` 自测通过） |
-| Rust DLL | ✅ 已编译 + 进游戏加载 |
-| 加载器 | ✅ ModEngine2 2.1.0 已装到游戏目录，config 指向 `er_echo.dll` |
-| 授权召唤（骨灰 + 召唤石） | ✅ 实测：改 BuddyParam 行后召唤出人形克隆，可见、不透明 |
-| 克隆体身份 | ✅ 实测是 `PlayerIns`（自带 `PlayerGameData`/`face_data`） |
-| 召唤后注入（装备/脸/等级） | ✅ 实测：lv9、脸=目标档案、左手 31330000 / 右手 2000000，玩家完全不变 |
-| 多存档同场（一召多体） | ✅ 实测：3 个克隆体等级 9/15/9（按 `i % n` 分配档案） |
-| 跟随 | ✅ 原生骨灰跟随可用；距离日志用物理世界坐标；**掉队由骨灰行自己处理**（整行复制拟态本体 20700001 后实测 42 m → 1 m 自动拉回） |
-| 零命令流程（`er_echo.ini`） | ✅ 进游戏自动加载档案 + 改骨灰行；**进游戏 / 坐火 / 传送 / 复活后自动召唤一队**（`summon_events=true`），F8 也可手动召；绕过区域/召唤石/冷却/「一次一队」（见 [§15](docs/implementation-log.md)） |
-| 灵体特效 | ✅ 去掉 295000（NpcParam 常驻槽）+ 295190（召唤时挂的着色）；实测外观恢复正常、跟随不变 |
-| 队友体型（身高/骨架/四肢） | ✅ 按档案的 `body_type` + 5 个体型滑条，在**出生时**从 `CharaInitParam → FACE_PARAM` 烘焙（1/2/3 号位各一行，见 [§28](docs/implementation-log.md)）；出生后改脸/装备不影响身体，改完要重召 |
-| 同伴施法（法系队友） | ✅ 记忆法术 14 槽从存档导出（PGD `+0x93B4`）并注入克隆体 + 无限蓝；**另外把拟态 think 行的交战半径从 2 m 抬到 13/7 m**（出厂值贴脸才反应，法系根本没有射程，§17.1）；May lv6 `[4000, 4070]` 已在内存里就位，`bullet:` 日志实测一次 7 颗 |
-| 权重 → AI（M4） | ✅ 可观察：`aggression` → 侦测/交战半径（6–20 m）、`spell_rate` → 记忆槽开几发（0/半/全）、`guard_rate` → 举盾、`target_switch` → 换目标；`combo/item/heal/spacing` 暂无可靠落点（§17.2） |
-| 战斗验证台（不用真打） | ✅ `dummy` 把一只克隆体变敌对木桩 + `combat_probe`/`bullet_probe` 量化：掉血、TTK、子弹归属、克隆体血量 |
-| 队友伤害修正 | ✅ 摘掉拟态泪滴行上的灵体削弱 spEffect `296000`（伤害 ×0.25 / 受伤 ×0.5 / 削韧 ×0.05）和 `20297000`（受伤削韧 ×0.5）：队友的伤害/受伤/削韧与玩家褪色者一致，**不动 SpEffectParam 行**，其它骨灰不受影响（`[clone] player_damage=true`） |
-| 玩家升级 → 队友跟升 | ✅ 检测玩家等级/8 维属性/三围上限的增量，按同样的加点追给所有已加载档案，写回 profile JSON（`[clone] auto_level=true`）；场上克隆体立刻重写等级/属性 |
-| 友伤开关 | ✅ 赐福「战友」二级菜单新增「友伤：开（20%）/关」：打开后 `AtkParam_Pc` 的 `friendlyTarget` 全开，玩家与同伴的攻击能命中对方，但只造成 **20%** 伤害（`[combat] friendly_fire_rate`；打普通敌人仍是 100%）；同伴队伍号/`isBuddyAI`/`team_attack_effectivity=0` 不变（不会把玩家当敌人），并钉住 `disable_lock_on`（不能被锁定）。状态持久化在 `er_echo_roster.json` |
-| 战友模式·敌人生命补正 | ✅ 按当前**出场且活着**的战友人数补正敌人生命上限：0/1/2/3 人 = ×1.0/×1.5/×1.8/×2.0（`[balance] enemy_hp_scaling` + `enemy_hp_rates`）。运行时写每只敌人的 `CSChrDataModule { hp, max_hp, max_uncapped_hp, base_hp }`，**已经在打的 Boss 也立刻生效**，并按百分比保留已掉血量；收起战友/关闭功能恢复原上限（不写 `NpcParam`/`regulation.bin`）。`enemy_hp_status` 可看每只敌人的数值/跟踪状态 |
-| 队友 AI（每号位） | ✅ 赐福「战友 → 队友 AI」三级菜单：**1/2/3 号位分别**点风格（默认 → 均衡 → 近战 → 法术 → 守护 → 激进），立刻写回该队友自己的 profile JSON `ai` 段（`preset` + 4 个数）。`aggression / guard_rate / target_switch` 落在每号位独立的 think 行（默认 `100000020/30/40`，运行时先从 `100000010` 整行复制、只覆盖差异字段，不借别的 AI 语义），**下次召唤**生效；`spell_rate` 直接改该克隆体的记忆槽数量，**立即**生效。没写 `ai` 的档案 = 跟随全局权重（和加功能前完全一样） |
-| 状态/日志/恢复（M5） | ✅ `status`（F6 / 每 30 秒）+ 日志轮转（8 MB、带 `+Xs`）+ 心跳/上次操作（`er_echo_heartbeat.txt`）+ `safe_mode` + `resummon`/掉队保底 |
-| 召唤区域限制 | ⚠️ 直接写召唤请求可绕过（已实测死区能召）；骨灰**物品**本身在死区仍不可用（引擎菜单层判定，见 §15.6） |
-| 离线导出存档角色（不切号） | ✅ `export_profile_from_save.py` 直接解析 `.sl2`（明文 BND4）；实测召唤出旧存档的 Sirenix lv17 / Ludwig lv9 |
-| 内置档案（彩蛋 / 备用） | ✅ 随包带 **Sanvenir**（Lv1）：安装器固定复制到 `profiles\builtin_sanvenir.json` 并追加到 `profiles=` 末尾；导出工具只写/删 `slot*`，不会覆盖它；重装恢复发布版 |
-| 离线字段完整性 | ✅ 与运行时 dump 逐字段对照（`tools/diff_profile.py`）：等级/8 属性/22 槽装备/脸部 276B/HP·FP·耐力上限 全一致 |
-| LLM 输入（战斗状态） | ✅ 每秒一条结构化 state：玩家三围/等级、克隆体（等级·血量·距离）、最近敌人、边沿事件 |
-| LLM 工具调用（换装/加点） | ✅ `set_equipment`/`set_stats`/`rollback_equipment` 作用在**克隆体**上，带槽位白名单、参数存在性、±20% clamp、回滚点 |
-| 游戏内 UI（原生） | ✅ 赐福根菜单「战友（n/m）」→ **二级菜单**（人数 / 1-3 号位 / 队友 AI（三级） / 立即重召 / 友伤 / 返回），运行时 EzState 注入；人数切换后「立即重新召唤」按新人数重召（1→3 / 3→1 实测）；消息钩子、F12 给装备（改内存档案，不写盘；没选中时恢复档案原样） |
-| 多语言菜单 | ✅ `[i18n] language=game`（默认**跟随游戏文本语言**：Steam per-game 语言 → manifest → 模拟器 → Windows）或 `auto` / `zh-CN` / `zh-TW` / `en` / `ja`；`er_echo_i18n.ini` 可覆盖/新增语言；安装器「游戏内菜单语言」下拉框直接写 ini（[docs/i18n.md](docs/i18n.md)） |
-| 安装 / 跨机器 | ✅ [docs/INSTALL.md](docs/INSTALL.md)：版本/加载器/权限三道门槛、换机清单、症状对照；`tools/doctor.ps1` 预检、`tools/package_release.ps1` 打免存档发布包 |
-| Nexus 发布素材 | ✅ [nexus/README.md](nexus/README.md)：页面文案/字段/权限/AI 披露/许可/上传清单；`tools/package_nexus.ps1` 出主包+可选 ESD 包；游戏内截图清单见 [nexus/shotlist.md](nexus/shotlist.md) |
-| 可插拔安装 | ✅ [docs/PLUGIN.md](docs/PLUGIN.md)：整个 mod 收进 `mods\ER-Echo\`（DLL 读同目录 ini），不改 ME2 的 config/bat；**内置图形工具**（`Export-Profiles.bat` → 安装 / 导出 / 写 `profiles=`）；`tools/package_plugin.ps1` 打包，`reset_to_vanilla.ps1` / `install_plugin.ps1` 做纯净安装实验 |
-| 一键安装器 | ✅ `ER-Echo-Setup.exe`（Nexus 主文件；`tools/build_gui_exe.ps1`，payload 由 `tools/package_payload.ps1` 生成）：**只输入游戏路径**就自动装好——拷文件、导出存档角色、写 `profiles=`、改加载器配置（全带备份），卸载同页；exe 不用放进 Game 目录 |
-| 一键启动 | ✅ 安装器同一页的「一键启动游戏」：**原版 + ME2** 跑 `mods\ER-Echo\launch-er-echo*.bat`（可选管理员启动，绕 10 秒闪退）；**原版 + me3** 跑 `me3 launch --auto-detect -p .\er-echo.me3`；**Convergence + 自带 me3** 跑 `me3 launch -p .\me3\convergence*.me3`（按 SeamlessCoop 自动选普通/无缝配置）。安装完成后也会问「现在启动？」。命令行：`ER-Echo-Setup.exe --launch <路径> [--admin] [--dry-run] [--me3 <me3.exe>]` |
-| 加载器引导 | ✅ 安装器检测 **Mod Engine 2 / me3**：原版可选「自动 / ME2 / me3（独立安装）」，me3.exe 可留空自动查找（PATH / 注册表 / 常见目录）或浏览指定；没装时弹窗引导 + 「获取 Mod Engine 2」「获取 me3」直接跳官方发布页，「加载器安装步骤…」给出三种组合的详细步骤；**安装器不打包、不分发** ME2/me3/Convergence（只写 ER Echo 文件和配置引用，合规） |
-| 参数表 dump | ✅ exe「安装 / 配置」页的「导出参数表」（或 `ER-Echo-Setup.exe --dump-tables <游戏路径>`）：走 DLL 的 IPC 让运行中的游戏写 `er_echo_equip.json` / `er_echo_magic.json`，导出器据此硬校验装备 id（混搭套装角色也能过）；Convergence 那套表已随包发布在 `payload\tables\convergence\` |
-| Convergence 适配 | ✅ [docs/CONVERGENCE.md](docs/CONVERGENCE.md)：Convergence 3.x 走 me3，安装器改成往 `me3\convergence*.me3` 追加 `[[natives]]`；不覆盖它的 talk ESD；已实测 DLL 在 me3 下注入并挂上 EzState 钩子（`er_echo_npc.json` 2036415 字节 = Convergence 的 regulation） |
+| 鑷繁鐨勮鑹?| 浠?`.sl2` 瀵煎嚭锛氳劯銆佷綋鍨嬨€?2 涓澶囨Ы銆佺瓑绾с€? 缁村睘鎬с€佽蹇嗘硶鏈?|
+| 1鈥? 鍚嶅悓浼?| 姣忎釜鍙蜂綅涓€浠芥。妗堬紝鍙悓鍦猴紱鍙敜涓嶇湅鍖哄煙/鍙敜鐭?鍐峰嵈 |
+| 鍘熺敓 AI | 璺熼殢銆佹帀闃熶紶閫併€佺储鏁屻€佷妇鐩俱€佹柦娉曪紱涓嶆敼 `regulation.bin`銆佷笉鍐欎綘鐨?`.sl2` |
+| 璧愮銆屾垬鍙嬨€嶈彍鍗?| 浜烘暟 / 1鈥? 鍙蜂綅 / 闃熷弸 AI锛堜笁绾э級/ 绔嬪嵆閲嶅彫 / 鍙嬩激 / 杩斿洖 |
+| 骞宠　涓庝究鍒?| 闃熷弸浼ゅ淇涓庣帺瀹朵竴鑷淬€佸崌绾ц窡闅忋€佹晫浜?HP 鎸夊嚭鎴樺弸浜烘暟琛ユ銆乣F12` 缁欒澶?|
+| 澶氳瑷€鑿滃崟 | 榛樿璺熼殢娓告垙鏂囨湰璇█锛堣嫳 / 绠€涓唴缃紝鍙嚜瀹氫箟锛?|
+| 瀹夎鏂瑰紡 | 涓€閿畨瑁呭櫒锛堟帹鑽愶級鎴栨墜鍔ㄨВ鍘嬶紱涓嶆墦鍖呫€佷笉鍒嗗彂鍔犺浇鍣?|
+| 鍙€?| Python LLM銆屾垬鏂楀婕斻€嶏紝榛樿 mock 绂荤嚎 |
 
-实现细节与复现步骤：[docs/implementation-log.md](docs/implementation-log.md)
-安装 / 换机器 / 兼容性：[docs/INSTALL.md](docs/INSTALL.md)（English: [docs/INSTALL.en.md](docs/INSTALL.en.md)）
-启动链排障（启动器崩溃 / 10 秒闪退 / 无 mod 也崩）：[docs/handoff-launch.md](docs/handoff-launch.md)
-菜单多语言：[docs/i18n.md](docs/i18n.md)
-日常使用（导出另一个存档、配置、召唤、LLM 调参）：[docs/usage.md](docs/usage.md)
-启动链 / 发布排障（三个坑：launcher 崩溃、游戏本体崩、Steam 覆盖层导致 10 秒闪退）：[docs/handoff-launch.md](docs/handoff-launch.md)
+> 鈿狅笍 **鍙绾?*锛氬叧 EAC 鍚姩锛屽甫 mod 鐨勫瓨妗ｄ笉瑕佷笂绾匡紙浼?soft-ban锛夈€傛敼妗ｅ墠鍏堝浠?`ER0000.sl2`銆?
+---
 
-## 现在能做什么
+## English quick start
 
-- **零命令使用**：`er_echo.ini` 配好 `profiles` + `buddy_rows` 后，进游戏直接用骨灰即可，
-  召唤出来的就是目标存档的角色（外观/装备/等级），玩家自己不变；
-- 注入后持续维护（每 15 帧重写），引擎变身/重招不会把外观刷回去；
-- 多存档同场：`profiles=a.json,b.json` → 默认按名单顺序出场（`er_echo_roster.json`）；
-- **赐福原生菜单**：最上面「战友（n/m）」，点进去是二级菜单：队伍人数 / 1-3 号位 / 队友 AI（三级菜单，每号位单独设风格） / 立即重新召唤 / 友伤开关（20%） / 返回
-  （运行时 `EzState` 注入，不用改 ESD；`er_echo.ini` 的 `[ui] nested_menu` 可关，回退根列表版本）；
-- **每个队友单独的 AI**：赐福「战友 → 队友 AI」里给 1/2/3 号位分别点 默认/均衡/近战/法术/守护/激进；
-  点完立刻写回该队友 profile JSON 的 `ai` 段（`preset` + `aggression/spell_rate/guard_rate/target_switch`）。
-  法术槽立即生效，交战半径/举盾/换目标在下一次召唤生效；没设置的档案跟随全局权重（详见 [usage.md](docs/usage.md)）；
-- **队友体型按档案**：Buddy 在**出生时**按该号位档案的 `body_type` + 5 个体型滑条烘焙（1/2/3 号位各一行 init/FACE_PARAM，见 [§28](docs/implementation-log.md)）；出生后改脸/装备不影响身体，改完要重召；
-- **F12 给队友装备**：置物包/装备菜单光标停在武器/防具/护符/法术上按 F12；没选中装备/法术时把队友的装备/法术恢复成档案原样（误按不会再复制玩家装备）；
-- **战友模式·敌人生命补正**：按当前出战友人数提高敌人生命上限（1/2/3 人 = 1.5/1.8/2.0 倍），
-  场上的 Boss 也立刻生效；`[balance]` 可关/可改倍率，`enemy_hp_status` 看跟踪详情（详见 [usage.md](docs/usage.md) §3.3）；
-- **菜单多语言**：`er_echo.ini` 的 `[i18n] language=game`（默认：**跟随游戏文本语言**，
-  即 Steam 的 per-game 语言；拿不到再退 Steam manifest / 模拟器配置 / Windows），
-  也可以写 `auto`（跟 Windows）或 `zh-CN` / `zh-TW` / `en` / `ja`；自定义语言放
-  `er_echo_i18n.ini`（不用重编译，见 [docs/i18n.md](docs/i18n.md)）；安装器「游戏内菜单语言」
-  下拉框改完会立即写入 ini；
-- 运行时导出 **BuddyParam / RideParam / NpcParam / NpcThinkParam / 玩家 profile** 为 JSON（不需要 Smithbox）；
-- 运行时写 `NpcAiBehaviorProbability` / `NpcThinkParam` / `NpcParam`（LLM 权重通道）；
-- 从当前角色一键导出档案：`python tools/dump_to_profile.py er_echo_profile.json -o profiles/me.json`；
-- 手动命令（调试用）：`apply_to_clone`、`auto_apply`、`set_clone_profiles`、`equip_probe`、`clone_info`、
-  `status`、`combat_probe`、`dummy`、`weights_probe`、`resummon`、`enemy_hp_status`、`enemy_hp_scale`；
-- 热键：`F6` 状态、`F7` 收回、`F8` 召唤（旧流程也一样）、`F9` 重载 profile、`F10` 调试开关、`F11` 注入开关、`F12` 给队友选中项（没选中则恢复档案原样）。
+ER Echo summons **characters from your own save files** as Spirit Ash companions: same face, body,
+gear, level and spells, driven by the game's native AI. Offline only.
 
-## 快速开始（进游戏）
+- **Requires:** ELDEN RING **1.17.2** (exe 2.7.2.0 / 2.7.2.1), Windows 10/11 x64, Mod Engine 2
+  (tested 2.1.0) or me3 (standalone, or bundled with The Convergence 3.x).
+- **Install:** download `ER-Echo-Setup-0.1.0.zip`, extract anywhere, run `ER-Echo-Setup.exe`, pick the
+  game folder + loader, **Install**, then **Launch game**. No manual config editing.
+- **Manual install:** `ER-Echo-0.1.0.zip` (no `.exe`) 鈫?unzip into `...\ELDEN RING\Game`, follow its
+  `README.txt`.
+- **In game:** Site of Grace 鈫?first entry **Comrades (n/m)**; `F8` summons directly.
+- **Build from source:** see [Build from source](#build-from-source); one command is
+  `powershell -File tools\build_all.ps1`.
+- Loaders are **not** bundled or redistributed. Nothing is sent over the network; the DLL only opens
+  a loopback socket `127.0.0.1:7811` for local tools.
 
+---
+
+<a id="download" name="download"></a>
+## 涓嬭浇涓庡畨瑁?
+| 娓犻亾 | 鎷夸粈涔?|
+|---|---|
+| **Nexus Mods**锛堜富鍙戝竷椤碉級 | 涓绘枃浠?`ER-Echo-Setup-0.1.0.zip`锛涘彲閫夛細鎵嬪姩鍖呫€丒SD fallback 鍖?|
+| **GitHub Releases** | 鍚屾牱涓変釜 zip + `release-checksums.txt`锛堝鐢ㄤ笅杞?/ 鏍稿 hash锛?|
+
+涓変釜鍖呯殑鍒嗗伐锛?
+| 鏂囦欢 | 鐢ㄩ€?|
+|---|---|
+| `ER-Echo-Setup-0.1.0.zip` | **鎺ㄨ崘**銆備竴閿畨瑁呭櫒锛氭嫹鏂囦欢銆佸鍑哄瓨妗ｈ鑹层€佸啓 `profiles=`銆佹敼鍔犺浇鍣ㄩ厤缃紙鍏ㄥ甫澶囦唤锛夈€佸悓椤靛嵏杞斤紝骞舵湁涓€閿惎鍔ㄣ€?|
+| `ER-Echo-0.1.0.zip` | 鎵嬪姩瀹夎锛氳В鍘嬪埌 `...\ELDEN RING\Game`锛屾寜鍖呭唴 `README.txt` 鑷繁鍔?`external_dlls` / `mod_loader`銆?*涓嶅惈 exe**銆?|
+| `ER-Echo-0.1.0-ESD-fallback.zip` | 鍙€夈€傚彧鍦ㄨ繍琛屾椂娉ㄥ叆鐨勩€屾垬鍙嬨€嶅叆鍙ｅ缁堜笉鍑虹幇鏃剁敤锛屼細鏇挎崲 talk ESD銆?|
+
+瀹夎鍓嶆彁锛?
+1. 姝ｇ増 ELDEN RING **1.17.2**锛岃兘**涓嶅甫 mod**杩涙爣棰樺苟绋冲畾涓€鍒嗛挓锛堝惁鍒欏厛淇父鎴?EAC锛夈€?2. 瑁呭ソ鍔犺浇鍣細鍘熺増 鈫?[Mod Engine 2](https://github.com/soulsmods/ModEngine2/releases)锛?   鍘熺増 + me3 鎴?The Convergence 3.x 鈫?[me3](https://github.com/garyttierney/me3/releases)銆?3. 澶囦唤 `%APPDATA%\EldenRing\<SteamID>\ER0000.sl2`銆?
+> 瀹夎鍣ㄤ笉甯?ME2 / me3 / Convergence 鐨勬枃浠讹紝鍙啓閰嶇疆寮曠敤锛涢〉闈㈤噷缁欎簡瀹樻柟閾炬帴鍜屽畨瑁呮楠ゃ€?> 瀹夎鍣ㄦ湭鍋氫唬鐮佺鍚嶏紝涓埆鏉€杞? VirusTotal 寮曟搸锛堝吀鍨嬫槸 Elastic锛変細鎶?PyInstaller 鍖呰鎶ヤ负鎭舵剰锛?> 婧愮爜銆佹瀯寤鸿剼鏈拰姣忔鍙戝竷鐨?SHA-256 閮藉湪鏈粨搴擄紝浠嬫剰鐨勮瘽鐢ㄦ墜鍔ㄥ寘鎴栬嚜琛屾瀯寤恒€?
+---
+
+<a id="build-from-source" name="build-from-source"></a>
+## 浠庢簮鐮佹瀯寤?
+### 1. 宸ュ叿閾撅紙涓€娆℃€э級
+
+| 缁勪欢 | 瑕佹眰 | 鐢ㄩ€?|
+|---|---|---|
+| Windows | 10/11 x64 | 鍏ㄩ儴 |
+| Rust | `rustup` + `stable-x86_64-pc-windows-gnu` 宸ュ叿閾?| 缂栬瘧 `er_echo.dll` |
+| MSYS2 binutils | 瑙ｅ帇鍒?`%USERPROFILE%\er-tools\binutils`锛堟彁渚?`mingw64\bin\as.exe`锛?| Rust 鐨?gnu 閾炬帴 |
+| Python | 3.11锛坄python` 鍦?PATH锛?| 瀹夎鍣?/ 瀵煎嚭宸ュ叿 |
+| Python 鍖?| `PySide6`銆乣PyInstaller`銆乣Pillow` | 鏋勫缓瀹夎鍣紱鑴氭湰浼氳嚜鍔ㄨ鍒?`build\pydeps`锛屼笉鍔ㄧ郴缁?Python |
+| 娓告垙鏈綋 | 1.17.2锛堝彲閫夛級 | `doctor.ps1` 瀹炴祴銆佹瀯寤哄悗椤烘墜鎷?DLL |
+
+> Rust 鐢?gnu 宸ュ叿閾炬槸鍥犱负閾炬帴鍣ㄨ嚜甯?`rust-lld`+MinGW锛?*涓嶉渶瑕?* Visual Studio Build Tools锛?> 浣?gnu 宸ュ叿閾剧己 `as.exe`锛屾墍浠ラ渶瑕?MSYS2 binutils銆?
+### 2. 涓€鏉″懡浠ゆ瀯寤哄叏閮?
 ```powershell
-# 0) 确认 config_eldenring.toml 里 [extension.mod_loader] 有：
-#    mods = [ { enabled = true, name = "er-echo", path = "mod" } ]
-#    空数组会导致 mod/script/talk 下的 ESD 完全不加载（坐火没有「战友」）。
-# 0.5) 换机器 / 首次安装先自检（只读，游戏不用开）：
-powershell -NoProfile -ExecutionPolicy Bypass -File tools\doctor.ps1
-
-# 1) 启动（EAC 关闭、离线），自动点掉标题/断线提示并进入游戏
-powershell -NoProfile -ExecutionPolicy Bypass -File tools\auto_start.ps1
-# 进图后需要坐火时：
-powershell -NoProfile -ExecutionPolicy Bypass -File tools\sit_grace.ps1
-
-# 2) 进游戏后，另开一个终端 dump 数据
-cd "D:\Projects\ER-Echo"
-python tools\ipc_client.py dump_buddies
-python tools\ipc_client.py dump_ride
-python tools\ipc_client.py dump_profile
-
-# 3) 从 dump 里挑到行 id 后，告诉 DLL（不用重编译）
-python tools\ipc_client.py set_rows --behavior 0 --think 133200000 --npc 133201000
-python tools\ipc_client.py set_weights --aggression 0.8 --dodge_rate 0.4
-
-# 4) 召唤后注入：load_profile → 改骨灰行成人形 → 用骨灰 → 克隆体变成目标角色
-python tools\ipc_client.py load_profile --path profiles\me.json   # 先导出你的角色
-python tools\ipc_client.py set_buddy_row --id 23200000 --npc 100000010 --think 100000010 --init 26050 --follow 2
-#    （在游戏里用「离群野狼」骨灰）
-python tools\ipc_client.py clone_info          # 看 face_prefix / equip / level
-python tools\ipc_client.py apply_to_clone --stats true
-
-# 5) LLM 通道：看状态流 / 让它换装加点（工具调用只作用于克隆体）
-python tools\watch_state.py --seconds 30
-python tools\ipc_client.py set_equipment --args "{\"loadout\":{\"head\":630000}}"
-python tools\ipc_client.py set_stats --args "{\"vigor\":12}"
-python tools\ipc_client.py rollback_equipment
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\build_all.ps1
 ```
 
-产物（在游戏根目录）：
-- `er_echo.log`：DLL 日志（UTF-8，`Get-Content -Encoding utf8` 看）
-- `er_echo_buddies.json`：所有骨灰召唤行（找 Mimic Tear）
-- `er_echo_ride.json`：骑乘行（找 c0000 ↔ 坐骑）
-- `er_echo_profile.json`：当前角色等级/属性/装备/脸缓冲
-- `er_echo_roster.json`：赐福菜单里的出场人数 / 名单（0–3 人，`slots` 为 `profiles` 下标）
-
-> 同一时间只能有一个 IPC 客户端；跑 `ipc_client.py` 前先停掉 `bridge/director.py`。
-
-## 构建
-
-前置：Windows + rustup `stable-x86_64-pc-windows-gnu` + MSYS2 binutils（提供 `as.exe`；
-Rust 自带 dlltool 需要它）。细节见 [implementation-log.md](docs/implementation-log.md) §1。
+瀹冩寜椤哄簭鎵ц涓嬮潰鍥涙锛屾渶鍚庢墦鍗颁笁涓?zip 鐨勮矾寰?/ 澶у皬锛屽苟鏇存柊 `nexus\release-checksums.txt`銆?
+### 3. 鍒嗘鏋勫缓锛堟帓鏌ユ椂鐢級
 
 ```powershell
-cd mod
-powershell -ExecutionPolicy Bypass -File .\build.ps1
+# 1) Rust DLL -> mod\target\release\er_echo.dll锛堟帰鍒版父鎴忕洰褰曚細椤烘墜鎷疯繃鍘伙級
+powershell -NoProfile -ExecutionPolicy Bypass -File mod\build.ps1
+
+# 2) 瀹夎鍣?payload -> build\payload锛圖LL + 鏂囨。 + 鍚姩 bat + talk ESD + 璁稿彲锛?powershell -NoProfile -ExecutionPolicy Bypass -File tools\package_payload.ps1 -SkipBuild
+
+# 3) 瀹夎鍣?-> dist\tools\ER-Echo-Setup\锛坥nedir锛岄娆′細鑷姩瑁?PySide6/PyInstaller/Pillow锛?powershell -NoProfile -ExecutionPolicy Bypass -File tools\build_gui_exe.ps1 -SkipPayload
+
+# 4) 涓変釜鍙戝竷 zip -> dist\nexus\锛屽苟鍐?nexus\release-checksums.txt
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\package_nexus.ps1 -SkipBuild
 ```
 
-产物：`mod/target/release/er_echo.dll`（`build.ps1` 若探测到游戏目录会顺手复制）。
+浜х墿锛?
+| 浜х墿 | 浣嶇疆 | 璇存槑 |
+|---|---|---|
+| `er_echo.dll` | `mod\target\release\` | Rust DLL锛岀害 1.6 MB |
+| payload | `build\payload\` | 瀹夎鍣ㄥ唴宓屽唴瀹癸紙47 涓枃浠讹級 |
+| `ER-Echo-Setup.exe` + `_internal\` | `dist\tools\ER-Echo-Setup\` | onedir锛岀害 73 MB锛?*鏁翠釜鏂囦欢澶逛竴璧峰垎鍙?* |
+| `ER-Echo-Setup-<ver>.zip` | `dist\nexus\` | 涓绘枃浠讹紝绾?28 MB |
+| `ER-Echo-<ver>.zip` | `dist\nexus\` | 鎵嬪姩鍖咃紝绾?1 MB |
+| `ER-Echo-<ver>-ESD-fallback.zip` | `dist\nexus\` | 鍙€?ESD 鍙樹綋 |
+| `release-checksums.txt` | `nexus\` | 涓変釜 zip + DLL 鐨?SHA-256 |
 
-## 打包 / 发布
+### 4. 鏋勫缓娉ㄦ剰浜嬮」
 
-```powershell
-# 完整发布流程（源码在仓库根目录，不在游戏目录里）
-powershell -NoProfile -ExecutionPolicy Bypass -File mod\build.ps1              # 1) Rust DLL
-powershell -NoProfile -ExecutionPolicy Bypass -File tools\package_payload.ps1  # 2) 安装器 payload
-powershell -NoProfile -ExecutionPolicy Bypass -File tools\build_gui_exe.ps1    # 3) ER-Echo-Setup.exe
-powershell -NoProfile -ExecutionPolicy Bypass -File tools\package_nexus.ps1    # 4) 三个 Nexus zip
-```
+- **PowerShell 5.1 璇?UTF-8**锛歚.ps1` 閲屾湁涓枃灏卞繀椤诲瓨鎴?**UTF-8 with BOM**锛屽惁鍒欎細琚綋 ANSI(GBK)
+  璇汇€佹妸涓嬩竴琛屽悶杩涙敞閲娿€備粨搴撻噷鐨?`.ps1` 閮藉甫 BOM锛屾敼瀹岃妫€鏌?`[IO.File]::ReadAllBytes` 鍓嶄笁瀛楄妭銆?- **`as.exe` 鎵句笉鍒?*锛氱‘璁?`%USERPROFILE%\er-tools\binutils\mingw64\bin\as.exe` 瀛樺湪锛?  `mod\build.ps1` 浼氭妸瀹冨拰 `%USERPROFILE%\.cargo\bin` 涓存椂鍔犺繘 PATH銆?- **pip 鎱?瓒呮椂**锛氬畨瑁呭櫒鏋勫缓璧版竻鍗庨暅鍍忥紙`tools\build_gui_exe.ps1` 閲岀殑 `-i`锛夛紱绂荤嚎鏃跺厛鎵嬪姩鎶?  `PySide6` / `pyinstaller` / `pillow` 瑁呰繘 `build\pydeps`銆?- **瀹夎鍣?GUI 渚濊禆**锛?*涓嶈**鎹㈠洖 PyQt5锛圙PLv3/鍟嗕笟鍙岃鍙紝浼氭妸瀹夎鍣ㄥ彉鎴?GPL 浣滃搧锛夛紱
+  鐜板湪鐢?PySide6锛圠GPLv3锛夛紝鏋勫缓鑴氭湰浼氳嚜鍔ㄨ骞惰鍓棤鐢?Qt 妯″潡銆?- **鏉€杞鎶?*锛氭湭绛惧悕 + PyInstaller + 娉ㄥ叆娓告垙鐨?DLL 鏄父瑙佸惎鍙戝紡鐩爣锛涙瀯寤?鍙戝竷鍓嶅彲鍙傝€?  `nexus\false-positive-report.md`銆傛瀯寤虹敤 `--onedir`銆乣--noupx`锛堣剼鏈凡鍥哄畾锛夈€?- **鏋勫缓浜х墿涓嶅叆搴?*锛歚mod/target/`銆乣build/`銆乣dist/` 閮藉湪 `.gitignore` 閲岋紝闅忔椂鍙噸寤恒€?
+---
 
-产物在 `dist\nexus\`：安装器（主文件）+ 手动安装包 + 可选 ESD fallback 包；
-上传前对照 `nexus\release-checksums.txt` 和 [nexus/checklist.md](nexus/checklist.md)。
-
-```powershell
-# 可插拔插件包（mods\ER-Echo\，不改 ME2 配置）
-powershell -NoProfile -ExecutionPolicy Bypass -File tools\package_plugin.ps1
-```
-
-Nexus 页面文案 / 字段 / 截图清单 / 上传检查表在 [nexus/](nexus/README.md)。
-运行时不需要 Python；只有导出档案、IPC 调试、LLM 导演需要。
-
-## 目录
+<a id="project-structure" name="project-structure"></a>
+## 椤圭洰缁撴瀯
 
 ```
 ER-Echo/
-├─ README.md
-├─ LICENSE / LICENSE-MIT / LICENSE-APACHE
-├─ docs/                         设计、安装、使用、排障、实现日志、文档配图（docs/images/）
-├─ config/                       behavior_map.yaml / weights.schema.json
-├─ bridge/                       Python sidecar（director / protocol / profile_reader）
-├─ install/                      er_echo.ini 模板、ME2 配置片段、启动 bat 模板、参数表
-├─ nexus/                        Nexus 发布素材（文案/字段/截图清单/上传清单/media）
-├─ tools/                        doctor、gamedir、导出、IPC、打包、ESD 构建等
-├─ ui/                           赐福菜单 ESD 资产（源 + 打包用的 out_vanilla / out_rootmenu）
-├─ mod/                          Rust DLL（src + Cargo + build.ps1 + examples/offsets.rs）
-└─ vendor/fromsoftware-rs-main/  上游 crate 快照（eldenring / shared，含 NON-AI 许可证）
+鈹溾攢 mod/                        Rust DLL锛坈dylib锛?鈹? 鈹溾攢 src/                     lib.rs / ezstate.rs / i18n.rs / balance.rs / spirit.rs / ui.rs / ipc.rs ...
+鈹? 鈹溾攢 Cargo.toml               鐗堟湰鍙凤紙鍙戝竷鏃朵笌鏂囦欢鍚嶃€侀〉闈繚鎸佷竴鑷达級
+鈹? 鈹溾攢 build.ps1                鏋勫缓 DLL锛堣 PATH銆乧argo build --release锛?鈹? 鈹斺攢 examples/offsets.rs      鍋忕Щ閲忔帰娴嬪皬宸ュ叿
+鈹溾攢 vendor/fromsoftware-rs-main/  涓婃父 crate 蹇収锛坋ldenring / shared锛屽惈 NON-AI 璁稿彲璇佸叏鏂囷級
+鈹溾攢 tools/                      鏋勫缓 + 杩愯鏃跺伐鍏?鈹? 鈹溾攢 build_all.ps1            涓€鏉″懡浠ゆ瀯寤哄叏閮?鈹? 鈹溾攢 package_payload.ps1      鐢熸垚瀹夎鍣?payload
+鈹? 鈹溾攢 build_gui_exe.ps1        PyInstaller 鎵撳寘 ER-Echo-Setup.exe
+鈹? 鈹溾攢 package_nexus.ps1        鐢熸垚涓変釜鍙戝竷 zip + 鏍￠獙娓呭崟
+鈹? 鈹溾攢 publish_github_release.ps1  鍙戝竷鍒?GitHub Releases
+鈹? 鈹溾攢 er_echo_setup.py         瀹夎/鍗歌浇/鍔犺浇鍣?鍚姩/鍙傛暟琛紙鏃?Qt 渚濊禆鐨勬牳蹇冿級
+鈹? 鈹溾攢 profile_export_gui.py    Qt 鐣岄潰锛堝畨瑁呫€佸鍑恒€佽缃級
+鈹? 鈹溾攢 doctor.ps1               瀹夎棰勬锛堢増鏈?鍔犺浇鍣?渚濊禆/鏉冮檺/鎻愭潈/bat 鍙傛暟锛?鈹? 鈹溾攢 gamedir.ps1 / .py        娓告垙鐩綍鎺㈡祴
+鈹? 鈹溾攢 export_profile_from_save.py  浠?.sl2 瀵煎嚭瑙掕壊
+鈹? 鈹溾攢 ipc_client.py / ipc_send.py  DLL 鏈湴 IPC 宸ュ叿
+鈹? 鈹斺攢 switch_menu_mode.ps1 / reset_to_vanilla.ps1 ...
+鈹溾攢 bridge/                     鍙€?Python sidecar锛圠LM 鎴樻枟瀵兼紨锛岄粯璁?mock锛?鈹溾攢 config/                     behavior_map.yaml / weights.schema.json
+鈹溾攢 install/                    er_echo.ini 妯℃澘銆丮E2 閰嶇疆鐗囨銆佸惎鍔?bat 妯℃澘銆佸唴缃。妗堛€丆onvergence 鍙傛暟琛?鈹溾攢 ui/                         璧愮鑿滃崟 ESD 璧勪骇锛坆ase 妯℃澘 / esd 鑴氭湰 / out_vanilla / out_rootmenu锛?鈹溾攢 docs/                       瀹夎銆佷娇鐢ㄣ€佹彃浠躲€丆onvergence銆乮18n銆佽璁°€佸疄鐜版棩蹇椼€佸彂甯?鈹溾攢 nexus/                      Nexus 鍙戝竷鏉愭枡锛堟枃妗?瀛楁/娓呭崟/鎴浘/璁稿彲/鏍￠獙/鐢宠瘔妯℃澘锛?鈹溾攢 dist/                       锛堝拷鐣ワ級鏋勫缓浜х墿
+鈹斺攢 build/                      锛堝拷鐣ワ級涓棿鏂囦欢銆丳yInstaller 渚濊禆
 ```
 
-常用命令：
+鍏抽敭鏂囦欢锛?
+| 璺緞 | 浣滅敤 |
+|---|---|
+| `mod/src/lib.rs` | DLL 鍏ュ彛銆佺儹閿€両PC 鍛戒护銆侀厤缃В鏋愩€佸彫鍞?娉ㄥ叆涓绘祦绋?|
+| `mod/src/ezstate.rs` | 璧愮鑿滃崟 EzState 杩愯鏃舵敞鍏ワ紙鍚洖鏍囬/璇绘。鍚庨噸鎵撹ˉ涓侊級 |
+| `mod/src/i18n.rs` | 鑿滃崟鏂囨涓庛€岃窡闅忔父鎴忚瑷€銆嶈В鏋?|
+| `tools/package_nexus.ps1` | 鍙戝竷鍖呯殑**鍞竴**鍑哄彛锛氫笁涓?zip + 鍝堝笇 |
+| `install/er_echo.ini.template` | 閰嶇疆榛樿鍊硷紙`profiles`銆佸弸浼ゃ€佸钩琛°€丄I銆乮18n锛?|
+| `nexus/checklist.md` | 鍙戝竷褰撳ぉ鐨勬搷浣滄竻鍗?|
+| `docs/RELEASING.md` | GitHub Release 鐨勪笁绉嶅彂甯冩柟寮?|
 
+---
+
+<a id="docs" name="docs"></a>
+## 鏂囨。绱㈠紩
+
+| 鏂囨。 | 鍐呭 |
+|---|---|
+| [docs/INSTALL.md](docs/INSTALL.md) 路 [INSTALL.en.md](docs/INSTALL.en.md) | 浠庨浂瀹夎銆佹崲鏈恒€佺棁鐘跺鐓?|
+| [docs/usage.md](docs/usage.md) | 鍏ㄩ儴閰嶇疆椤广€佽彍鍗曘€佺儹閿€両PC 鍛戒护銆佹帓闅?|
+| [docs/PLUGIN.md](docs/PLUGIN.md) | 鍙彃鎷斿畨瑁咃紙`mods\ER-Echo\`锛変笌鍗歌浇 |
+| [docs/CONVERGENCE.md](docs/CONVERGENCE.md) | Convergence 3.x + me3 閫傞厤 |
+| [docs/i18n.md](docs/i18n.md) | 鑿滃崟璇█瑙ｆ瀽涓庤嚜瀹氫箟鏂囨 |
+| [docs/design.md](docs/design.md) | 璁捐鏂囨。锛堟満鍒躲€佽皟鐮斻€佸彇鑸嶏級 |
+| [docs/implementation-log.md](docs/implementation-log.md) | 閫愭棩瀹炵幇鏃ュ織涓庤俯鍧戣褰?|
+| [docs/RELEASING.md](docs/RELEASING.md) | 鍙戝竷鍒?GitHub Releases |
+| [nexus/](nexus/README.md) | Nexus 椤甸潰鏂囨銆佸瓧娈点€佹埅鍥俱€佷笂浼犳竻鍗?|
+
+甯哥敤鍛戒护锛?
 ```powershell
-powershell -File tools\doctor.ps1                  # 安装预检
-python tools\export_profile_from_save.py --list    # 列出存档角色
-python tools\ipc_client.py status                  # 游戏内状态
-python tools\ipc_send.py rebuild_clone --arg mode=model  # 通用 IPC（JSON 参数）
+powershell -File tools\doctor.ps1                     # 瀹夎棰勬
+python tools\export_profile_from_save.py --list       # 鍒楀嚭瀛樻。瑙掕壊
+python tools\ipc_client.py status                     # 娓告垙鍐呯姸鎬?python tools\ipc_send.py rebuild_clone --arg mode=model
 ```
 
-## 安全与合规
+---
 
-- **只离线**：EAC 关闭；带 mod 存档上线会被隔离/soft-ban。
-- 改 `regulation.bin` / `.sl2` 前备份；本仓库不含存档或他人存档。`ui/` 下是赐福菜单 ESD 的构建资产：
-  `ui/base/` 是重打包用的原版模板，`ui/out_vanilla/`、`ui/out_rootmenu/` 是改过的版本
-  （发布包里只有后者；原版模板不随包分发）。
-- 本仓库代码 MIT OR Apache-2.0（见 [LICENSE](LICENSE) / [LICENSE-MIT](LICENSE-MIT) / [LICENSE-APACHE](LICENSE-APACHE)）；文档中的参数名来自 Paramdex / 社区逆向。
-- `vendor/fromsoftware-rs-main` 使用 MIT-NON-AI / Apache-NON-AI，全文见该目录与 [nexus/THIRD-PARTY-LICENSES.txt](nexus/THIRD-PARTY-LICENSES.txt)。
+<a id="release" name="release"></a>
+## 鍙戝竷娴佺▼
+
+1. 鏀圭増鏈彿锛歚mod/Cargo.toml`锛屽苟纭椤甸潰/鏂囦欢鍚嶄竴鑷淬€?2. 鏋勫缓锛歚powershell -File tools\build_all.ps1`銆?3. 鏍稿锛歚nexus\release-checksums.txt`銆?4. **Nexus**锛氭寜 [nexus/checklist.md](nexus/checklist.md) 涓婁紶锛涜 quarantine 鏃剁敤
+   [nexus/nexus-quarantine-appeal.md](nexus/nexus-quarantine-appeal.md)銆?5. **GitHub**锛歚powershell -File tools\publish_github_release.ps1 -DryRun` 鐪嬭鍒掞紝鍘绘帀 `-DryRun`
+   姝ｅ紡鍙戯紙鎴栨寜 [docs/RELEASING.md](docs/RELEASING.md) 鐢ㄧ綉椤?/ `gh`锛夈€?
+---
+
+## 鍏煎鎬т笌宸茬煡闄愬埗
+
+- **鐗堟湰閿佸畾**锛氬彧鏀寔 1.17.2锛坋xe 2.7.2.0 / 2.7.2.1锛夛紱娓告垙鏇存柊鍚庤閲嶆槧灏勫亸绉诲苟閲嶆柊缂栬瘧銆?- **鍐茬獊**锛氭敼鍚屼竴鎵瑰弬鏁拌锛圔uddyParam / NpcParam / NpcThinkParam / BuddyStoneParam锛夋垨鍚屼竴浠?  talk ESD 鐨?mod 鍙兘鍐茬獊锛涘厛鍙鏈?mod 鍐嶉€愪釜鍔犲洖銆?- **楠ㄧ伆閫夋嫨**锛氶粯璁ゆ敼銆屽鐙奸鐏般€嶈锛屽叾瀹冮鐏拌鍦?`er_echo.ini` 鐨?`buddy_rows` 閲屾槧灏勩€?- **beta**锛氭牳蹇冩祦绋嬪凡鍦?1.17.2 瀹炴祴锛屼絾浠嶆槸 0.x锛涗繚鐣欏共鍑€瀛樻。鍜屽浠姐€?
+---
+
+## 璁稿彲涓庣涓夋柟
+
+- 鏈粨搴撲唬鐮侊細**MIT OR Apache-2.0**锛圼LICENSE](LICENSE) / [LICENSE-MIT](LICENSE-MIT) /
+  [LICENSE-APACHE](LICENSE-APACHE)锛夈€?- `vendor/fromsoftware-rs-main`锛?*MIT-NON-AI / Apache-2.0-NON-AI**锛屽叏鏂囬殢浠撳簱鍜屽彂甯冨寘鍒嗗彂
+  锛圼nexus/THIRD-PARTY-LICENSES.txt](nexus/THIRD-PARTY-LICENSES.txt)锛夛紝涓嶅緱鐢ㄤ簬璁粌 ML 妯″瀷銆?- 瀹夎鍣ㄨ繍琛屾椂锛歈t 6 / PySide6锛圠GPLv3锛夈€丆Python锛圥SF锛夈€丱penSSL锛圓pache-2.0锛夈€乴ibffi锛圡IT锛夈€?  PyInstaller锛圙PLv2+渚嬪锛夛紱鍏ㄦ枃鍦ㄥ彂甯冨寘鐨?`LICENSES\`銆?- 鍙戝竷鍖呭惈涓€浠?*鏀硅繃鐨?* vanilla talk ESD锛堣祼绂忚彍鍗曟寕杞界偣蹇呴渶锛夛紝涓嶅惈 `regulation.bin`锛屼笉鍚粬浜哄瓨妗ｏ紱
+  `ui/base` 鍙槸閲嶆墦鍖呮ā鏉匡紝涓嶉殢鍖呭垎鍙戙€?- 鏈粨搴撲笉鍖呭惈 ME2 / me3 / Convergence 鐨勬枃浠躲€?
+ELDEN RING 鏄?FromSoftware / Bandai Namco 鐨勫晢鏍囷紱鏈」鐩槸闈炲畼鏂?fan work锛屼笌涓ゅ鍏徃鏃犲叧銆?
