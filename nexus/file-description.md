@@ -76,3 +76,5 @@ unzip it into `...\ELDEN RING\Game` and follow its `README.txt` (add `external_d
   folder you pick, and has an Uninstall button. Source, build scripts and the SHA-256 of every release
   file are public: <https://github.com/Sanvenir/ER-Echo>. Use the manual archive if you prefer not to
   run an .exe.
+- Mirror: the same archives + `release-checksums.txt` are on
+  [GitHub Releases](https://github.com/Sanvenir/ER-Echo/releases/latest).

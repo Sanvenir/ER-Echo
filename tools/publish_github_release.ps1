@@ -215,8 +215,12 @@ Write-Host ("[ok] release: {0}" -f $release.html_url) -ForegroundColor Green
 
 # ---------------------------------------------------------------- assets
 $existingAssets = @()
-try { $existingAssets = @(Invoke-RestMethod -Uri "$api/$($release.id)/assets" -Headers $headers -TimeoutSec 60) } catch { }
-$existingNames = @($existingAssets | ForEach-Object { $_.name })
+try {
+    $res = Invoke-RestMethod -Uri "$api/$($release.id)/assets" -Headers $headers -TimeoutSec 60
+    foreach ($item in $res) { $existingAssets += $item }
+} catch { }
+$existingNames = @()
+foreach ($item in $existingAssets) { $existingNames += $item.name }
 
 foreach ($file in $Assets) {
     $name = Split-Path -Leaf $file
@@ -253,7 +257,9 @@ foreach ($file in $Assets) {
 Write-Host ''
 Write-Host '=== release ===' -ForegroundColor Cyan
 Write-Host $release.html_url
-$final = @(Invoke-RestMethod -Uri "$api/$($release.id)/assets" -Headers $headers -TimeoutSec 60)
+$final = @()
+$res = Invoke-RestMethod -Uri "$api/$($release.id)/assets" -Headers $headers -TimeoutSec 60
+foreach ($item in $res) { $final += $item }
 foreach ($a in $final) {
     Write-Host ("  {0,-34} {1,12:N0} bytes  {2}" -f $a.name, $a.size, $a.browser_download_url)
 }
